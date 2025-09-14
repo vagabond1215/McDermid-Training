@@ -2,6 +2,7 @@ const allowedUsers = [
   'rerhardt@ailpdx.com',
   'tmdermid@ailpdx.com'
 ];
+window.allowedUsers = allowedUsers;
 
 const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your Google OAuth Client ID
 
@@ -18,6 +19,7 @@ function parseJwt(token) {
 }
 
 function showDashboard(email) {
+  window.loggedInUser = email;
   const loginSection = document.getElementById('login-section');
   if (loginSection) {
     loginSection.style.display = 'none';

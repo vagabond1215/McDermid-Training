@@ -42,7 +42,10 @@
         </ol>
         <h4>Tasks</h4>
         <ul>
-          <li><strong>Print two copies of the 1a Financial Analysis Sheet.</strong> Begin now so you can record recurring expenses you might overlook, such as haircuts. Exact amounts are not required; we will use your approximate monthly income requirement to build a reverse budget and determine the activity needed to reach your goals.</li>
+          <li>
+            <strong>Complete the 1a Financial Analysis.</strong> Begin now so you can record recurring expenses you might overlook, such as haircuts. Exact amounts are not required; we will use your approximate monthly income requirement to build a reverse budget and determine the activity needed to reach your goals.
+            <button id="begin-financial-analysis" type="button">Begin Financial Analysis</button>
+          </li>
           <li><strong>Add an alarm for the Professional Growth and Personal Development meeting.</strong> This meeting occurs every Friday at 11:00 a.m. Pacific. Set a reminder for 10 minutes beforehand and add it to your work calendar as a weekly recurring event.</li>
         </ul>
         <h4>Expectations</h4>
@@ -101,8 +104,28 @@
 
     </details>
   </main>
+  <div id="financialAnalysisModal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span id="faUser"></span>
+        <input type="text" id="faUserOverride" class="hidden" placeholder="User ID" />
+        <button id="faClose" type="button">&times;</button>
+      </div>
+      <div class="modal-body">
+        <label>Date: <input type="date" id="faDate" /></label>
+        <div id="faFields"></div>
+        <div class="modal-actions">
+          <button id="faPdf" type="button">PDF</button>
+          <button id="faSave" type="button">Save & Exit</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/auth.js"></script>
+  <script src="user_data/financialAnalysisData.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="js/financialAnalysis.js"></script>
 </body>
 </html>
 
