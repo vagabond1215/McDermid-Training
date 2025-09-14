@@ -3,22 +3,35 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AO Globe Life Training</title>
+  <title>AO Globe Life Portal</title>
   <link rel="stylesheet" href="/css/style.css" />
 </head>
 <body>
-  <header>
+  <header class="branding">
     <img src="/img/logo.svg" alt="AO Globe Life Logo" />
-    <nav>
-      <a href="/module1.html">Module 1</a>
-      <a href="/company.html">Company Info</a>
-      <a href="/checklist.html">Hiring Checklist</a>
-      <span id="auth"></span>
-    </nav>
+    <img src="/img/globe-life-logo.png" alt="Globe Life Logo" class="globe-logo" />
   </header>
   <main>
-    <h1>Training & Resource Hub</h1>
-    <p>Welcome to the AO Globe Life training portal. Access modules, reference materials, and tools for agents and managers.</p>
+    <section id="login-section">
+      <h1>Sign In</h1>
+      <div id="g_id_button"></div>
+      <label class="remember"><input type="checkbox" id="rememberMe" /> Remember me</label>
+      <div class="alt-options">
+        <button id="2faBtn" type="button">Use 2FA</button>
+        <button id="passkeyBtn" type="button">Use Passkey</button>
+      </div>
+    </section>
+    <section id="dashboard" style="display:none;">
+      <h1>AO Globe Life</h1>
+      <p>Part of the Globe Life family of companies providing coverage across North America.</p>
+      <p id="userEmail"></p>
+      <div class="menu">
+        <a href="/module1.html" class="menu-item">Training</a>
+        <a href="#" class="menu-item">Agent Tools</a>
+        <a href="#" class="menu-item">Management Tools</a>
+      </div>
+      <button id="logoutBtn" type="button">Logout</button>
+    </section>
   </main>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="/js/auth.js"></script>
