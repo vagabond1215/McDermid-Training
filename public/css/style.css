@@ -95,6 +95,11 @@ summary {
   margin-top: 1rem;
 }
 
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
 .menu {
   display: flex;
   justify-content: center;

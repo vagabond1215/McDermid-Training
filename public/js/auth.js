@@ -48,29 +48,39 @@ function handleEmailLogin(event) {
   const emailInput = document.getElementById('email');
   const passwordInput = document.getElementById('password');
   if (!emailInput || !passwordInput) return;
-  const email = emailInput.value;
+  const email = emailInput.value.trim();
   const password = passwordInput.value;
-  const user = users.find(u => u.email === email && u.password === password);
-  if (user) {
-    if (document.getElementById('rememberMe').checked) {
-      localStorage.setItem('rememberedUser', email);
-    }
-    showDashboard(email);
-  } else {
-    alert('Invalid email or password');
+  const errorEl = document.getElementById('loginError');
+  const user = users.find(u => u.email === email);
+  if (!user) {
+    if (errorEl) errorEl.textContent = 'Unknown user';
+    return;
   }
+  if (user.password !== password) {
+    if (errorEl) errorEl.textContent = 'Invalid email or password';
+    return;
+  }
+  if (errorEl) errorEl.textContent = '';
+  if (document.getElementById('rememberMe').checked) {
+    localStorage.setItem('rememberedUser', email);
+  }
+  showDashboard(email);
+  window.location.href = 'module1.html';
 }
 
 function handleCredentialResponse(response) {
   const data = parseJwt(response.credential);
   const email = data.email;
+  const errorEl = document.getElementById('loginError');
   if (allowedUsers.includes(email)) {
     if (document.getElementById('rememberMe').checked) {
       localStorage.setItem('rememberedUser', email);
     }
+    if (errorEl) errorEl.textContent = '';
     showDashboard(email);
+    window.location.href = 'module1.html';
   } else {
-    alert('Unauthorized user');
+    if (errorEl) errorEl.textContent = 'Unknown user';
     google.accounts.id.disableAutoSelect();
   }
 }
