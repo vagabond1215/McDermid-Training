@@ -1,7 +1,5 @@
-const allowedUsers = [
-  'rerhardt@ailpdx.com',
-  'tmdermid@ailpdx.com'
-];
+const users = window.users || [];
+const allowedUsers = users.map(user => user.email);
 window.allowedUsers = allowedUsers;
 
 // Client ID is provided via public/js/config.js which sets window.GOOGLE_CLIENT_ID
@@ -42,6 +40,24 @@ function showDashboard(email) {
         initGoogle();
       });
     }
+  }
+}
+
+function handleEmailLogin(event) {
+  event.preventDefault();
+  const emailInput = document.getElementById('email');
+  const passwordInput = document.getElementById('password');
+  if (!emailInput || !passwordInput) return;
+  const email = emailInput.value;
+  const password = passwordInput.value;
+  const user = users.find(u => u.email === email && u.password === password);
+  if (user) {
+    if (document.getElementById('rememberMe').checked) {
+      localStorage.setItem('rememberedUser', email);
+    }
+    showDashboard(email);
+  } else {
+    alert('Invalid email or password');
   }
 }
 
@@ -86,5 +102,9 @@ function initGoogle() {
 }
 
 window.addEventListener('load', () => {
+  const form = document.getElementById('emailLoginForm');
+  if (form) {
+    form.addEventListener('submit', handleEmailLogin);
+  }
   initGoogle();
 });
