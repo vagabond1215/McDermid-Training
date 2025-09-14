@@ -64,7 +64,7 @@ function initGoogle() {
     console.warn('Google OAuth Client ID not set. See config.js.');
     const buttonEl = document.getElementById('g_id_button');
     if (buttonEl) {
-      buttonEl.innerHTML = '<p>Google Sign-In unavailable</p>';
+      buttonEl.innerHTML = '<p>Google Sign-In unavailable. See <a href="https://developers.google.com/identity/sign-in/web/sign-in">setup instructions</a>.</p>';
     }
     return;
   }
@@ -87,16 +87,4 @@ function initGoogle() {
 
 window.addEventListener('load', () => {
   initGoogle();
-  const twoFa = document.getElementById('2faBtn');
-  if (twoFa) {
-    twoFa.addEventListener('click', () => {
-      alert('2FA is required through your Google account.');
-    });
-  }
-  const passkey = document.getElementById('passkeyBtn');
-  if (passkey) {
-    passkey.addEventListener('click', () => {
-      alert('Passkey login will use your device credentials.');
-    });
-  }
 });

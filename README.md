@@ -28,3 +28,6 @@ If you encounter a 400 error when attempting to sign in with Google, it usually 
 
 - `public/js/config.js` contains your actual Google OAuth Client ID.
 - The domain serving the site is listed under **Authorized JavaScript origins** in the Google Cloud Console.
+
+Refer to Google's documentation for additional setup details:
+https://developers.google.com/identity/sign-in/web/sign-in
