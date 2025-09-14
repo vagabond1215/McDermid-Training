@@ -2,19 +2,14 @@
   "name": "mcdermid-training",
   "version": "1.0.0",
   "description": "AO Globe Life training portal",
-  "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "deploy": "gh-pages -d public",
     "test": "echo \"No tests specified\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
-  "dependencies": {
-    "express": "^5.1.0",
-    "express-session": "^1.18.2",
-    "passport": "^0.7.0",
-    "passport-google-oauth20": "^2.0.0"
+  "devDependencies": {
+    "gh-pages": "^6.0.0"
   }
 }
