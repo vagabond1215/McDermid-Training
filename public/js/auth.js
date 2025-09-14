@@ -17,29 +17,75 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+function showDashboard(email) {
+  const loginSection = document.getElementById('login-section');
+  if (loginSection) {
+    loginSection.style.display = 'none';
+  }
+  const dash = document.getElementById('dashboard');
+  if (dash) {
+    dash.style.display = 'block';
+    const emailEl = document.getElementById('userEmail');
+    if (emailEl) {
+      emailEl.textContent = `Logged in as ${email}`;
+    }
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('rememberedUser');
+        google.accounts.id.disableAutoSelect();
+        dash.style.display = 'none';
+        if (loginSection) loginSection.style.display = 'block';
+        initGoogle();
+      });
+    }
+  }
+}
+
 function handleCredentialResponse(response) {
   const data = parseJwt(response.credential);
   const email = data.email;
-  const authEl = document.getElementById('auth');
-
   if (allowedUsers.includes(email)) {
-    authEl.innerHTML = `Logged in as ${email} <button id="logoutBtn">Logout</button>`;
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-      google.accounts.id.disableAutoSelect();
-      authEl.innerHTML = '';
-      google.accounts.id.renderButton(authEl, { theme: 'outline', size: 'large' });
-    });
+    if (document.getElementById('rememberMe').checked) {
+      localStorage.setItem('rememberedUser', email);
+    }
+    showDashboard(email);
   } else {
-    authEl.innerHTML = 'Unauthorized user';
+    alert('Unauthorized user');
     google.accounts.id.disableAutoSelect();
   }
 }
 
-window.addEventListener('load', () => {
+function initGoogle() {
+  if (localStorage.getItem('rememberedUser')) {
+    showDashboard(localStorage.getItem('rememberedUser'));
+    return;
+  }
   google.accounts.id.initialize({
     client_id: CLIENT_ID,
     callback: handleCredentialResponse
   });
-  const authEl = document.getElementById('auth');
-  google.accounts.id.renderButton(authEl, { theme: 'outline', size: 'large' });
+  const buttonEl = document.getElementById('g_id_button');
+  if (buttonEl) {
+    google.accounts.id.renderButton(
+      buttonEl,
+      { theme: 'outline', size: 'large' }
+    );
+  }
+}
+
+window.addEventListener('load', () => {
+  initGoogle();
+  const twoFa = document.getElementById('2faBtn');
+  if (twoFa) {
+    twoFa.addEventListener('click', () => {
+      alert('2FA is required through your Google account.');
+    });
+  }
+  const passkey = document.getElementById('passkeyBtn');
+  if (passkey) {
+    passkey.addEventListener('click', () => {
+      alert('Passkey login will use your device credentials.');
+    });
+  }
 });
