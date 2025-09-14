@@ -4,7 +4,8 @@ const allowedUsers = [
 ];
 window.allowedUsers = allowedUsers;
 
-const CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your Google OAuth Client ID
+// Client ID is provided via public/js/config.js which sets window.GOOGLE_CLIENT_ID
+const CLIENT_ID = window.GOOGLE_CLIENT_ID || '';
 
 function parseJwt(token) {
   const base64Url = token.split('.')[1];
@@ -59,6 +60,14 @@ function handleCredentialResponse(response) {
 }
 
 function initGoogle() {
+  if (!CLIENT_ID) {
+    console.warn('Google OAuth Client ID not set. See config.js.');
+    const buttonEl = document.getElementById('g_id_button');
+    if (buttonEl) {
+      buttonEl.innerHTML = '<p>Google Sign-In unavailable</p>';
+    }
+    return;
+  }
   if (localStorage.getItem('rememberedUser')) {
     showDashboard(localStorage.getItem('rememberedUser'));
     return;
