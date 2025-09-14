@@ -72,6 +72,24 @@ summary {
   margin-top: 2rem;
 }
 
+#emailLoginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+#emailLoginForm input {
+  padding: 0.5rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+#emailLoginForm button {
+  padding: 0.5rem 1rem;
+}
+
 .remember {
   display: block;
   margin-top: 1rem;
