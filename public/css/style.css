@@ -31,3 +31,11 @@ h1, h2, h3 {
   list-style: none;
   margin-bottom: 0.5rem;
 }
+details {
+  margin-bottom: 1rem;
+}
+summary {
+  cursor: pointer;
+  color: #005daa;
+  font-weight: bold;
+}
