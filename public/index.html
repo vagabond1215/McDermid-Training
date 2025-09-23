@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta name="color-scheme" content="light dark">
   <meta charset="UTF-8" />
   <title>AO Globe Life – Comprehensive Visual Timeline</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    :root { --brand:#0a3e7a; --ink:#1f2937; --muted:#6b7280; --card:#ffffff; --rail:#d9e3f2; --accent:#e8f0ff; --halo:rgba(10,62,122,.12); --ok:#10b981; --info:#0ea5e9; --warn:#f59e0b; }
+    :root {
+      /* AO Globe Life brand palette */
+      --ao-blue:#0a3e7a;           /* Primary brand blue */
+      --ao-green:#00a870;          /* Brand green */
+      --ao-gray:#e6ebf2;           /* Light gray accents */
+      --ink:#1f2937;               /* Body text */
+      --muted:#6b7280;             /* Secondary text */
+      --card:#ffffff;              /* Surfaces */
+      --rail: var(--ao-gray);      /* Timeline rail */
+      --accent:#eaf2ff;            /* Subtle blue tint */
+      --halo:rgba(10,62,122,.14);  /* Shadow tint */
+      --ok:#10b981; --info:#0ea5e9; --warn:#f59e0b;
+      --brand: var(--ao-blue);
+    }
     * { box-sizing: border-box; }
-    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background:#f7f9fc; color: var(--ink); }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; background:#f7f9fc; color: var(--ink); }
     header { padding: 28px 16px 0; text-align: center; }
     h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
@@ -73,6 +88,48 @@
   .sticky-icons a{display:inline-flex;width:22px;height:22px}
   .sticky-icons img{width:22px;height:22px;filter:brightness(0) invert(1);opacity:.95}
   .sticky-icons img:hover{opacity:1}
+  /* Reveal-on-bottom footer */
+  .reveal-footer{opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s ease, transform .3s ease}
+  .reveal-footer.show{opacity:1;transform:translateY(0);pointer-events:auto}
+  /* Theming accents */
+  .rail{background:linear-gradient(180deg, var(--ao-gray), #d4deeb)}
+  .card{border:1px solid rgba(10,62,122,.06);}
+  .card:before{content:"";position:absolute;inset:0 0 auto; height:4px; background:linear-gradient(90deg, var(--ao-blue), var(--ao-green)); opacity:.85}
+  .mission{background:linear-gradient(90deg, rgba(10,62,122,.06), rgba(10,191,102,.06)); border-left-color: var(--ao-green)}
+  .chip{border-color:#d6e3f6}
+  .chip:hover{background:linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08));}
+  .logos img{background:#fff;border-radius:6px;padding:4px;border:1px solid rgba(0,0,0,.05)}
+  .sticky-bar{background:linear-gradient(90deg, var(--ao-blue), var(--ao-green))}
+  .footer-card{border:1px solid rgba(10,62,122,.08);}
+  .footer-head h3{color:var(--ao-blue)}
+  body{background:linear-gradient(180deg,#f7f9fc 0%, #f9fbff 40%, #f7f9fc 100%)}
+  /* Heading tweaks for brand tone */
+  h1,h2,h3,h4 { letter-spacing:.2px }
+  .title{font-weight:800}
+
+  /* Dark mode (auto by system/browser setting) */
+  @media (prefers-color-scheme: dark) {
+    :root{
+      --ink:#e6e7ea;
+      --muted:#a3a8b3;
+      --card:#0f1720;
+      --rail:#243246;
+      --accent:#0f1a2a;
+      --halo:rgba(0,0,0,.55);
+      --ao-gray:#1e2937;
+    }
+    body{ background: linear-gradient(180deg,#0b1220 0%, #0c1322 40%, #0b1220 100%); color: var(--ink); }
+    .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
+    .card:before{ opacity:.6 }
+    .mission{ background: linear-gradient(90deg, rgba(10,62,122,.18), rgba(0,168,112,.14)); border-left-color: var(--ao-green); }
+    .chip{ background:#0f1720; border-color:#223048; color:#dbe5f7 }
+    .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.25), rgba(0,168,112,.22)); }
+    .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
+    .logos img{ background:#0f1720; border-color: rgba(255,255,255,.06) }
+    .sticky-bar{ background: linear-gradient(90deg, rgba(10,62,122,.95), rgba(0,168,112,.9)); box-shadow: 0 -6px 24px rgba(0,0,0,.6) }
+    .footer-card{ background:#0f1720; border-color: rgba(255,255,255,.06) }
+    .footer-head h3{ color:#b9d6ff }
+  }
 </style>
 </head>
 <body>
@@ -399,7 +456,7 @@
     </div>
   </div>
 
-  <footer>
+  <footer id="contact-footer" class="reveal-footer">
     <div class="footer-head">
       <h3>Contact &amp; Headquarters</h3>
       <p class="small">We’d love to hear from you. Reach the right team below.</p>
@@ -503,5 +560,18 @@
       </nav>
     </div>
   </div>
+  <script>
+    // Reveal footer only when fully scrolled to bottom
+    function toggleContactFooter(){
+      const f = document.getElementById('contact-footer');
+      if(!f) return;
+      const doc = document.documentElement;
+      const atBottom = (window.innerHeight + window.pageYOffset) >= (doc.scrollHeight - 2);
+      f.classList.toggle('show', atBottom);
+    }
+    window.addEventListener('scroll', toggleContactFooter, {passive:true});
+    window.addEventListener('resize', toggleContactFooter);
+    document.addEventListener('DOMContentLoaded', toggleContactFooter);
+  </script>
 </body>
 </html>
