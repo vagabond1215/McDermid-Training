@@ -27,7 +27,7 @@
     h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
 
-    .timeline { position: relative; max-width: 1080px; margin: 16px auto 80px; padding: 0 16px 80px; }
+    .timeline { position: relative; max-width: 1080px; margin: 16px auto 80px; padding: 0 16px 160px; padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
     .rail { position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; background: var(--rail); border-radius: 3px; }
 
     .node { position: relative; width: 50%; padding: 18px; }
@@ -84,10 +84,15 @@
   .sticky-inner{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
   .sticky-left{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
   .sticky-left span.handle{opacity:.9;font-weight:600}
+  .sticky-right{display:flex;align-items:center;gap:12px}
   .sticky-icons{display:flex;align-items:center;gap:12px}
   .sticky-icons a{display:inline-flex;width:22px;height:22px}
   .sticky-icons img{width:22px;height:22px;filter:brightness(0) invert(1);opacity:.95}
   .sticky-icons img:hover{opacity:1}
+  .theme-toggle{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:12px;letter-spacing:.2px;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease;backdrop-filter:blur(6px)}
+  .theme-toggle .theme-icon{font-size:14px;line-height:1}
+  .theme-toggle:focus-visible{outline:2px solid rgba(255,255,255,.65);outline-offset:2px}
+  .theme-toggle:hover{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.65)}
   /* Reveal-on-bottom footer */
   .reveal-footer{opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s ease, transform .3s ease}
   .reveal-footer.show{opacity:1;transform:translateY(0);pointer-events:auto}
@@ -118,7 +123,7 @@
       --halo:rgba(0,0,0,.55);
       --ao-gray:#1e2937;
     }
-    body{ background: linear-gradient(180deg,#0b1220 0%, #0c1322 40%, #0b1220 100%); color: var(--ink); }
+    body{ background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%); color: var(--ink); }
     .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
     .card:before{ opacity:.6 }
     .mission{ background: linear-gradient(90deg, rgba(10,62,122,.18), rgba(0,168,112,.14)); border-left-color: var(--ao-green); }
@@ -127,9 +132,59 @@
     .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
     .logos img{ background:#0f1720; border-color: rgba(255,255,255,.06) }
     .sticky-bar{ background: linear-gradient(90deg, rgba(10,62,122,.95), rgba(0,168,112,.9)); box-shadow: 0 -6px 24px rgba(0,0,0,.6) }
+    .theme-toggle{background:rgba(15,23,32,.55);border-color:rgba(255,255,255,.35)}
+    .theme-toggle:hover{background:rgba(15,23,32,.7);border-color:rgba(255,255,255,.5)}
     .footer-card{ background:#0f1720; border-color: rgba(255,255,255,.06) }
     .footer-head h3{ color:#b9d6ff }
   }
+  body.theme-dark{
+    --ink:#e6e7ea;
+    --muted:#a3a8b3;
+    --card:#0f1720;
+    --rail:#243246;
+    --accent:#0f1a2a;
+    --halo:rgba(0,0,0,.55);
+    --ao-gray:#1e2937;
+    color: var(--ink);
+    background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%);
+    color-scheme: dark;
+  }
+  body.theme-dark .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
+  body.theme-dark .card:before{ opacity:.6 }
+  body.theme-dark .mission{ background: linear-gradient(90deg, rgba(10,62,122,.18), rgba(0,168,112,.14)); border-left-color: var(--ao-green); }
+  body.theme-dark .chip{ background:#0f1720; border-color:#223048; color:#dbe5f7 }
+  body.theme-dark .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.25), rgba(0,168,112,.22)); }
+  body.theme-dark .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
+  body.theme-dark .logos img{ background:#0f1720; border-color: rgba(255,255,255,.06) }
+  body.theme-dark .sticky-bar{ background: linear-gradient(90deg, rgba(10,62,122,.95), rgba(0,168,112,.9)); box-shadow: 0 -6px 24px rgba(0,0,0,.6) }
+  body.theme-dark .theme-toggle{background:rgba(15,23,32,.55);border-color:rgba(255,255,255,.35)}
+  body.theme-dark .theme-toggle:hover{background:rgba(15,23,32,.7);border-color:rgba(255,255,255,.5)}
+  body.theme-dark .footer-card{ background:#0f1720; border-color: rgba(255,255,255,.06) }
+  body.theme-dark .footer-head h3{ color:#b9d6ff }
+  body.theme-light{
+    --ink:#1f2937;
+    --muted:#6b7280;
+    --card:#ffffff;
+    --rail:#e6ebf2;
+    --accent:#eaf2ff;
+    --halo:rgba(10,62,122,.14);
+    --ao-gray:#e6ebf2;
+    color: var(--ink);
+    background: linear-gradient(180deg,#f7f9fc 0%, #f9fbff 40%, #f7f9fc 100%);
+    color-scheme: light;
+  }
+  body.theme-light .card{ background:#fff; border-color: rgba(10,62,122,.06); }
+  body.theme-light .card:before{ opacity:.85 }
+  body.theme-light .mission{ background: linear-gradient(90deg, rgba(10,62,122,.06), rgba(10,191,102,.06)); border-left-color: var(--ao-green); }
+  body.theme-light .chip{ background:#fff; border:1px solid #e6eefb; color:var(--brand) }
+  body.theme-light .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08)); }
+  body.theme-light .rail{ background: linear-gradient(180deg, var(--ao-gray), #d4deeb); }
+  body.theme-light .logos img{ background:#fff; border:1px solid rgba(0,0,0,.05) }
+  body.theme-light .sticky-bar{ background: linear-gradient(90deg, var(--ao-blue), var(--ao-green)); box-shadow:0 -4px 18px rgba(0,0,0,.12) }
+  body.theme-light .theme-toggle{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.5)}
+  body.theme-light .theme-toggle:hover{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.65)}
+  body.theme-light .footer-card{ background:#fff; border-color: rgba(10,62,122,.08) }
+  body.theme-light .footer-head h3{ color:var(--ao-blue) }
 </style>
 </head>
 <body>
@@ -538,26 +593,32 @@
   <div class="sticky-bar" role="contentinfo" aria-label="Follow AO Globe Life">
     <div class="sticky-inner">
       <div class="sticky-left">Follow <span class="handle">@aoglobelife</span></div>
-      <nav class="sticky-icons" aria-label="social links">
-        <a href="https://instagram.com/aoglobelife" target="_blank" rel="noopener" aria-label="Instagram">
-          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram" />
-        </a>
-        <a href="https://www.facebook.com/aoglobelife" target="_blank" rel="noopener" aria-label="Facebook">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
-        </a>
-        <a href="https://x.com/aoglobelife" target="_blank" rel="noopener" aria-label="X">
-          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" />
-        </a>
-        <a href="https://www.linkedin.com/company/aoglobelife" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" />
-        </a>
-        <a href="https://youtube.com/@aoglobelife" target="_blank" rel="noopener" aria-label="YouTube">
-          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
-        </a>
-        <a href="https://www.tiktok.com/@aoglobelife" target="_blank" rel="noopener" aria-label="TikTok">
-          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" />
-        </a>
-      </nav>
+      <div class="sticky-right">
+        <nav class="sticky-icons" aria-label="social links">
+          <a href="https://instagram.com/aoglobelife" target="_blank" rel="noopener" aria-label="Instagram">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram" />
+          </a>
+          <a href="https://www.facebook.com/aoglobelife" target="_blank" rel="noopener" aria-label="Facebook">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+          </a>
+          <a href="https://x.com/aoglobelife" target="_blank" rel="noopener" aria-label="X">
+            <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" />
+          </a>
+          <a href="https://www.linkedin.com/company/aoglobelife" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" />
+          </a>
+          <a href="https://youtube.com/@aoglobelife" target="_blank" rel="noopener" aria-label="YouTube">
+            <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+          </a>
+          <a href="https://www.tiktok.com/@aoglobelife" target="_blank" rel="noopener" aria-label="TikTok">
+            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" />
+          </a>
+        </nav>
+        <button id="themeToggle" class="theme-toggle" type="button" aria-pressed="false" aria-label="Toggle light and dark mode">
+          <span class="theme-icon" aria-hidden="true">🌙</span>
+          <span class="theme-text">Dark mode</span>
+        </button>
+      </div>
     </div>
   </div>
   <script>
@@ -572,6 +633,88 @@
     window.addEventListener('scroll', toggleContactFooter, {passive:true});
     window.addEventListener('resize', toggleContactFooter);
     document.addEventListener('DOMContentLoaded', toggleContactFooter);
+  </script>
+  <script>
+    (function(){
+      const toggleButton = document.getElementById('themeToggle');
+      if(!toggleButton) return;
+      const icon = toggleButton.querySelector('.theme-icon');
+      const label = toggleButton.querySelector('.theme-text');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      const validThemes = new Set(['dark','light']);
+
+      function getStoredTheme(){
+        try{
+          return localStorage.getItem('theme');
+        }catch(err){
+          return null;
+        }
+      }
+
+      function persistTheme(value){
+        try{
+          if(value){
+            localStorage.setItem('theme', value);
+          }else{
+            localStorage.removeItem('theme');
+          }
+        }catch(err){/* noop */}
+      }
+
+      const stored = getStoredTheme();
+
+      function updateButton(mode){
+        const isDark = mode === 'dark';
+        toggleButton.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+        if(icon) icon.textContent = isDark ? '☀️' : '🌙';
+        if(label) label.textContent = isDark ? 'Light mode' : 'Dark mode';
+      }
+
+      function setTheme(theme){
+        document.body.classList.remove('theme-dark','theme-light');
+        if(theme === 'dark'){
+          document.body.classList.add('theme-dark');
+          persistTheme('dark');
+        }else if(theme === 'light'){
+          document.body.classList.add('theme-light');
+          persistTheme('light');
+        }else{
+          persistTheme(null);
+        }
+        updateButton(theme || (prefersDark.matches ? 'dark' : 'light'));
+      }
+
+      function currentTheme(){
+        if(document.body.classList.contains('theme-dark')) return 'dark';
+        if(document.body.classList.contains('theme-light')) return 'light';
+        return prefersDark.matches ? 'dark' : 'light';
+      }
+
+      if(validThemes.has(stored)){
+        setTheme(stored);
+      }else{
+        updateButton(prefersDark.matches ? 'dark' : 'light');
+      }
+
+      toggleButton.addEventListener('click', () => {
+        const next = currentTheme() === 'dark' ? 'light' : 'dark';
+        setTheme(next);
+      });
+
+      if(typeof prefersDark.addEventListener === 'function'){
+        prefersDark.addEventListener('change', event => {
+          if(!getStoredTheme()){
+            updateButton(event.matches ? 'dark' : 'light');
+          }
+        });
+      }else if(typeof prefersDark.addListener === 'function'){
+        prefersDark.addListener(event => {
+          if(!getStoredTheme()){
+            updateButton(event.matches ? 'dark' : 'light');
+          }
+        });
+      }
+    })();
   </script>
 </body>
 </html>
