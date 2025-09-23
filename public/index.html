@@ -2,42 +2,506 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AO Globe Life Portal</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <title>AO Globe Life – Comprehensive Visual Timeline</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root { --brand:#0a3e7a; --ink:#1f2937; --muted:#6b7280; --card:#ffffff; --rail:#d9e3f2; --accent:#e8f0ff; --halo:rgba(10,62,122,.12); --ok:#10b981; --info:#0ea5e9; --warn:#f59e0b; }
+    * { box-sizing: border-box; }
+    body { font-family: Arial, Helvetica, sans-serif; margin: 0; background:#f7f9fc; color: var(--ink); }
+    header { padding: 28px 16px 0; text-align: center; }
+    h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
+    .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+
+    .timeline { position: relative; max-width: 1080px; margin: 16px auto 80px; padding: 0 16px 80px; }
+    .rail { position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; background: var(--rail); border-radius: 3px; }
+
+    .node { position: relative; width: 50%; padding: 18px; }
+    .node.left { padding-right: 40px; float: left; clear: both; }
+    .node.right { padding-left: 40px; float: right; clear: both; }
+    .dot { position: absolute; top: 28px; left: calc(100% - 3px); transform: translateX(-50%); width: 16px; height: 16px; background: var(--brand); border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--rail); }
+    .node.right .dot { left: 3px; }
+
+    .card { background: var(--card); border-radius: 14px; box-shadow: 0 10px 28px var(--halo); padding: 18px 18px 14px; position: relative; overflow: hidden; }
+    .date { font-weight: 800; color: var(--brand); margin: 0 0 8px; letter-spacing: .2px; text-transform: uppercase; font-size: 12px; display:flex; align-items:center; gap:8px; }
+    .title { margin: 0 0 8px; font-weight: 800; font-size: 18px; display:flex; align-items:center; gap:10px; }
+    .list { margin: 8px 0 0 18px; }
+    .list li { margin: 6px 0; }
+    .source { margin-top: 10px; font-size: 13px; }
+    .source a { color: var(--brand); text-decoration: none; font-weight: 700; }
+
+    .mission { background: linear-gradient(90deg, var(--accent), #ffffff); border-left: 4px solid var(--brand); padding: 14px 16px; border-radius: 12px; box-shadow: 0 4px 14px var(--halo); display: flex; align-items: center; gap: 12px; }
+    .mission .line1 { font-weight: 800; color: var(--brand); }
+    .mission .line2 { color: var(--muted); font-size: 13px; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    .chip { background: #fff; border: 1px solid #e6eefb; color: var(--brand); border-radius: 999px; padding: 6px 12px; font-size: 13px; cursor: pointer; position: relative; box-shadow: 0 2px 8px var(--halo); }
+
+    .popup { position: absolute; z-index: 40; top: calc(100% + 8px); left: 0; width: min(560px, 92vw); background: #fff; border: 1px solid #e6eefb; border-radius: 12px; box-shadow: 0 20px 44px var(--halo); padding: 14px 14px 12px; display: none; }
+    .popup.open { display: block; }
+    .popup h4 { margin: 0 0 6px; color: var(--brand); display:flex; align-items:center; gap:8px; }
+    .popup p { margin: 6px 0; font-size: 14px; }
+    .popup ul { margin: 8px 0 0 18px; }
+
+    .logos { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+    .logos img { height: 26px; width: auto; display: inline-block; filter: drop-shadow(0 1px 2px rgba(0,0,0,.1)); }
+
+    .badge { display:inline-flex; align-items:center; gap:8px; padding:4px 8px; background:#fff; border:1px solid #e6eefb; border-radius:999px; font-size:12px; color:var(--brand); box-shadow:0 2px 6px var(--halo); }
+    .badge .fallback { font-weight:700; }
+
+    footer { max-width:1080px; margin: 0 auto 80px; padding: 0 16px; }
+    .footer-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:18px; }
+    .footer-card { background:#fff; border-radius:12px; box-shadow:0 8px 24px var(--halo); padding:16px; }
+    .footer-card h4 { margin:0 0 8px; color:var(--brand); }
+    .small { color:var(--muted); font-size:13px; }
+
+    @media (max-width: 980px) { .timeline { max-width: 860px; } }
+    @media (max-width: 860px) {
+      .rail { left: 24px; }
+      .node, .node.left, .node.right { width: 100%; float: none; padding: 18px 18px 18px 54px; }
+      .dot { left: 24px; }
+      .node.right .dot { left: 24px; }
+    }
+    .footer-head{max-width:1080px;margin:40px auto 12px;padding:0 16px;text-align:left}
+  .footer-head h3{margin:0 0 4px;color:var(--brand);font-size:18px}
+  .footer-head .small{margin:0;color:var(--muted)}
+  body{padding-bottom:68px}
+  .sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#0a3e7a;color:#fff;box-shadow:0 -4px 18px rgba(0,0,0,.12);z-index:100}
+  .sticky-inner{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .sticky-left{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
+  .sticky-left span.handle{opacity:.9;font-weight:600}
+  .sticky-icons{display:flex;align-items:center;gap:12px}
+  .sticky-icons a{display:inline-flex;width:22px;height:22px}
+  .sticky-icons img{width:22px;height:22px;filter:brightness(0) invert(1);opacity:.95}
+  .sticky-icons img:hover{opacity:1}
+</style>
 </head>
 <body>
-  <header class="branding">
-    <img src="img/logo.svg" alt="AO Globe Life Logo" />
-    <img src="img/globe-life-logo.png" alt="Globe Life Logo" class="globe-logo" />
+  <header>
+    <h1>AO Globe Life - Our Story At A Glance</h1>
+    <div class="subtitle">From AIL roots and union solidarity to Globe Life strength and AO leadership</div>
   </header>
-  <main>
-    <section id="login-section">
-      <h1>Sign In</h1>
-      <form id="emailLoginForm">
-        <input type="email" id="email" placeholder="Email" required />
-        <input type="password" id="password" placeholder="Password" required />
-        <button type="submit">Sign In</button>
-      </form>
-      <div id="g_id_button"></div>
-      <label class="remember"><input type="checkbox" id="rememberMe" /> Remember me</label>
-      <p id="loginError" class="error"></p>
-    </section>
-    <section id="dashboard" style="display:none;">
-      <h1>AO Globe Life</h1>
-      <p>Part of the Globe Life family of companies providing coverage across North America.</p>
-      <p id="userEmail"></p>
-      <div class="menu">
-        <a href="module1.html" class="menu-item">Training</a>
-        <a href="#" class="menu-item">Agent Tools</a>
-        <a href="#" class="menu-item">Management Tools</a>
+
+  <section class="timeline" id="timeline">
+    <div class="rail" aria-hidden="true"></div>
+
+    <!-- Mission Banner: Make Tomorrow Better -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="mission card">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12l4 4 12-12" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div>
+          <div class="line1">Make Tomorrow Better</div>
+          <div class="line2">Globe Life’s giving focus on youth, veterans, and underserved families</div>
+        </div>
       </div>
-      <button id="logoutBtn" type="button">Logout</button>
-    </section>
-  </main>
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="js/config.js"></script>
-  <script src="user_data/users.js"></script>
-  <script src="js/auth.js"></script>
+    </article>
+
+    <!-- 1951 -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">1951</p>
+        <h3 class="title">Founding and early mission of AIL</h3>
+        <ul class="list">
+          <li>Founded in Indianapolis by Bernard Rapoport and Harold Goodman to protect working families.</li>
+          <li>Premium waivers for union members during strikes, scholarships, and strike relief funds.</li>
+          <li>Guiding belief: "Be Union - Buy Union" with union-label operations.</li>
+        </ul>
+        <div class="logos" aria-label="AIL logos">
+          <img src="https://www.ailife.com/favicon-32x32.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>AIL</span></span>'" alt="AIL mark" />
+        </div>
+        <p class="source">Check out <a href="https://www.ailife.com/about/who-we-serve">AIL's Who We Serve</a>.</p>
+      </div>
+    </article>
+
+    <!-- 1961 Union-first innovations -->
+    <article class="node left">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">1961</p>
+        <h3 class="title">Union-first innovations</h3>
+        <ul class="list">
+          <li>Waived premiums during authorized strikes; contributed to strike funds.</li>
+          <li>Launched scholarships for union families; deepened labor alignment.</li>
+          <li>Set foundation for official AFL-CIO Union Label recognition in the 1970s.</li>
+        </ul>
+        <div class="chips"><div class="chip" data-pop="union-benefits">Learn more</div></div>
+        <p class="source">Check out <a href="https://www.ailife.com/about/history">AIL History</a>.</p>
+      </div>
+    </article>
+
+    <!-- 1950s - 1970s Growth & Values -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">1950s - 1970s</p>
+        <h3 class="title">Growth and values</h3>
+        <ul class="list">
+          <li>By 1956 AIL operated in 13 states with 300+ agents; moved HQ to Waco in 1958.</li>
+          <li>Coverage portability supported workers who moved jobs.</li>
+          <li>Scholarships and strike waivers reinforced solidarity in action.</li>
+        </ul>
+        <p class="source">Check out <a href="https://www.ailife.com/about/history">AIL History</a>.</p>
+      </div>
+    </article>
+
+    <!-- 1970s - 1990s Labor Advisory Board & Community -->
+    <article class="node left">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">1970s - 1990s</p>
+        <h3 class="title">Labor Advisory Board and community engagement</h3>
+        <ul class="list">
+          <li>Established AIL/NILICO Labor Advisory Board with 65+ union leaders and AFL-CIO reps.</li>
+          <li>Regular advisory on wage security, safety, and healthcare access with feedback loops.</li>
+          <li>Award-winning Labor Letter amplified labor news and solidarity actions.</li>
+          <li>Hands-on support: picket lines, food banks, scholarships. 100% union-label under OPEIU Local 277.</li>
+        </ul>
+        <div class="logos" aria-label="Union logos">
+          <img src="https://opeiu277.org/favicon.ico" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>OPEIU 277</span></span>'" alt="OPEIU Local 277" />
+        </div>
+        <div class="chips"><div class="chip" data-pop="community-recent">Recent community impact</div></div>
+        <p class="source">Check out <a href="https://www.ailife.com/about/community">AIL Community</a>.</p>
+      </div>
+    </article>
+
+    <!-- 1994 Torchmark Acquisition -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">1994</p>
+        <h3 class="title">Acquisition by Torchmark</h3>
+        <ul class="list">
+          <li>AIL acquired by Torchmark Corporation for approximately $563M - added financial strength and scale.</li>
+          <li>Bernard Rapoport remained active to preserve mission and culture.</li>
+        </ul>
+        <p class="source">Check out <a href="https://www.ailife.com/about">About AIL</a>.</p>
+      </div>
+    </article>
+
+    <!-- 2011 - Present Youth Grants Accent -->
+    <article class="node left">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">2011 - Present</p>
+        <h3 class="title">Community outreach - Youth baseball and softball grants</h3>
+        <ul class="list">
+          <li>Globe Life and the Texas Rangers Baseball Foundation fund youth baseball and softball across a five-state region.</li>
+          <li>More than $625,000 distributed to 78+ organizations - impacting 75,000+ kids in 57+ communities.</li>
+          <li>Funding for fields, scoreboards, equipment, uniforms, and league development.</li>
+        </ul>
+        <div class="chips"><div class="chip" data-pop="grants-program">See impact</div></div>
+        <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/community/archive">Community archive</a>.</p>
+      </div>
+    </article>
+
+    <!-- 2014 - Present Brand Recognition & Partnerships -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">2014 - Present</p>
+        <h3 class="title">Brand recognition and partnerships</h3>
+        <ul class="list">
+          <li>Naming rights to <strong>Globe Life Field</strong> - home of the Texas Rangers (extended through 2048).</li>
+          <li><strong>Official Life Insurance</strong> of the Dallas Cowboys; partnerships with Atlanta Braves, FC Dallas, Allen Americans.</li>
+        </ul>
+        <div class="logos" aria-label="brand logos">
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Globe_Life_Field_logo.svg/320px-Globe_Life_Field_logo.svg.png" alt="Globe Life Field" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Dallas_Cowboys.svg/320px-Dallas_Cowboys.svg.png" alt="Dallas Cowboys" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Texas_Rangers.svg/320px-Texas_Rangers.svg.png" alt="Texas Rangers" />
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Atlanta_Braves_Insignia.svg/320px-Atlanta_Braves_Insignia.svg.png" alt="Atlanta Braves" />
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/FC_Dallas_logo.svg/320px-FC_Dallas_logo.svg.png" alt="FC Dallas" />
+          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/94/Allen_Americans_logo.svg/320px-Allen_Americans_logo.svg.png" alt="Allen Americans" />
+        </div>
+        <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/globe-life-field">Globe Life Field</a> and <a href="https://home.globelifeinsurance.com/press-releases">Press releases</a>.</p>
+      </div>
+    </article>
+
+    <!-- 2019 Rebrand + Financial profile -->
+    <article class="node left">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">2019</p>
+        <h3 class="title">Rebrand as Globe Life Inc.</h3>
+        <ul class="list">
+          <li>Torchmark rebranded as Globe Life - unified brand across divisions.</li>
+          <li>Ratings: A (Excellent) A.M. Best; AA- (Very Strong) S&amp;P; A+ Fitch; A+ BBB.</li>
+          <li>Scale: 17M+ policies in force; ~$229B coverage in force. NYSE: GL.</li>
+        </ul>
+        <div class="logos">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Globe_Life_logo.svg/320px-Globe_Life_logo.svg.png" alt="Globe Life logo" />
+        </div>
+        <div class="chips"><div class="chip" data-pop="globe-life">Who is Globe Life?</div><div class="chip" data-pop="financial-profile">Financial profile</div><div class="chip" data-pop="who-we-work-with">Who we work with</div></div>
+        <p class="source">Check out <a href="https://home.globelifeinsurance.com/about">Globe Life</a> and <a href="https://home.globelifeinsurance.com/about/financial-strength-and-insurance-ratings">Financial strength and ratings</a>.</p>
+      </div>
+    </article>
+
+    <!-- 1982 AO Founded -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">1982</p>
+        <h3 class="title">AO founded</h3>
+        <ul class="list">
+          <li>Established as Altig-Orlovic; later rebranded as Altig Organizations as operations scaled across North America.</li>
+          <li>Became the largest distribution system of Globe Life’s AIL Division, with training and support across the U.S. and Canada.</li>
+        </ul>
+        <div class="logos" aria-label="AO logo">$1</div>
+        <div class="chips"><div class="chip" data-pop="who-is-ao">Who is AO (video)</div></div>
+        <p class="source">Check out <a href="https://aoglobelife.com/about/">AO - About</a> and <a href="https://aoglobelife.com/history/">AO History</a>.</p>
+      </div>
+    </article>
+
+    <!-- AO Globe Life Alignment -->
+    <article class="node left">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">AO Globe Life</p>
+        <h3 class="title">Alignment with Globe Life</h3>
+        <ul class="list">
+          <li>AO aligned with Globe Life after AIL rebrand.</li>
+          <li>Distinct culture: merit-based advancement, leadership pipelines, union protections (OPEIU Local 277).</li>
+        </ul>
+        <p class="source">Check out <a href="https://aoglobelife.com/history/">AO's history</a>.</p>
+      </div>
+    </article>
+
+    <!-- Today Modern -->
+    <article class="node right">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">Today</p>
+        <h3 class="title">Modern work, training, and outreach</h3>
+        <ul class="list">
+          <li>Digital onboarding portals, interactive e-learning, virtual academies; national livestreams and conventions.</li>
+          <li>Remote service platforms to reach underserved communities; benefits education for unions and member groups.</li>
+          <li>AO growth highlights: 34% revenue growth in 2023, 409% growth over 10 years (per AO overview).</li>
+        </ul>
+        <div class="chips"><div class="chip" data-pop="what-is-your-why">What is your why? (video)</div></div>
+        <p class="source">Check out <a href="https://aoglobelife.com/careers/">AO Careers</a> and <a href="https://aoglobelife.com/wp-content/uploads/2024/04/AO-Globe-Life-Overview-D6.pdf">AO Overview PDF</a>.</p>
+      </div>
+    </article>
+
+    <!-- Summary -->
+    <article class="node left">
+      <span class="dot"></span>
+      <div class="card">
+        <p class="date">Summary</p>
+        <h3 class="title">Heritage meets opportunity</h3>
+        <p>From AIL's legacy for working families to Globe Life's national strength and AO's leadership culture - the mission is constant: protect people, empower communities, and keep promises.</p>
+        <div class="chips">
+          <div class="chip" data-pop="careers">Careers and advancement</div>
+          <div class="chip" data-pop="community">Community impact</div>
+          <!-- Intentionally not wiring video triggers yet, per your note -->
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- Popups (stories & videos) -->
+  <div id="popups">
+    <div class="popup" id="pop-union-benefits">
+      <h4>Union-first innovations</h4>
+      <p>In 1961, AIL led the industry by waiving premiums during authorized strikes, contributing to strike funds, and launching scholarships for union families - cementing trust with working people.</p>
+      <ul>
+        <li>Premium waivers during strikes</li>
+        <li>Scholarships for union members' children</li>
+        <li>Financial support for authorized strikes</li>
+      </ul>
+      <p class="source">Check out <a href="https://www.ailife.com/about/history">AIL History</a>.</p>
+    </div>
+
+    <div class="popup" id="pop-community-recent">
+      <h4>Recent community impact</h4>
+      <p>AIL/NIL division and partners continue tangible support today.</p>
+      <ul>
+        <li>KKIS scholarships and supplies (2024)</li>
+        <li>Kids Cancer Foundation contributions (2024)</li>
+        <li>Ongoing food banks and strike relief</li>
+      </ul>
+      <p class="source">Check out <a href="https://www.ailife.com/about/community">AIL Community</a>.</p>
+    </div>
+
+    <div class="popup" id="pop-grants-program">
+      <h4>Globe Life × Texas Rangers Youth Grants</h4>
+      <p>In partnership with the Texas Rangers Baseball Foundation, Globe Life awards annual grants that strengthen youth baseball and softball.</p>
+      <ul>
+        <li>Since 2011, more than $625,000 distributed to 78+ organizations - impacting 75,000+ kids in 57+ communities.</li>
+        <li>Grants fund fields, scoreboards, equipment, uniforms, and programming.</li>
+      </ul>
+      <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/community/archive">Globe Life Community archive</a>.</p>
+    </div>
+
+    <div class="popup" id="pop-globe-life">
+      <h4>Who is Globe Life?</h4>
+      <p>Globe Life Inc. (NYSE: GL) is among the largest life insurers in the U.S. with over 17M policies and ~$229B coverage in force. Family of companies includes AIL, Liberty National, Family Heritage, United American, and more.</p>
+      <ul>
+        <li>Strong ratings and decades-long track record of financial strength</li>
+        <li>Brand partnerships: Globe Life Field (Texas Rangers), Dallas Cowboys, Atlanta Braves, FC Dallas, Allen Americans</li>
+      </ul>
+      <p class="source">Check out <a href="https://home.globelifeinsurance.com/about">Globe Life - About</a>.</p>
+    </div>
+
+    <div class="popup" id="pop-financial-profile">
+      <h4>Financial profile</h4>
+      <ul>
+        <li>Over 17M policies in force; ~$229B coverage in force</li>
+        <li>45+ consecutive years rated A (Excellent) or higher by A.M. Best</li>
+        <li>Current ratings: A (Excellent) A.M. Best; AA- (Very Strong) S&amp;P; A+ Fitch; A+ BBB</li>
+        <li>NYSE ticker: GL</li>
+      </ul>
+      <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/financial-strength-and-insurance-ratings">Financial strength and ratings</a>.</p>
+    </div>
+
+    <div class="popup" id="pop-who-we-work-with">
+      <h4>Who we work with</h4>
+      <p>AO Globe Life partners with member-centric groups and organizations to expand access and serve working families.</p>
+      <ul>
+        <li>Labor unions and associations</li>
+        <li>Credit unions and member benefits programs</li>
+        <li>Veterans organizations and first-responder groups</li>
+        <li>Teachers, healthcare workers, and public service employees</li>
+      </ul>
+      <p class="source">Inspired by <a href="https://aoglobelife.com/about/">AO Globe Life - About</a>.</p>
+    </div>
+
+    <div class="popup" id="pop-geo-reach">
+      <h4>Geographic reach</h4>
+      <p>AO serves families across the U.S. and Canada. AIL licensing spans 49 U.S. states, D.C., Canada, and New Zealand.</p>
+    </div>
+
+    <div class="popup" id="pop-careers">
+      <h4>Careers and advancement</h4>
+      <p>Merit-based growth with one-on-one mentorship, leadership academies, and flexible remote models.</p>
+      <ul>
+        <li>Weekly team huddles and regional recognition</li>
+        <li>Annual conventions and advanced workshops</li>
+        <li>Business Builder Pathway: recruit/code agents and production milestones for advancement</li>
+      </ul>
+      <p class="source">Check out <a href="https://aoglobelife.com/careers/">AO Careers</a> and <a href="https://aoglobelife.com/business-builder-pathway/">Business Builder Pathway</a>.</p>
+    </div>
+
+    <!-- Video popups (no triggers yet per your note) -->
+    <div class="popup" id="pop-who-is-ao">
+      <h4>Who is AO?</h4>
+      <p>Get to know AO Globe Life through this short video overview:</p>
+      <div style="margin:12px 0;">
+        <iframe title="vimeo-player" src="https://player.vimeo.com/video/834165304?h=9894e86fcf" width="100%" height="320" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="popup" id="pop-what-is-your-why">
+      <h4>What is your why?</h4>
+      <p>This inspirational piece asks you to consider your personal motivations for success:</p>
+      <div style="margin:12px 0;">
+        <iframe width="100%" height="320" src="https://www.youtube.com/embed/9IMNPY4nKS8" title="What is your Why?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-head">
+      <h3>Contact &amp; Headquarters</h3>
+      <p class="small">We’d love to hear from you. Reach the right team below.</p>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-card">
+        <h4>AO Globe Life</h4>
+        <div class="small">15440 Bellevue-Redmond Rd.<br/>Redmond, WA 98052<br/>Phone: (800) 842-0022<br/><a href="https://aoglobelife.com/" target="_blank" rel="noopener">aoglobelife.com</a></div>
+      </div>
+      <div class="footer-card">
+        <h4>Globe Life - American Income Life Division</h4>
+        <div class="small">P.O. Box 2608<br/>Waco, TX 76797-2608<br/>Phone: (800) 433-3405<br/><a href="https://www.ailife.com/" target="_blank" rel="noopener">ailife.com</a></div>
+      </div>
+      <div class="footer-card">
+        <h4>Globe Life Inc.</h4>
+        <div class="small">3700 S. Stonebridge Dr.<br/>McKinney, TX 75070<br/>Phone: (800) 742-6787<br/><a href="https://home.globelifeinsurance.com/" target="_blank" rel="noopener">home.globelifeinsurance.com</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Popup manager (click + hover)
+    const idMap = {
+      'union-benefits':'pop-union-benefits',
+      'community-recent':'pop-community-recent',
+      'grants-program':'pop-grants-program',
+      'globe-life':'pop-globe-life',
+      'financial-profile':'pop-financial-profile',
+      'who-we-work-with':'pop-who-we-work-with',
+      'geo-reach':'pop-geo-reach',
+      'careers':'pop-careers',
+      'community':'pop-community',
+      'who-is-ao':'pop-who-is-ao',
+      'what-is-your-why':'pop-what-is-your-why'
+    };
+
+    document.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      const openPopups = document.querySelectorAll('.popup.open');
+      if (!chip && !e.target.closest('.popup')) { openPopups.forEach(p => p.classList.remove('open')); return; }
+      if (chip) {
+        const key = chip.getAttribute('data-pop');
+        const popId = idMap[key];
+        if (!popId) return;
+        const popup = document.getElementById(popId);
+        if (!popup) return;
+        openPopups.forEach(p => { if (p !== popup) p.classList.remove('open'); });
+        const rect = chip.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+        popup.style.left = (rect.left + scrollLeft) + 'px';
+        popup.style.top = (rect.bottom + scrollTop + 8) + 'px';
+        popup.classList.toggle('open');
+      }
+    });
+
+    // Hover (desktop)
+    document.addEventListener('mouseover', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      const key = chip.getAttribute('data-pop');
+      const popId = idMap[key];
+      if (!popId) return;
+      const popup = document.getElementById(popId);
+      if (!popup) return;
+      const rect = chip.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+      popup.style.left = (rect.left + scrollLeft) + 'px';
+      popup.style.top = (rect.bottom + scrollTop + 8) + 'px';
+      popup.classList.add('open');
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('.popup')) {
+        document.querySelectorAll('.popup.open').forEach(p => p.classList.remove('open'));
+      }
+    });
+  </script>
+  <div class="sticky-bar" role="contentinfo" aria-label="Follow AO Globe Life">
+    <div class="sticky-inner">
+      <div class="sticky-left">Follow <span class="handle">@aoglobelife</span></div>
+      <nav class="sticky-icons" aria-label="social links">
+        <a href="https://instagram.com/aoglobelife" target="_blank" rel="noopener" aria-label="Instagram">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram" />
+        </a>
+        <a href="https://www.facebook.com/aoglobelife" target="_blank" rel="noopener" aria-label="Facebook">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" />
+        </a>
+        <a href="https://x.com/aoglobelife" target="_blank" rel="noopener" aria-label="X">
+          <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="X" />
+        </a>
+        <a href="https://www.linkedin.com/company/aoglobelife" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="LinkedIn" />
+        </a>
+        <a href="https://youtube.com/@aoglobelife" target="_blank" rel="noopener" aria-label="YouTube">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" />
+        </a>
+        <a href="https://www.tiktok.com/@aoglobelife" target="_blank" rel="noopener" aria-label="TikTok">
+          <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok" />
+        </a>
+      </nav>
+    </div>
+  </div>
 </body>
 </html>
