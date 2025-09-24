@@ -23,6 +23,7 @@
       --menu-surface: rgba(255,255,255,.92);
       --menu-border: rgba(10,62,122,.14);
       --menu-pop: rgba(255,255,255,.97);
+      --menu-border-gradient: linear-gradient(135deg, rgba(10,62,122,.65), rgba(0,168,112,.65), rgba(14,165,233,.55));
     }
     * { box-sizing: border-box; }
     body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; background:#f7f9fc; color: var(--ink); }
@@ -33,31 +34,52 @@
     .layout-grid { max-width: 1600px; margin: 0 auto; padding: clamp(16px, 4vw, 48px) clamp(16px, 6vw, 72px) 0; display: block; }
     .main-content { min-width: 0; }
 
-    .primary-menu { background: var(--menu-surface); border: 1px solid var(--menu-border); border-radius: 22px; padding: 22px 20px; box-shadow: 0 20px 48px var(--halo); display: flex; flex-direction: column; gap: 18px; backdrop-filter: blur(18px); z-index: 110; }
+    .primary-menu { background: var(--menu-surface); border-radius: 24px; padding: 24px 22px 32px; box-shadow: 0 20px 48px var(--halo); display: flex; flex-direction: column; gap: 22px; backdrop-filter: blur(18px); z-index: 110; border: 1px solid transparent; background-image: linear-gradient(var(--menu-surface), var(--menu-surface)), var(--menu-border-gradient); background-origin: border-box; background-clip: padding-box, border-box; position: relative; }
     .primary-menu .menu-button { display: none; align-items: center; justify-content: center; gap: 10px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
     .primary-menu .menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
     .primary-menu .menu-list li { list-style: none; }
-    .primary-menu .menu-list a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--ink); font-weight: 600; letter-spacing: .2px; transition: background .2s ease, color .2s ease, transform .2s ease; }
-    .primary-menu .menu-list a::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px rgba(10,62,122,.12); }
-    .primary-menu .menu-list a:hover { background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(0,168,112,.08)); color: var(--brand); transform: translateX(4px); }
-    .primary-menu .menu-list a:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
-    .primary-menu .menu-list a:focus-visible::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
+    .primary-menu .menu-list a,
+    .primary-menu .menu-list button { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--ink); font-weight: 600; letter-spacing: .2px; transition: background .2s ease, color .2s ease, transform .2s ease; background: transparent; border: none; font: inherit; cursor: pointer; }
+    .primary-menu .menu-list button { text-align: left; }
+    .primary-menu .menu-list a::before,
+    .primary-menu .menu-list button::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px rgba(10,62,122,.12); }
+    .primary-menu .menu-list a:hover,
+    .primary-menu .menu-list button:hover { background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(0,168,112,.08)); color: var(--brand); transform: translateX(4px); }
+    .primary-menu .menu-list a:focus-visible,
+    .primary-menu .menu-list button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
+    .primary-menu .menu-list a:focus-visible::before,
+    .primary-menu .menu-list button:focus-visible::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
+    .primary-menu .mission-menu-item.mission-open .mission-trigger { background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
+    .primary-menu .mission-menu-item.mission-open .mission-trigger::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
+    .primary-menu .mission-menu-item { position: relative; }
+    .mission-popup { position: absolute; left: calc(100% + 18px); top: 0; width: min(320px, 36vw); background: var(--menu-pop); border: 1px solid rgba(10,62,122,.16); border-radius: 16px; padding: 18px 18px 16px; box-shadow: 0 28px 52px var(--halo); display: none; color: var(--ink); z-index: 120; }
+    .mission-popup.open { display: block; }
+    .mission-popup h4 { margin: 0 0 10px; font-size: 16px; color: var(--brand); display: flex; align-items: center; gap: 8px; }
+    .mission-popup .mission-entry + .mission-entry { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(10,62,122,.08); }
+    .mission-popup .mission-entry h5 { margin: 0 0 6px; font-size: 15px; color: var(--brand); }
+    .mission-popup .mission-entry p { margin: 0 0 8px; font-size: 13px; color: var(--ink); }
+    .mission-popup .mission-entry ul { margin: 0 0 0 18px; padding: 0; }
+    .mission-popup .mission-entry ul li { margin: 4px 0; font-size: 13px; color: var(--muted); }
+    .menu-logo { margin-top: 4px; padding-top: 10px; border-top: 1px solid rgba(10,62,122,.1); display: flex; justify-content: center; }
+    .menu-logo img { max-width: 140px; width: 100%; height: auto; filter: drop-shadow(0 4px 12px rgba(10,62,122,.25)); opacity: .96; }
 
     .menu-icon { display: inline-flex; flex-direction: column; gap: 4px; margin-right: 4px; }
     .menu-icon span { display: block; width: 18px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .2s ease, width .2s ease; }
 
-    header, .node, #contact-footer { scroll-margin-top: 96px; }
+    header, .node, #contact-footer, .timeline-anchor { scroll-margin-top: 96px; }
 
-    body.theme-dark .primary-menu { background: var(--menu-surface); border-color: var(--menu-border); box-shadow: 0 20px 48px rgba(0,0,0,.55); }
+    body.theme-dark .primary-menu { background-image: linear-gradient(var(--menu-surface), var(--menu-surface)), var(--menu-border-gradient); border-color: transparent; box-shadow: 0 20px 48px rgba(0,0,0,.55); }
     body.theme-dark .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
     body.theme-dark .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
+    body.theme-dark .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
 
     body.theme-light .primary-menu .menu-list { background: var(--menu-pop); }
 
     @media (prefers-color-scheme: dark) {
-      body:not(.theme-light) .primary-menu { background: var(--menu-surface); border-color: var(--menu-border); box-shadow: 0 20px 48px rgba(0,0,0,.55); }
+      body:not(.theme-light) .primary-menu { background-image: linear-gradient(var(--menu-surface), var(--menu-surface)), var(--menu-border-gradient); border-color: transparent; box-shadow: 0 20px 48px rgba(0,0,0,.55); }
       body:not(.theme-light) .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
       body:not(.theme-light) .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
+      body:not(.theme-light) .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
     }
 
     @media (orientation: landscape) and (min-width: 1024px) {
@@ -72,14 +94,20 @@
       .primary-menu .menu-button { display: inline-flex; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--menu-border); background: linear-gradient(90deg, var(--ao-blue), var(--ao-green)); color: #fff; box-shadow: 0 20px 36px var(--halo); }
       .primary-menu .menu-list { position: absolute; top: calc(100% + 12px); right: 0; background: var(--menu-pop); border: 1px solid var(--menu-border); border-radius: 16px; padding: 12px; gap: 8px; min-width: 200px; box-shadow: 0 28px 48px var(--halo); display: none; }
       .primary-menu.open .menu-list { display: flex; flex-direction: column; }
-      .primary-menu .menu-list a { padding: 10px 14px; transform: none; }
-      .primary-menu .menu-list a:hover { transform: none; }
+      .primary-menu .menu-list a,
+      .primary-menu .menu-list button { padding: 10px 14px; transform: none; }
+      .primary-menu .menu-list a:hover,
+      .primary-menu .menu-list button:hover { transform: none; }
+      .primary-menu .mission-popup { position: relative; left: auto; right: auto; top: auto; width: 100%; margin-top: 6px; box-shadow: 0 20px 36px var(--halo); }
+      .primary-menu .menu-logo { display: none; }
+      .primary-menu.open .menu-logo { display: flex; margin: 8px 4px 4px; padding-top: 10px; border-top: 1px solid var(--menu-border); }
       .main-content { padding-top: clamp(72px, 18vw, 104px); }
-      header, .node, #contact-footer { scroll-margin-top: clamp(112px, 22vw, 140px); }
+      header, .node, #contact-footer, .timeline-anchor { scroll-margin-top: clamp(112px, 22vw, 140px); }
     }
 
 
     .timeline { position: relative; max-width: 1080px; margin: 16px auto 80px; padding: 0 16px 160px; padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
+    .timeline-anchor { position: relative; height: 0; display: block; }
     .rail { position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; background: var(--rail); border-radius: 3px; }
 
     .node { position: relative; width: 50%; padding: 18px; }
@@ -95,10 +123,6 @@
     .list li { margin: 6px 0; }
     .source { margin-top: 10px; font-size: 13px; }
     .source a { color: var(--brand); text-decoration: none; font-weight: 700; }
-
-    .mission { background: linear-gradient(90deg, var(--accent), #ffffff); border-left: 4px solid var(--brand); padding: 14px 16px; border-radius: 12px; box-shadow: 0 4px 14px var(--halo); display: flex; align-items: center; gap: 12px; }
-    .mission .line1 { font-weight: 800; color: var(--brand); }
-    .mission .line2 { color: var(--muted); font-size: 13px; }
 
     .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
     .chip { background: #fff; border: 1px solid #e6eefb; color: var(--brand); border-radius: 999px; padding: 6px 12px; font-size: 13px; cursor: pointer; position: relative; box-shadow: 0 2px 8px var(--halo); }
@@ -152,7 +176,6 @@
   .rail{background:linear-gradient(180deg, var(--ao-gray), #d4deeb)}
   .card{border:1px solid rgba(10,62,122,.06);}
   .card:before{content:"";position:absolute;inset:0 0 auto; height:4px; background:linear-gradient(90deg, var(--ao-blue), var(--ao-green)); opacity:.85}
-  .mission{background:linear-gradient(90deg, rgba(10,62,122,.06), rgba(10,191,102,.06)); border-left-color: var(--ao-green)}
   .chip{border-color:#d6e3f6}
   .chip:hover{background:linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08));}
   .logos img{background:#fff;border-radius:6px;padding:4px;border:1px solid rgba(0,0,0,.05)}
@@ -177,11 +200,11 @@
       --menu-surface: rgba(15,23,32,.92);
       --menu-border: rgba(255,255,255,.08);
       --menu-pop: rgba(15,23,32,.96);
+      --menu-border-gradient: linear-gradient(135deg, rgba(62,142,255,.9), rgba(0,208,166,.82), rgba(14,165,233,.75));
     }
     body{ background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%); color: var(--ink); }
     .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
     .card:before{ opacity:.6 }
-    .mission{ background: linear-gradient(90deg, rgba(10,62,122,.18), rgba(0,168,112,.14)); border-left-color: var(--ao-green); }
     .chip{ background:#0f1720; border-color:#223048; color:#dbe5f7 }
     .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.25), rgba(0,168,112,.22)); }
     .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
@@ -209,7 +232,6 @@
   }
   body.theme-dark .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
   body.theme-dark .card:before{ opacity:.6 }
-  body.theme-dark .mission{ background: linear-gradient(90deg, rgba(10,62,122,.18), rgba(0,168,112,.14)); border-left-color: var(--ao-green); }
   body.theme-dark .chip{ background:#0f1720; border-color:#223048; color:#dbe5f7 }
   body.theme-dark .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.25), rgba(0,168,112,.22)); }
   body.theme-dark .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
@@ -236,7 +258,6 @@
   }
   body.theme-light .card{ background:#fff; border-color: rgba(10,62,122,.06); }
   body.theme-light .card:before{ opacity:.85 }
-  body.theme-light .mission{ background: linear-gradient(90deg, rgba(10,62,122,.06), rgba(10,191,102,.06)); border-left-color: var(--ao-green); }
   body.theme-light .chip{ background:#fff; border:1px solid #e6eefb; color:var(--brand) }
   body.theme-light .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08)); }
   body.theme-light .rail{ background: linear-gradient(180deg, var(--ao-gray), #d4deeb); }
@@ -257,12 +278,36 @@
       </button>
       <ul class="menu-list" id="primaryMenuList">
         <li><a href="#identity">Identity</a></li>
-        <li><a href="#mission">Mission</a></li>
+        <li class="mission-menu-item">
+          <button type="button" class="mission-trigger" aria-expanded="false" aria-controls="missionMenuPopup" aria-haspopup="dialog">Mission</button>
+          <div class="mission-popup" id="missionMenuPopup" role="dialog" aria-label="Mission statements" aria-hidden="true">
+            <h4>Mission Statements</h4>
+            <div class="mission-entry">
+              <h5>Make Tomorrow Better</h5>
+              <p>Globe Life’s giving focus on youth, veterans, and underserved families.</p>
+            </div>
+            <div class="mission-entry">
+              <h5>Founded to Protect Working Families</h5>
+              <ul>
+                <li>Founded in Indianapolis by Bernard Rapoport and Harold Goodman to protect working families.</li>
+                <li>Premium waivers for union members during strikes, scholarships, and strike relief funds.</li>
+                <li>Guiding belief: “Be Union – Buy Union” with union-label operations.</li>
+              </ul>
+            </div>
+            <div class="mission-entry">
+              <h5>Keep Promises &amp; Empower Communities</h5>
+              <p>The mission is constant: protect people, empower communities, and keep promises.</p>
+            </div>
+          </div>
+        </li>
         <li><a href="#history">History</a></li>
         <li><a href="#partnership">Partnership</a></li>
         <li><a href="#community">Community</a></li>
         <li><a href="#contact-footer">Contact</a></li>
       </ul>
+      <div class="menu-logo" aria-hidden="true">
+        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="" />
+      </div>
     </nav>
     <main class="main-content">
       <header id="identity">
@@ -273,17 +318,7 @@
   <section class="timeline" id="timeline">
     <div class="rail" aria-hidden="true"></div>
 
-    <!-- Mission Banner: Make Tomorrow Better -->
-    <article class="node right" id="mission">
-      <span class="dot"></span>
-      <div class="mission card">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12l4 4 12-12" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div>
-          <div class="line1">Make Tomorrow Better</div>
-          <div class="line2">Globe Life’s giving focus on youth, veterans, and underserved families</div>
-        </div>
-      </div>
-    </article>
+    <div id="mission" class="timeline-anchor" aria-hidden="true"></div>
 
     <!-- 1951 -->
     <article class="node right" id="history">
@@ -477,7 +512,7 @@
       <div class="card">
         <p class="date">Summary</p>
         <h3 class="title">Heritage meets opportunity</h3>
-        <p>From AIL's legacy for working families to Globe Life's national strength and AO's leadership culture - the mission is constant: protect people, empower communities, and keep promises.</p>
+        <p>From AIL's legacy for working families to Globe Life's national strength and AO's leadership culture, this timeline highlights decades of protecting people, empowering communities, and keeping promises.</p>
         <div class="chips">
           <div class="chip" data-pop="careers">Careers and advancement</div>
           <div class="chip" data-pop="community">Community impact</div>
@@ -495,9 +530,53 @@
       if(!menu) return;
       const button = menu.querySelector('.menu-button');
       const list = menu.querySelector('.menu-list');
+      const missionItem = list ? list.querySelector('.mission-menu-item') : null;
+      const missionTrigger = missionItem ? missionItem.querySelector('.mission-trigger') : null;
+      const missionPopup = missionItem ? missionItem.querySelector('.mission-popup') : null;
+      let missionCloseTimer = null;
       const landscapeQuery = window.matchMedia ? window.matchMedia('(orientation: landscape)') : null;
 
+      function clearMissionTimer(){
+        if(missionCloseTimer){
+          clearTimeout(missionCloseTimer);
+          missionCloseTimer = null;
+        }
+      }
+
+      function closeMissionPopup(){
+        if(!missionPopup) return;
+        clearMissionTimer();
+        missionPopup.classList.remove('open');
+        missionPopup.setAttribute('aria-hidden', 'true');
+        if(missionTrigger){
+          missionTrigger.setAttribute('aria-expanded', 'false');
+        }
+        if(missionItem){
+          missionItem.classList.remove('mission-open');
+        }
+      }
+
+      function openMissionPopup(){
+        if(!missionPopup) return;
+        clearMissionTimer();
+        missionPopup.classList.add('open');
+        missionPopup.setAttribute('aria-hidden', 'false');
+        if(missionTrigger){
+          missionTrigger.setAttribute('aria-expanded', 'true');
+        }
+        if(missionItem){
+          missionItem.classList.add('mission-open');
+        }
+      }
+
+      function scheduleMissionClose(){
+        if(!missionPopup) return;
+        clearMissionTimer();
+        missionCloseTimer = window.setTimeout(() => closeMissionPopup(), 120);
+      }
+
       function closeMenu(){
+        closeMissionPopup();
         if(!menu.classList.contains('open')) return;
         menu.classList.remove('open');
         if(button) button.setAttribute('aria-expanded', 'false');
@@ -511,8 +590,12 @@
       }
 
       document.addEventListener('click', (event) => {
-        if(!menu.contains(event.target)){
+        const target = event.target;
+        if(!menu.contains(target)){
+          closeMissionPopup();
           closeMenu();
+        }else if(missionItem && !missionItem.contains(target)){
+          closeMissionPopup();
         }
       });
 
@@ -522,11 +605,70 @@
         });
       }
 
+      if(missionTrigger && missionPopup){
+        const pointerFine = window.matchMedia ? window.matchMedia('(pointer: fine)') : null;
+
+        missionTrigger.addEventListener('click', (event) => {
+          event.preventDefault();
+          if(missionPopup.classList.contains('open')){
+            closeMissionPopup();
+          }else{
+            openMissionPopup();
+          }
+        });
+
+        missionTrigger.addEventListener('focus', () => {
+          openMissionPopup();
+        });
+
+        if(pointerFine && typeof pointerFine.matches === 'boolean'){
+          missionTrigger.addEventListener('mouseenter', () => {
+            if(pointerFine.matches){
+              openMissionPopup();
+            }
+          });
+          if(missionItem){
+            missionItem.addEventListener('mouseenter', () => {
+              if(pointerFine.matches){
+                clearMissionTimer();
+              }
+            });
+            missionItem.addEventListener('mouseleave', () => {
+              if(pointerFine.matches){
+                scheduleMissionClose();
+              }
+            });
+          }
+          missionPopup.addEventListener('mouseenter', () => {
+            if(pointerFine.matches){
+              clearMissionTimer();
+            }
+          });
+          missionPopup.addEventListener('mouseleave', () => {
+            if(pointerFine.matches){
+              scheduleMissionClose();
+            }
+          });
+        }
+
+        if(missionItem){
+          missionItem.addEventListener('focusout', (event) => {
+            const next = event.relatedTarget;
+            if(!next || !missionItem.contains(next)){
+              closeMissionPopup();
+            }
+          });
+        }
+      }
+
       document.addEventListener('keydown', (event) => {
         if(event.key === 'Escape'){
           closeMenu();
           if(button){
-            button.focus();
+            const styles = window.getComputedStyle(button);
+            if(styles && styles.display !== 'none'){
+              button.focus();
+            }
           }
         }
       });
