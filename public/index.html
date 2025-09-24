@@ -20,12 +20,64 @@
       --halo:rgba(10,62,122,.14);  /* Shadow tint */
       --ok:#10b981; --info:#0ea5e9; --warn:#f59e0b;
       --brand: var(--ao-blue);
+      --menu-surface: rgba(255,255,255,.92);
+      --menu-border: rgba(10,62,122,.14);
+      --menu-pop: rgba(255,255,255,.97);
     }
     * { box-sizing: border-box; }
     body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; background:#f7f9fc; color: var(--ink); }
     header { padding: 28px 16px 0; text-align: center; }
     h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+
+    .layout-grid { max-width: 1600px; margin: 0 auto; padding: clamp(16px, 4vw, 48px) clamp(16px, 6vw, 72px) 0; display: block; }
+    .main-content { min-width: 0; }
+
+    .primary-menu { background: var(--menu-surface); border: 1px solid var(--menu-border); border-radius: 22px; padding: 22px 20px; box-shadow: 0 20px 48px var(--halo); display: flex; flex-direction: column; gap: 18px; backdrop-filter: blur(18px); z-index: 110; }
+    .primary-menu .menu-button { display: none; align-items: center; justify-content: center; gap: 10px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
+    .primary-menu .menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+    .primary-menu .menu-list li { list-style: none; }
+    .primary-menu .menu-list a { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--ink); font-weight: 600; letter-spacing: .2px; transition: background .2s ease, color .2s ease, transform .2s ease; }
+    .primary-menu .menu-list a::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px rgba(10,62,122,.12); }
+    .primary-menu .menu-list a:hover { background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(0,168,112,.08)); color: var(--brand); transform: translateX(4px); }
+    .primary-menu .menu-list a:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
+    .primary-menu .menu-list a:focus-visible::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
+
+    .menu-icon { display: inline-flex; flex-direction: column; gap: 4px; margin-right: 4px; }
+    .menu-icon span { display: block; width: 18px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .2s ease, width .2s ease; }
+
+    header, .node, #contact-footer { scroll-margin-top: 96px; }
+
+    body.theme-dark .primary-menu { background: var(--menu-surface); border-color: var(--menu-border); box-shadow: 0 20px 48px rgba(0,0,0,.55); }
+    body.theme-dark .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
+    body.theme-dark .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
+
+    body.theme-light .primary-menu .menu-list { background: var(--menu-pop); }
+
+    @media (prefers-color-scheme: dark) {
+      body:not(.theme-light) .primary-menu { background: var(--menu-surface); border-color: var(--menu-border); box-shadow: 0 20px 48px rgba(0,0,0,.55); }
+      body:not(.theme-light) .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
+      body:not(.theme-light) .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
+    }
+
+    @media (orientation: landscape) and (min-width: 1024px) {
+      .layout-grid { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
+      .primary-menu { position: sticky; top: clamp(32px, 8vh, 80px); width: 220px; }
+      .main-content { max-width: 1080px; margin: 0 auto; }
+    }
+
+    @media (orientation: portrait), (max-width: 1023px) {
+      .layout-grid { padding: clamp(16px, 6vw, 64px) clamp(16px, 6vw, 48px) 0; }
+      .primary-menu { position: fixed; top: clamp(12px, 5vw, 24px); right: clamp(12px, 5vw, 24px); left: auto; width: auto; padding: 0; background: transparent; border: none; box-shadow: none; backdrop-filter: none; }
+      .primary-menu .menu-button { display: inline-flex; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--menu-border); background: linear-gradient(90deg, var(--ao-blue), var(--ao-green)); color: #fff; box-shadow: 0 20px 36px var(--halo); }
+      .primary-menu .menu-list { position: absolute; top: calc(100% + 12px); right: 0; background: var(--menu-pop); border: 1px solid var(--menu-border); border-radius: 16px; padding: 12px; gap: 8px; min-width: 200px; box-shadow: 0 28px 48px var(--halo); display: none; }
+      .primary-menu.open .menu-list { display: flex; flex-direction: column; }
+      .primary-menu .menu-list a { padding: 10px 14px; transform: none; }
+      .primary-menu .menu-list a:hover { transform: none; }
+      .main-content { padding-top: clamp(72px, 18vw, 104px); }
+      header, .node, #contact-footer { scroll-margin-top: clamp(112px, 22vw, 140px); }
+    }
+
 
     .timeline { position: relative; max-width: 1080px; margin: 16px auto 80px; padding: 0 16px 160px; padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
     .rail { position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; background: var(--rail); border-radius: 3px; }
@@ -122,6 +174,9 @@
       --accent:#0f1a2a;
       --halo:rgba(0,0,0,.55);
       --ao-gray:#1e2937;
+      --menu-surface: rgba(15,23,32,.92);
+      --menu-border: rgba(255,255,255,.08);
+      --menu-pop: rgba(15,23,32,.96);
     }
     body{ background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%); color: var(--ink); }
     .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
@@ -145,6 +200,9 @@
     --accent:#0f1a2a;
     --halo:rgba(0,0,0,.55);
     --ao-gray:#1e2937;
+    --menu-surface: rgba(15,23,32,.92);
+    --menu-border: rgba(255,255,255,.08);
+    --menu-pop: rgba(15,23,32,.96);
     color: var(--ink);
     background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%);
     color-scheme: dark;
@@ -169,6 +227,9 @@
     --accent:#eaf2ff;
     --halo:rgba(10,62,122,.14);
     --ao-gray:#e6ebf2;
+    --menu-surface: rgba(255,255,255,.92);
+    --menu-border: rgba(10,62,122,.14);
+    --menu-pop: rgba(255,255,255,.97);
     color: var(--ink);
     background: linear-gradient(180deg,#f7f9fc 0%, #f9fbff 40%, #f7f9fc 100%);
     color-scheme: light;
@@ -188,7 +249,23 @@
 </style>
 </head>
 <body>
-  <header>
+  <div class="layout-grid">
+    <nav class="primary-menu" aria-label="Section navigation">
+      <button class="menu-button" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="primaryMenuList">
+        <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+        Menu
+      </button>
+      <ul class="menu-list" id="primaryMenuList">
+        <li><a href="#identity">Identity</a></li>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#partnership">Partnership</a></li>
+        <li><a href="#community">Community</a></li>
+        <li><a href="#contact-footer">Contact</a></li>
+      </ul>
+    </nav>
+    <main class="main-content">
+      <header id="identity">
     <h1>AO Globe Life - Our Story At A Glance</h1>
     <div class="subtitle">From AIL roots and union solidarity to Globe Life strength and AO leadership</div>
   </header>
@@ -197,7 +274,7 @@
     <div class="rail" aria-hidden="true"></div>
 
     <!-- Mission Banner: Make Tomorrow Better -->
-    <article class="node right">
+    <article class="node right" id="mission">
       <span class="dot"></span>
       <div class="mission card">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12l4 4 12-12" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -209,7 +286,7 @@
     </article>
 
     <!-- 1951 -->
-    <article class="node right">
+    <article class="node right" id="history">
       <span class="dot"></span>
       <div class="card">
         <p class="date">1951</p>
@@ -292,7 +369,7 @@
     </article>
 
     <!-- 2011 - Present Youth Grants Accent -->
-    <article class="node left">
+    <article class="node left" id="community">
       <span class="dot"></span>
       <div class="card">
         <p class="date">2011 - Present</p>
@@ -308,7 +385,7 @@
     </article>
 
     <!-- 2014 - Present Brand Recognition & Partnerships -->
-    <article class="node right">
+    <article class="node right" id="partnership">
       <span class="dot"></span>
       <div class="card">
         <p class="date">2014 - Present</p>
@@ -409,6 +486,72 @@
       </div>
     </article>
   </section>
+    </main>
+  </div>
+
+  <script>
+    (function(){
+      const menu = document.querySelector('.primary-menu');
+      if(!menu) return;
+      const button = menu.querySelector('.menu-button');
+      const list = menu.querySelector('.menu-list');
+      const landscapeQuery = window.matchMedia ? window.matchMedia('(orientation: landscape)') : null;
+
+      function closeMenu(){
+        if(!menu.classList.contains('open')) return;
+        menu.classList.remove('open');
+        if(button) button.setAttribute('aria-expanded', 'false');
+      }
+
+      if(button){
+        button.addEventListener('click', () => {
+          const isOpen = menu.classList.toggle('open');
+          button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
+
+      document.addEventListener('click', (event) => {
+        if(!menu.contains(event.target)){
+          closeMenu();
+        }
+      });
+
+      if(list){
+        list.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => closeMenu());
+        });
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape'){
+          closeMenu();
+          if(button){
+            button.focus();
+          }
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if(window.innerWidth > 1023 && landscapeQuery && landscapeQuery.matches){
+          closeMenu();
+        }
+      });
+
+      if(landscapeQuery && typeof landscapeQuery.addEventListener === 'function'){
+        landscapeQuery.addEventListener('change', (event) => {
+          if(event.matches){
+            closeMenu();
+          }
+        });
+      }else if(landscapeQuery && typeof landscapeQuery.addListener === 'function'){
+        landscapeQuery.addListener((event) => {
+          if(event.matches){
+            closeMenu();
+          }
+        });
+      }
+    })();
+  </script>
 
   <!-- Popups (stories & videos) -->
   <div id="popups">
