@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact – AO Globe Life</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ao-blue: #0a3e7a;
+      --ao-green: #00a870;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --surface: rgba(255, 255, 255, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f7f9fc 0%, #f0f6ff 45%, #f7f9fc 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 24px clamp(16px, 6vw, 72px) 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    header img {
+      height: 48px;
+      width: auto;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      color: #fff;
+      background: linear-gradient(120deg, var(--ao-blue), var(--ao-green));
+      padding: 10px 18px;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(10, 62, 122, 0.16);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    nav a:hover,
+    nav a:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 28px rgba(10, 62, 122, 0.22);
+    }
+
+    main {
+      width: min(900px, 92vw);
+      margin: 0 auto 64px;
+      padding-bottom: 40px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 3vw, 2.4rem);
+      margin-bottom: 12px;
+      color: var(--ao-blue);
+    }
+
+    .intro {
+      color: var(--muted);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .grid {
+      display: grid;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: 18px;
+      padding: clamp(20px, 3vw, 28px);
+      box-shadow: 0 22px 48px rgba(10, 62, 122, 0.16);
+      border: 1px solid rgba(10, 62, 122, 0.08);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      font-size: 1.3rem;
+      color: var(--ao-blue);
+    }
+
+    .card p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .card a {
+      color: var(--ao-blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    address {
+      font-style: normal;
+      line-height: 1.6;
+    }
+
+    footer {
+      margin-top: auto;
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 760px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+    <nav aria-label="Site">
+      <a href="index.html">Home</a>
+      <a href="history.html">History</a>
+      <a href="community.html">Community</a>
+      <a href="company.html">Company</a>
+    </nav>
+  </header>
+  <main>
+    <h1>Contact</h1>
+    <p class="intro">Reach the right AO Globe Life or Globe Life team below. We look forward to connecting with you.</p>
+    <section class="grid">
+      <article class="card">
+        <h2>AO Globe Life</h2>
+        <address>
+          15440 Bellevue-Redmond Rd.<br />
+          Redmond, WA 98052
+        </address>
+        <p>Phone: <a href="tel:18008420022">(800) 842-0022</a><br />
+        Website: <a href="https://aoglobelife.com/" target="_blank" rel="noopener">aoglobelife.com</a></p>
+      </article>
+      <article class="card">
+        <h2>Globe Life – American Income Life Division</h2>
+        <address>
+          P.O. Box 2608<br />
+          Waco, TX 76797-2608
+        </address>
+        <p>Phone: <a href="tel:18004333405">(800) 433-3405</a><br />
+        Website: <a href="https://www.ailife.com/" target="_blank" rel="noopener">ailife.com</a></p>
+      </article>
+      <article class="card">
+        <h2>Globe Life Inc.</h2>
+        <address>
+          3700 S. Stonebridge Dr.<br />
+          McKinney, TX 75070
+        </address>
+        <p>Phone: <a href="tel:18007426787">(800) 742-6787</a><br />
+        Website: <a href="https://home.globelifeinsurance.com/" target="_blank" rel="noopener">home.globelifeinsurance.com</a></p>
+      </article>
+    </section>
+  </main>
+  <footer>
+    &copy; <span id="year"></span> AO Globe Life. All rights reserved.
+  </footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
