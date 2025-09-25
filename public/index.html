@@ -80,6 +80,9 @@
       body:not(.theme-light) .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
       body:not(.theme-light) .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
       body:not(.theme-light) .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
+      body:not(.theme-light) .partner-card { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
+      body:not(.theme-light) .partner-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,.55); }
+      body:not(.theme-light) .partner-card figcaption { color: var(--muted); }
     }
 
     @media (orientation: landscape) and (min-width: 1024px) {
@@ -136,6 +139,17 @@
     .logos { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
     .logos img { height: 26px; width: auto; display: inline-block; filter: drop-shadow(0 1px 2px rgba(0,0,0,.1)); }
 
+    .partner-groups { margin-top: 20px; display: flex; flex-direction: column; gap: 18px; }
+    .partner-group h4 { margin: 0 0 10px; font-size: 15px; text-transform: uppercase; letter-spacing: .3px; color: var(--brand); }
+    .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+    .partner-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 12px; border-radius: 14px; border: 1px solid rgba(10,62,122,.08); background: rgba(255,255,255,.78); box-shadow: 0 12px 26px rgba(10,62,122,.08); backdrop-filter: blur(6px); min-height: 132px; transition: transform .2s ease, box-shadow .2s ease; }
+    .partner-card img { max-width: 120px; max-height: 56px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.08)); }
+    .partner-card figcaption { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.35; }
+    .partner-card:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(10,62,122,.12); }
+    body.theme-dark .partner-card { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
+    body.theme-dark .partner-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,.55); }
+    body.theme-dark .partner-card figcaption { color: var(--muted); }
+
     .badge { display:inline-flex; align-items:center; gap:8px; padding:4px 8px; background:#fff; border:1px solid #e6eefb; border-radius:999px; font-size:12px; color:var(--brand); box-shadow:0 2px 6px var(--halo); }
     .badge .fallback { font-weight:700; }
 
@@ -179,6 +193,7 @@
   .chip{border-color:#d6e3f6}
   .chip:hover{background:linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08));}
   .logos img{background:#fff;border-radius:6px;padding:4px;border:1px solid rgba(0,0,0,.05)}
+  .partner-card{background:rgba(255,255,255,.82);border:1px solid rgba(10,62,122,.08)}
   .sticky-bar{background:linear-gradient(90deg, var(--ao-blue), var(--ao-green))}
   .footer-card{border:1px solid rgba(10,62,122,.08);}
   .footer-head h3{color:var(--ao-blue)}
@@ -436,6 +451,63 @@
           <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Atlanta_Braves_Insignia.svg/320px-Atlanta_Braves_Insignia.svg.png" alt="Atlanta Braves" />
           <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/FC_Dallas_logo.svg/320px-FC_Dallas_logo.svg.png" alt="FC Dallas" />
           <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/94/Allen_Americans_logo.svg/320px-Allen_Americans_logo.svg.png" alt="Allen Americans" />
+        </div>
+        <div class="partner-groups" aria-label="Examples of AO Globe Life partner organizations">
+          <div class="partner-group">
+            <h4>Labor &amp; trade unions</h4>
+            <div class="partner-grid" role="list">
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/60/International_Association_of_Fire_Fighters_logo.svg/240px-International_Association_of_Fire_Fighters_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>IAFF</span></span>'" alt="International Association of Fire Fighters" />
+                <figcaption>International Association of Fire Fighters (IAFF)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/International_Brotherhood_of_Electrical_Workers_logo.svg/240px-International_Brotherhood_of_Electrical_Workers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>IBEW</span></span>'" alt="International Brotherhood of Electrical Workers" />
+                <figcaption>International Brotherhood of Electrical Workers (IBEW)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/16/United_Steelworkers_logo.svg/240px-United_Steelworkers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>USW</span></span>'" alt="United Steelworkers" />
+                <figcaption>United Steelworkers (USW)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/06/Communications_Workers_of_America_logo.svg/240px-Communications_Workers_of_America_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>CWA</span></span>'" alt="Communications Workers of America" />
+                <figcaption>Communications Workers of America (CWA)</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="partner-group">
+            <h4>Public service &amp; first responders</h4>
+            <div class="partner-grid" role="list">
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/American_Federation_of_Government_Employees_logo.svg/240px-American_Federation_of_Government_Employees_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>AFGE</span></span>'" alt="American Federation of Government Employees" />
+                <figcaption>American Federation of Government Employees (AFGE)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Fraternal_Order_of_Police_logo.png/240px-Fraternal_Order_of_Police_logo.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>FOP</span></span>'" alt="Fraternal Order of Police" />
+                <figcaption>Fraternal Order of Police (FOP)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/National_Association_of_Letter_Carriers_logo.svg/240px-National_Association_of_Letter_Carriers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>NALC</span></span>'" alt="National Association of Letter Carriers" />
+                <figcaption>National Association of Letter Carriers (NALC)</figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="partner-group">
+            <h4>Community &amp; service organizations</h4>
+            <div class="partner-grid" role="list">
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/92/Veterans_of_Foreign_Wars_Emblem.svg/240px-Veterans_of_Foreign_Wars_Emblem.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>VFW</span></span>'" alt="Veterans of Foreign Wars" />
+                <figcaption>Veterans of Foreign Wars (VFW)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6f/American_Federation_of_Teachers_logo.svg/240px-American_Federation_of_Teachers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>AFT</span></span>'" alt="American Federation of Teachers" />
+                <figcaption>American Federation of Teachers (AFT)</figcaption>
+              </figure>
+              <figure class="partner-card" role="listitem">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/United_Way_logo.svg/240px-United_Way_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>United Way</span></span>'" alt="United Way" />
+                <figcaption>United Way community campaigns</figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
         <div class="chips"><div class="chip" data-pop="globe-life-field">Explore Globe Life Field</div></div>
         <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/globe-life-field">Globe Life Field</a> and <a href="https://home.globelifeinsurance.com/press-releases">Press releases</a>.</p>
@@ -769,10 +841,9 @@
       <h4>Who we work with</h4>
       <p>AO Globe Life partners with member-centric groups and organizations to expand access and serve working families.</p>
       <ul>
-        <li>Labor unions and associations</li>
-        <li>Credit unions and member benefits programs</li>
-        <li>Veterans organizations and first-responder groups</li>
-        <li>Teachers, healthcare workers, and public service employees</li>
+        <li><strong>Labor &amp; trade unions:</strong> International Association of Fire Fighters (IAFF), International Brotherhood of Electrical Workers (IBEW), United Steelworkers (USW), Communications Workers of America (CWA).</li>
+        <li><strong>Public service &amp; first responders:</strong> American Federation of Government Employees (AFGE), Fraternal Order of Police (FOP), National Association of Letter Carriers (NALC).</li>
+        <li><strong>Community &amp; service organizations:</strong> Veterans of Foreign Wars (VFW), American Federation of Teachers (AFT), United Way community campaigns and similar member benefit groups.</li>
       </ul>
       <p class="source">Inspired by <a href="https://aoglobelife.com/about/">AO Globe Life - About</a>.</p>
     </div>
