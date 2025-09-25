@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav.css" />
   <meta name="color-scheme" content="light dark">
   <meta charset="UTF-8" />
   <title>AO Globe Life – Comprehensive Visual Timeline</title>
@@ -28,6 +29,15 @@
     * { box-sizing: border-box; }
     body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; background:#f7f9fc; color: var(--ink); }
     header { padding: 28px 16px 0; text-align: center; }
+    .global-nav {
+      width: min(1100px, 92vw);
+      margin: clamp(16px, 5vw, 32px) auto 0;
+      justify-content: center;
+      gap: 18px;
+    }
+    .global-nav .nav-links {
+      justify-content: center;
+    }
     h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
 
@@ -285,6 +295,18 @@
 </style>
 </head>
 <body>
+  <div class="site-header global-nav">
+    <a class="site-logo" href="index.html" aria-label="AO Globe Life home">
+      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="history.html" aria-current="page">History &amp; Timeline</a>
+      <a href="community.html">Community</a>
+      <a href="company.html">Company</a>
+      <a href="module1.html">Training</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
   <div class="layout-grid">
     <nav class="primary-menu" aria-label="Section navigation">
       <button class="menu-button" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="primaryMenuList">

@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/nav.css" />
   <style>
     :root {
       --ao-blue: #0a3e7a;
@@ -51,32 +52,6 @@
       filter: drop-shadow(0 8px 20px rgba(10, 62, 122, 0.14));
     }
 
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 14px;
-      padding: 0 24px 32px;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: 0.2px;
-      color: #fff;
-      background: linear-gradient(120deg, var(--ao-blue), var(--ao-green));
-      padding: 12px 22px;
-      border-radius: 999px;
-      box-shadow: 0 12px 26px rgba(10, 62, 122, 0.18);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      transform: translateY(-2px);
-      box-shadow: 0 16px 28px rgba(10, 62, 122, 0.22);
-    }
-
     .tagline {
       max-width: 520px;
       text-align: center;
@@ -84,6 +59,10 @@
       font-size: 0.95rem;
       line-height: 1.6;
       padding: 0 24px;
+    }
+
+    body > nav.nav-links {
+      padding: 0 24px 32px;
     }
 
     @media (max-width: 540px) {
@@ -104,7 +83,7 @@
   </div>
   <p class="tagline">Explore the history, community outreach, and opportunities that define AO Globe Life.</p>
   <nav class="nav-links" aria-label="Main">
-    <a href="history.html">History</a>
+    <a href="history.html">History &amp; Timeline</a>
     <a href="community.html">Community</a>
     <a href="company.html">Company</a>
     <a href="module1.html">Training</a>
