@@ -3,39 +3,87 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Company History - AO Globe Life Training</title>
+  <title>Company Overview - AO Globe Life Training</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
 </head>
 <body>
-  <header>
-    <img src="img/logo.svg" alt="AO Globe Life Logo" />
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="module1.html">Module 1</a>
-      <a href="checklist.html">Hiring Checklist</a>
-      <a href="company.html">Company Info</a>
-      <span id="auth"></span>
+  <header class="site-header">
+    <a class="site-logo" href="index.html" aria-label="AO Globe Life home">
+      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="history.html">History &amp; Timeline</a>
+      <a href="community.html">Community</a>
+      <a href="company.html" aria-current="page">Company</a>
+      <a href="module1.html">Training</a>
+      <a href="contact.html">Contact</a>
     </nav>
+    <span id="auth" class="auth-status"></span>
   </header>
   <main>
-    <h1>Company History</h1>
-    <ul class="timeline">
-      <li data-year="1951">
-        American Income Life is founded by Bernard Rapoport to offer supplemental benefits for working families.
-      </li>
-      <li data-year="1994">
-        Torchmark Corporation acquires American Income Life, expanding the company's reach across the United States and Canada.
-      </li>
-      <li data-year="2019">
-        Torchmark rebrands as Globe Life, unifying its companies under a single name.
-      </li>
-      <li data-year="2024">
-        American Income Life AO announces its name change and rebrand to AO Globe Life, aligning more closely with Globe Life.
-      </li>
-      <li data-year="Today">
-        Globe Life continues to provide life and supplemental health insurance to help protect the financial future of families across North America.
-      </li>
-    </ul>
+    <div class="page-hero">
+      <h1>AO Globe Life Company Overview</h1>
+      <p class="intro">From our labor roots to today's national reach, AO Globe Life connects the strength of Globe Life with a
+        mission to protect working families and develop future leaders.</p>
+    </div>
+
+    <section class="info-grid two-column" aria-label="Company highlights">
+      <article class="info-card">
+        <h2>Who we are</h2>
+        <p>AO Globe Life is the largest distribution of Globe Life’s American Income Life division. We are a
+          leadership-driven agency system focused on serving union members, associations, and the communities we call
+          home.</p>
+        <ul>
+          <li>Founded on the principle of protecting working families with union-label service.</li>
+          <li>Licensed in 49 states, Washington, D.C., Canada, and New Zealand through the American Income Life brand.</li>
+          <li>Backed by Globe Life Inc. (NYSE: GL) with 17M+ policies and A or higher ratings for more than four decades.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <h2>Culture &amp; leadership</h2>
+        <p>We cultivate leaders through mentorship, field training, and performance-driven advancement so every agent
+          can grow a career with impact.</p>
+        <ul>
+          <li>One-on-one mentorship and weekly leadership labs for new agents.</li>
+          <li>Business Builder Pathway outlining the milestones to agency leadership.</li>
+          <li>Recognition programs, regional summits, and annual conventions that celebrate results and service.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <h2>How we serve</h2>
+        <p>Our teams partner with labor unions, associations, and local organizations to expand access to supplemental
+          protection and deliver value beyond the policy.</p>
+        <ul>
+          <li>Strike relief funds, scholarship programs, and community grants in partnership with unions and civic groups.</li>
+          <li>Customized benefits for members of the IAFF, IBEW, USW, CWA, AFGE, FOP, NALC, and more.</li>
+          <li>Dedicated outreach for veterans, first responders, and working families navigating financial uncertainty.</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <h2>Tools &amp; resources</h2>
+        <p>AO Globe Life invests in technology and training so agents can deliver a consistent, high-quality experience
+          virtually or in person.</p>
+        <ul>
+          <li>Digital presentations, quoting tools, and integrated e-applications for streamlined appointments.</li>
+          <li>Dedicated support teams that provide onboarding, compliance guidance, and continuing education.</li>
+          <li>Community of practice channels for sharing scripts, best practices, and referral strategies.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="timeline-callout" aria-labelledby="timeline-callout-title">
+      <h2 id="timeline-callout-title">Explore our detailed history &amp; timeline</h2>
+      <p>We have consolidated the AO Globe Life timeline into a single immersive experience featuring milestones,
+        partnerships, and interactive stories.</p>
+      <a href="history.html">View the History &amp; Timeline</a>
+    </section>
   </main>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/config.js"></script>
