@@ -29,15 +29,7 @@
     * { box-sizing: border-box; }
     body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 0; background:#f7f9fc; color: var(--ink); }
     header { padding: 28px 16px 0; text-align: center; }
-    .global-nav {
-      width: min(1100px, 92vw);
-      margin: clamp(16px, 5vw, 32px) auto 0;
-      justify-content: center;
-      gap: 18px;
-    }
-    .global-nav .nav-links {
-      justify-content: center;
-    }
+    .history-page .page-content { padding: clamp(24px, 6vw, 48px) 0; }
     h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
     .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
 
@@ -180,7 +172,7 @@
   .footer-head h3{margin:0 0 4px;color:var(--brand);font-size:18px}
   .footer-head .small{margin:0;color:var(--muted)}
   body{padding-bottom:68px}
-  .sticky-bar{position:fixed;bottom:0;left:0;right:0;background:#0a3e7a;color:#fff;box-shadow:0 -4px 18px rgba(0,0,0,.12);z-index:100}
+  .sticky-bar{position:fixed;bottom:0;left:var(--menu-width);right:0;background:#0a3e7a;color:#fff;box-shadow:0 -4px 18px rgba(0,0,0,.12);z-index:100}
   .sticky-inner{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
   .sticky-left{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
   .sticky-left span.handle{opacity:.9;font-weight:600}
@@ -294,19 +286,22 @@
   body.theme-light .footer-head h3{ color:var(--ao-blue) }
 </style>
 </head>
-<body>
-  <div class="site-header global-nav">
-    <a class="site-logo" href="index.html" aria-label="AO Globe Life home">
-      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
-    </a>
-    <nav class="nav-links" aria-label="Main">
-      <a href="history.html" aria-current="page">History &amp; Timeline</a>
-      <a href="community.html">Community</a>
-      <a href="company.html">Company</a>
-      <a href="module1.html">Training</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </div>
+<body class="with-glass-menu history-page">
+  <aside class="glass-menu" aria-label="Primary navigation">
+    <div class="glass-menu__inner">
+      <a class="glass-menu__brand" href="index.html" aria-label="AO Globe Life home">
+        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+      </a>
+      <nav class="glass-menu__nav" aria-label="Main">
+        <a href="history.html" aria-current="page">History &amp; Timeline</a>
+        <a href="community.html">Community</a>
+        <a href="company.html">Company</a>
+        <a href="module1.html">Training</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </aside>
+  <div class="page-content">
   <div class="layout-grid">
     <nav class="primary-menu" aria-label="Section navigation">
       <button class="menu-button" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="primaryMenuList">
@@ -616,6 +611,7 @@
     </article>
   </section>
     </main>
+  </div>
   </div>
 
   <script>

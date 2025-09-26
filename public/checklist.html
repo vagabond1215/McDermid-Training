@@ -10,21 +10,24 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/nav.css" />
 </head>
-<body>
-  <header class="site-header">
-    <a class="site-logo" href="index.html" aria-label="AO Globe Life home">
-      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
-    </a>
-    <nav class="nav-links" aria-label="Main">
-      <a href="history.html">History &amp; Timeline</a>
-      <a href="community.html">Community</a>
-      <a href="company.html">Company</a>
-      <a href="module1.html">Training</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <span id="auth" class="auth-status"></span>
-  </header>
+<body class="with-glass-menu">
+  <aside class="glass-menu" aria-label="Primary navigation">
+    <div class="glass-menu__inner">
+      <a class="glass-menu__brand" href="index.html" aria-label="AO Globe Life home">
+        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+      </a>
+      <nav class="glass-menu__nav" aria-label="Main">
+        <a href="history.html">History &amp; Timeline</a>
+        <a href="community.html">Community</a>
+        <a href="company.html">Company</a>
+        <a href="module1.html">Training</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </aside>
+  <div class="page-content">
   <main>
+    <span id="auth" class="auth-status"></span>
     <h1>Hiring Process Checklist</h1>
     <p>Use this checklist to track progress through recruiting and onboarding.</p>
     <h2>1. Recruiting</h2>
@@ -50,6 +53,7 @@
       <li><label><input type="checkbox" /> Final evaluation</label></li>
     </ul>
   </main>
+  </div>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/config.js"></script>
   <script src="js/auth.js"></script>
