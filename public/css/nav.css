@@ -4,12 +4,22 @@
   --ink: #1f2937;
   --muted: #6b7280;
   --menu-width: 260px;
-  --menu-padding: 24px;
+  --menu-frame-inset: 16px;
   --menu-surface: rgba(255, 255, 255, 0.14);
   --menu-highlight: rgba(255, 255, 255, 0.18);
   --menu-border: rgba(255, 255, 255, 0.22);
   --menu-shadow: 24px 0 48px -28px rgba(6, 28, 58, 0.32);
   --menu-rib-sheen: linear-gradient(90deg, rgba(10, 62, 122, 0.35), rgba(10, 62, 122, 0.1) 45%, rgba(10, 62, 122, 0.4));
+  --menu-button-padding-y: 18px;
+  --menu-button-padding-x: 22px;
+  --menu-button-surface: linear-gradient(
+      112deg,
+      rgba(245, 247, 250, 0.98) 0%,
+      rgba(214, 220, 232, 0.98) 52%,
+      rgba(188, 196, 212, 0.98) 100%
+    );
+  --menu-button-shadow: inset 1px 1px 6px rgba(255, 255, 255, 0.7), inset -6px -4px 12px rgba(34, 34, 34, 0.32),
+    0 16px 28px rgba(0, 0, 0, 0.28);
 }
 
 body.with-glass-menu {
@@ -81,39 +91,68 @@ body.with-glass-menu {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 32px;
+  gap: 28px;
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0;
+  padding: 0 var(--menu-frame-inset) 40px;
+}
+
+.glass-menu__brand,
+.glass-menu__nav a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--menu-button-padding-y) var(--menu-button-padding-x);
+  background: var(--menu-button-surface);
+  background-repeat: no-repeat;
+  box-shadow: var(--menu-button-shadow);
+  border: 1px solid rgba(10, 62, 122, 0.12);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
 }
 
 .glass-menu__brand {
-  display: flex;
-  align-items: center;
   justify-content: center;
-  margin: 0 var(--menu-padding);
-  padding: 14px;
-  border-radius: 0;
-  background: linear-gradient(160deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 -10px 18px rgba(10, 30, 58, 0.24), 0 18px 38px rgba(0, 0, 0, 0.18);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  gap: 12px;
 }
 
+.glass-menu__brand::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.glass-menu__brand:hover,
 .glass-menu__brand:focus-visible {
-  outline: 2px solid rgba(14, 165, 233, 0.65);
-  outline-offset: 4px;
+  background: linear-gradient(128deg, rgba(0, 168, 112, 0.3), rgba(0, 168, 112, 0.16)), var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.35);
 }
 
 .glass-menu__brand:hover {
   transform: translateY(-3px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), inset 0 -14px 24px rgba(110, 138, 170, 0.2), 0 24px 48px rgba(16, 46, 88, 0.22);
+  box-shadow: inset 1px 1px 6px rgba(255, 255, 255, 0.75), inset -8px -6px 14px rgba(34, 34, 34, 0.34), 0 20px 36px rgba(0, 0, 0, 0.3);
+}
+
+.glass-menu__brand:focus-visible {
+  outline: 2px solid rgba(0, 168, 112, 0.5);
+  outline-offset: 2px;
+}
+
+.glass-menu__brand:active {
+  background: linear-gradient(140deg, rgba(0, 168, 112, 0.46), rgba(0, 168, 112, 0.28)), var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.5);
+  box-shadow: inset 0 0 0 1px rgba(0, 168, 112, 0.5), inset 0 0 20px rgba(0, 168, 112, 0.55), 0 10px 20px rgba(0, 0, 0, 0.38);
 }
 
 .glass-menu__brand img {
   display: block;
   width: 100%;
+  max-width: 180px;
   height: auto;
   filter: drop-shadow(0 8px 20px rgba(10, 62, 122, 0.25));
 }
@@ -122,13 +161,12 @@ body.with-glass-menu {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 16px;
   margin: 0;
   padding: 0;
-  border-radius: 0;
   background: none;
-  box-shadow: none;
   border: none;
+  box-shadow: none;
   overflow: visible;
   isolation: auto;
 }
@@ -138,48 +176,26 @@ body.with-glass-menu {
 }
 
 .glass-menu__nav a {
-  position: relative;
   z-index: 1;
-  display: flex;
-  align-items: center;
   justify-content: flex-start;
   gap: 12px;
-  width: 100%;
-  padding: 18px calc(var(--menu-padding) + 4px);
-  border-radius: 0;
-  color: #050608;
+  color: #032a1b;
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.24px;
-  background:
-    radial-gradient(140% 120% at 0% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.62) 34%, rgba(255, 255, 255, 0) 64%),
-    linear-gradient(108deg, rgba(238, 239, 242, 0.94) 0%, rgba(199, 204, 214, 0.96) 48%, rgba(148, 154, 166, 0.96) 100%);
-  background-repeat: no-repeat;
-  background-blend-mode: screen, normal;
-  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.6), inset -6px -4px 12px rgba(34, 34, 34, 0.45), 0 2px 10px rgba(0, 0, 0, 0.32);
-  transition: background 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  background-position: center;
 }
 
 .glass-menu__nav a + a::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  height: 2px;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.85) 0%, rgba(196, 202, 212, 0.6) 40%, rgba(82, 90, 104, 0.62) 100%);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.65);
-  z-index: 2;
+  content: none;
 }
 
 .glass-menu__nav a::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 0;
   background: linear-gradient(120deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
-  opacity: 0.35;
-  mix-blend-mode: screen;
+  opacity: 0.24;
   pointer-events: none;
 }
 
@@ -187,6 +203,8 @@ body.with-glass-menu {
 .glass-menu__nav a:hover,
 .glass-menu__nav a:focus-visible {
   color: #032a1b;
+  background: linear-gradient(128deg, rgba(0, 168, 112, 0.3), rgba(0, 168, 112, 0.16)), var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.35);
   box-shadow:
     inset 0 0 0 1px rgba(0, 168, 112, 0.35),
     inset 0 0 18px rgba(0, 168, 112, 0.45),
@@ -195,9 +213,9 @@ body.with-glass-menu {
 
 .glass-menu__nav a[aria-current="page"] {
   color: #021d13;
-  background:
-    radial-gradient(140% 120% at 0% 50%, rgba(0, 168, 112, 0.32) 0%, rgba(0, 168, 112, 0.16) 42%, rgba(255, 255, 255, 0) 68%),
-    linear-gradient(112deg, rgba(0, 168, 112, 0.32) 0%, rgba(4, 116, 78, 0.24) 48%, rgba(2, 58, 39, 0.32) 100%);
+  font-weight: 700;
+  background: linear-gradient(132deg, rgba(0, 168, 112, 0.4), rgba(0, 168, 112, 0.22)), var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.55);
   box-shadow:
     inset 0 0 0 1px rgba(0, 168, 112, 0.55),
     inset 0 0 28px rgba(0, 168, 112, 0.5),
@@ -215,10 +233,12 @@ body.with-glass-menu {
 
 .glass-menu__nav a:focus-visible {
   outline: 2px solid rgba(0, 168, 112, 0.5);
-  outline-offset: -4px;
+  outline-offset: 2px;
 }
 
 .glass-menu__nav a:active {
+  background: linear-gradient(140deg, rgba(0, 168, 112, 0.46), rgba(0, 168, 112, 0.28)), var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.5);
   box-shadow:
     inset 0 0 0 1px rgba(0, 168, 112, 0.5),
     inset 0 0 20px rgba(0, 168, 112, 0.55),
