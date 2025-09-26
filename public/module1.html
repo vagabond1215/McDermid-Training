@@ -10,21 +10,24 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/nav.css" />
 </head>
-<body>
-  <header class="site-header">
-    <a class="site-logo" href="index.html" aria-label="AO Globe Life home">
-      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
-    </a>
-    <nav class="nav-links" aria-label="Main">
-      <a href="history.html">History &amp; Timeline</a>
-      <a href="community.html">Community</a>
-      <a href="company.html">Company</a>
-      <a href="module1.html" aria-current="page">Training</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <span id="auth" class="auth-status"></span>
-  </header>
+<body class="with-glass-menu">
+  <aside class="glass-menu" aria-label="Primary navigation">
+    <div class="glass-menu__inner">
+      <a class="glass-menu__brand" href="index.html" aria-label="AO Globe Life home">
+        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+      </a>
+      <nav class="glass-menu__nav" aria-label="Main">
+        <a href="history.html">History &amp; Timeline</a>
+        <a href="community.html">Community</a>
+        <a href="company.html">Company</a>
+        <a href="module1.html" aria-current="page">Training</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </aside>
+  <div class="page-content">
   <main>
+    <span id="auth" class="auth-status"></span>
     <p><strong>Need the Hiring Checklist?</strong> <a href="checklist.html">Review it here.</a></p>
     <details>
       <summary>Module 1 – Basic Support Instructions</summary>
@@ -129,6 +132,8 @@
         </div>
       </div>
     </div>
+  </div>
+  </main>
   </div>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <script src="js/config.js"></script>

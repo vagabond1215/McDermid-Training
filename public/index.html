@@ -24,14 +24,18 @@
     body {
       margin: 0;
       min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    .landing-layout {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 56px;
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      color: var(--ink);
-      background: var(--bg);
+      padding: clamp(48px, 8vw, 72px);
     }
 
     .logo-wrapper {
@@ -61,13 +65,10 @@
       padding: 0 24px;
     }
 
-    body > nav.nav-links {
-      padding: 0 24px 32px;
-    }
-
     @media (max-width: 540px) {
-      body {
+      .landing-layout {
         gap: 40px;
+        padding: clamp(32px, 10vw, 56px);
       }
 
       .logo-wrapper {
@@ -77,17 +78,26 @@
     }
   </style>
 </head>
-<body>
-  <div class="logo-wrapper" aria-label="AO Globe Life">
-    <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
-  </div>
-  <p class="tagline">Explore the history, community outreach, and opportunities that define AO Globe Life.</p>
-  <nav class="nav-links" aria-label="Main">
-    <a href="history.html">History &amp; Timeline</a>
-    <a href="community.html">Community</a>
-    <a href="company.html">Company</a>
-    <a href="module1.html">Training</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+<body class="with-glass-menu">
+  <aside class="glass-menu" aria-label="Primary navigation">
+    <div class="glass-menu__inner">
+      <a class="glass-menu__brand" href="index.html" aria-label="AO Globe Life home">
+        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+      </a>
+      <nav class="glass-menu__nav" aria-label="Main">
+        <a href="history.html">History &amp; Timeline</a>
+        <a href="community.html">Community</a>
+        <a href="company.html">Company</a>
+        <a href="module1.html">Training</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </aside>
+  <main class="page-content landing-layout" aria-labelledby="landing-tagline">
+    <div class="logo-wrapper" aria-label="AO Globe Life">
+      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+    </div>
+    <p id="landing-tagline" class="tagline">Explore the history, community outreach, and opportunities that define AO Globe Life.</p>
+  </main>
 </body>
 </html>

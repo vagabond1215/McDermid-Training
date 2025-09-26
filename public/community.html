@@ -27,28 +27,18 @@
       color: var(--ink);
       background: linear-gradient(180deg, #f7f9fc 0%, #f0f6ff 45%, #f7f9fc 100%);
       min-height: 100vh;
+    }
+
+    .page-content {
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-    }
-
-    .site-header {
-      width: min(1100px, 92vw);
-      margin: clamp(16px, 5vw, 32px) auto 0;
-      padding: 24px clamp(16px, 6vw, 72px) 16px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-    }
-
-    .site-header .nav-links {
-      justify-content: center;
+      padding: clamp(32px, 6vw, 56px) clamp(24px, 6vw, 48px) clamp(40px, 6vw, 64px);
     }
 
     main {
       width: min(960px, 92vw);
-      margin: 0 auto 64px;
+      margin: 0 auto 48px;
       padding-bottom: 40px;
     }
 
@@ -126,19 +116,22 @@
     }
   </style>
 </head>
-<body>
-  <header class="site-header">
-    <a class="site-logo" href="index.html" aria-label="AO Globe Life home">
-      <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
-    </a>
-    <nav class="nav-links" aria-label="Main">
-      <a href="history.html">History &amp; Timeline</a>
-      <a href="community.html" aria-current="page">Community</a>
-      <a href="company.html">Company</a>
-      <a href="module1.html">Training</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-  </header>
+<body class="with-glass-menu">
+  <aside class="glass-menu" aria-label="Primary navigation">
+    <div class="glass-menu__inner">
+      <a class="glass-menu__brand" href="index.html" aria-label="AO Globe Life home">
+        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="AO Globe Life" />
+      </a>
+      <nav class="glass-menu__nav" aria-label="Main">
+        <a href="history.html">History &amp; Timeline</a>
+        <a href="community.html" aria-current="page">Community</a>
+        <a href="company.html">Company</a>
+        <a href="module1.html">Training</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </aside>
+  <div class="page-content">
   <main>
     <h1>Community Outreach &amp; Impact</h1>
     <p class="intro">Beyond our historic milestones, AO Globe Life invests time, talent, and resources into programs that strengthen working families and the communities we serve.</p>
@@ -204,6 +197,7 @@
   <footer>
     &copy; <span id="year"></span> AO Globe Life. All rights reserved.
   </footer>
+  </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
