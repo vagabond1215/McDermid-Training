@@ -129,13 +129,19 @@ body.with-glass-menu {
 
 .glass-menu__brand:hover,
 .glass-menu__brand:focus-visible {
-  background: linear-gradient(128deg, rgba(0, 168, 112, 0.3), rgba(0, 168, 112, 0.16)), var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.35);
+  background: var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.45);
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 168, 112, 0.92),
+    inset 0 0 0 3px rgba(0, 168, 112, 0.35),
+    inset 0 0 0 6px rgba(0, 168, 112, 0.12),
+    inset 1px 1px 6px rgba(255, 255, 255, 0.75),
+    inset -6px -4px 12px rgba(34, 34, 34, 0.32),
+    0 18px 32px rgba(0, 0, 0, 0.3);
 }
 
 .glass-menu__brand:hover {
   transform: translateY(-3px);
-  box-shadow: inset 1px 1px 6px rgba(255, 255, 255, 0.75), inset -8px -6px 14px rgba(34, 34, 34, 0.34), 0 20px 36px rgba(0, 0, 0, 0.3);
 }
 
 .glass-menu__brand:focus-visible {
@@ -203,12 +209,15 @@ body.with-glass-menu {
 .glass-menu__nav a:hover,
 .glass-menu__nav a:focus-visible {
   color: #032a1b;
-  background: linear-gradient(128deg, rgba(0, 168, 112, 0.3), rgba(0, 168, 112, 0.16)), var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.35);
+  background: var(--menu-button-surface);
+  border-color: rgba(0, 168, 112, 0.45);
   box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.35),
-    inset 0 0 18px rgba(0, 168, 112, 0.45),
-    0 12px 24px rgba(0, 0, 0, 0.34);
+    inset 0 0 0 1px rgba(0, 168, 112, 0.95),
+    inset 0 0 0 3px rgba(0, 168, 112, 0.38),
+    inset 0 0 0 6px rgba(0, 168, 112, 0.14),
+    inset 1px 1px 6px rgba(255, 255, 255, 0.75),
+    inset -6px -4px 12px rgba(34, 34, 34, 0.32),
+    0 16px 28px rgba(0, 0, 0, 0.34);
 }
 
 .glass-menu__nav a[aria-current="page"] {
