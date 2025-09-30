@@ -56,7 +56,7 @@ body.with-glass-menu {
   bottom: 0;
   width: 16px;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 
 .glass-menu::before {
@@ -104,6 +104,7 @@ body.with-glass-menu {
   display: flex;
   align-items: center;
   width: 100%;
+  box-sizing: border-box;
   padding: var(--menu-button-padding-y) var(--menu-button-padding-x);
   background: var(--menu-button-surface);
   background-repeat: no-repeat;
