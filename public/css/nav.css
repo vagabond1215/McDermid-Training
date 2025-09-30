@@ -109,36 +109,58 @@ body.with-glass-menu {
   background-repeat: no-repeat;
   box-shadow: var(--menu-button-shadow);
   border: 1px solid rgba(10, 62, 122, 0.12);
-  border-radius: 20px;
+  border-radius: 0;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.glass-menu__brand::before,
+.glass-menu__nav a::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 0;
+  background:
+    radial-gradient(140% 160% at 50% -10%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 38%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(140% 160% at 50% 110%, rgba(0, 168, 112, 0.26) 0%, rgba(0, 168, 112, 0.12) 45%, rgba(0, 168, 112, 0) 75%),
+    radial-gradient(160% 160% at -10% 50%, rgba(0, 168, 112, 0.22) 0%, rgba(0, 168, 112, 0.08) 46%, rgba(0, 168, 112, 0) 78%),
+    radial-gradient(160% 160% at 110% 50%, rgba(0, 168, 112, 0.22) 0%, rgba(0, 168, 112, 0.08) 46%, rgba(0, 168, 112, 0) 78%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  z-index: 0;
 }
 
 .glass-menu__brand {
   justify-content: center;
   gap: 12px;
+  color: #000;
 }
 
 .glass-menu__brand::after {
   content: '';
   position: absolute;
   inset: 2px;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
-  border-radius: inherit;
+  background:
+    radial-gradient(120% 140% at 50% -20%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(140% 160% at 50% 120%, rgba(0, 168, 112, 0.24) 0%, rgba(0, 168, 112, 0.1) 46%, rgba(0, 168, 112, 0) 80%);
+  border-radius: 0;
   opacity: 0.4;
   pointer-events: none;
+  z-index: 0;
 }
 
 .glass-menu__brand:hover,
 .glass-menu__brand:focus-visible {
+  color: #000;
   background: var(--menu-button-surface);
   border-color: rgba(0, 168, 112, 0.45);
   box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.92),
-    inset 0 0 0 6px rgba(0, 168, 112, 0.35),
-    inset 0 0 0 12px rgba(0, 168, 112, 0.12),
-    inset 1px 1px 6px rgba(255, 255, 255, 0.75),
-    inset -6px -4px 12px rgba(34, 34, 34, 0.32),
+    inset 0 0 0 1px rgba(0, 168, 112, 0.82),
+    inset 0 0 22px rgba(0, 168, 112, 0.38),
+    inset 0 0 42px rgba(0, 168, 112, 0.2),
+    inset 1px 1px 8px rgba(255, 255, 255, 0.7),
+    inset -6px -4px 16px rgba(34, 34, 34, 0.3),
     0 18px 32px rgba(0, 0, 0, 0.3);
 }
 
@@ -152,6 +174,7 @@ body.with-glass-menu {
 }
 
 .glass-menu__brand:active {
+  color: #000;
   background: linear-gradient(140deg, #00a870, #02855c), var(--menu-button-surface);
   border-color: rgba(0, 168, 112, 0.65);
   box-shadow: inset 0 0 0 1px rgba(0, 168, 112, 0.75), inset 0 0 24px rgba(0, 168, 112, 0.65), 0 10px 20px rgba(0, 0, 0, 0.38);
@@ -187,7 +210,7 @@ body.with-glass-menu {
   z-index: 1;
   justify-content: flex-start;
   gap: 12px;
-  color: #032a1b;
+  color: #000;
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 0.24px;
@@ -202,29 +225,39 @@ body.with-glass-menu {
   content: '';
   position: absolute;
   inset: 2px;
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
-  border-radius: inherit;
+  background:
+    radial-gradient(120% 140% at 50% -20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 40%, rgba(255, 255, 255, 0) 70%),
+    radial-gradient(140% 160% at 50% 120%, rgba(0, 168, 112, 0.22) 0%, rgba(0, 168, 112, 0.08) 46%, rgba(0, 168, 112, 0) 80%);
+  border-radius: 0;
   opacity: 0.24;
   pointer-events: none;
+  z-index: 0;
 }
 
 
 .glass-menu__nav a:hover,
 .glass-menu__nav a:focus-visible {
-  color: #032a1b;
+  color: #000;
   background: var(--menu-button-surface);
   border-color: rgba(0, 168, 112, 0.45);
   box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.95),
-    inset 0 0 0 6px rgba(0, 168, 112, 0.38),
-    inset 0 0 0 12px rgba(0, 168, 112, 0.14),
-    inset 1px 1px 6px rgba(255, 255, 255, 0.75),
-    inset -6px -4px 12px rgba(34, 34, 34, 0.32),
+    inset 0 0 0 1px rgba(0, 168, 112, 0.85),
+    inset 0 0 22px rgba(0, 168, 112, 0.36),
+    inset 0 0 44px rgba(0, 168, 112, 0.2),
+    inset 1px 1px 8px rgba(255, 255, 255, 0.7),
+    inset -6px -4px 16px rgba(34, 34, 34, 0.3),
     0 16px 28px rgba(0, 0, 0, 0.34);
 }
 
+.glass-menu__brand:hover::before,
+.glass-menu__brand:focus-visible::before,
+.glass-menu__nav a:hover::before,
+.glass-menu__nav a:focus-visible::before {
+  opacity: 1;
+}
+
 .glass-menu__nav a[aria-current="page"] {
-  color: #021d13;
+  color: #000;
   font-weight: 700;
   background: linear-gradient(132deg, #00a870, #029663), var(--menu-button-surface);
   border-color: rgba(0, 168, 112, 0.65);
@@ -239,6 +272,11 @@ body.with-glass-menu {
   opacity: 0.6;
 }
 
+.glass-menu__brand:hover::after,
+.glass-menu__brand:focus-visible::after {
+  opacity: 0.68;
+}
+
 .glass-menu__nav a[aria-current="page"]::after {
   opacity: 0.75;
 }
@@ -249,6 +287,7 @@ body.with-glass-menu {
 }
 
 .glass-menu__nav a:active {
+  color: #000;
   background: linear-gradient(140deg, #00a870, #02855c), var(--menu-button-surface);
   border-color: rgba(0, 168, 112, 0.65);
   box-shadow:
@@ -257,7 +296,8 @@ body.with-glass-menu {
     0 10px 20px rgba(0, 0, 0, 0.38);
 }
 
-.glass-menu__nav a span {
+.glass-menu__nav a > *,
+.glass-menu__brand > * {
   position: relative;
   z-index: 1;
 }
