@@ -51,17 +51,29 @@
     .primary-menu .menu-list button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
     .primary-menu .menu-list a:focus-visible::before,
     .primary-menu .menu-list button:focus-visible::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
-    .primary-menu .mission-menu-item.mission-open .mission-trigger { background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
-    .primary-menu .mission-menu-item.mission-open .mission-trigger::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
-    .primary-menu .mission-menu-item { position: relative; }
-    .mission-popup { position: absolute; left: calc(100% + 18px); top: 0; width: min(320px, 36vw); background: var(--menu-pop); border: 1px solid rgba(10,62,122,.16); border-radius: 16px; padding: 18px 18px 16px; box-shadow: 0 28px 52px var(--halo); display: none; color: var(--ink); z-index: 120; }
-    .mission-popup.open { display: block; }
-    .mission-popup h4 { margin: 0 0 10px; font-size: 16px; color: var(--brand); display: flex; align-items: center; gap: 8px; }
-    .mission-popup .mission-entry + .mission-entry { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(10,62,122,.08); }
-    .mission-popup .mission-entry h5 { margin: 0 0 6px; font-size: 15px; color: var(--brand); }
-    .mission-popup .mission-entry p { margin: 0 0 8px; font-size: 13px; color: var(--ink); }
-    .mission-popup .mission-entry ul { margin: 0 0 0 18px; padding: 0; }
-    .mission-popup .mission-entry ul li { margin: 4px 0; font-size: 13px; color: var(--muted); }
+    .primary-menu .menu-item--popup { position: relative; }
+    .primary-menu .menu-item--popup.menu-open .menu-trigger { background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
+    .primary-menu .menu-item--popup.menu-open .menu-trigger::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
+    .menu-trigger { width: 100%; }
+    .menu-popup { position: absolute; left: calc(100% + 18px); top: 0; width: min(320px, 36vw); background: var(--menu-pop); border: 1px solid rgba(10,62,122,.16); border-radius: 16px; padding: 18px 18px 16px; box-shadow: 0 28px 52px var(--halo); display: none; color: var(--ink); z-index: 120; }
+    .menu-popup.open { display: block; }
+    .menu-popup h4 { margin: 0 0 10px; font-size: 16px; color: var(--brand); display: flex; align-items: center; gap: 8px; }
+    .menu-popup .menu-section + .menu-section { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(10,62,122,.08); }
+    .menu-popup .menu-section h5 { margin: 0 0 6px; font-size: 15px; color: var(--brand); }
+    .menu-popup .menu-section p { margin: 0 0 8px; font-size: 13px; color: var(--ink); }
+    .menu-popup .menu-section ul { margin: 0 0 0 18px; padding: 0; }
+    .menu-popup .menu-section ul li { margin: 4px 0; font-size: 13px; color: var(--muted); }
+    .menu-popup--wide { width: min(380px, 42vw); }
+    .menu-popup__intro { margin: 0 0 12px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .menu-popup__grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+    .menu-popup__grid .menu-section { margin: 0; padding: 12px; border: 1px solid rgba(10,62,122,.08); border-radius: 12px; background: rgba(255,255,255,.78); box-shadow: 0 8px 20px rgba(10,62,122,.1); }
+    .menu-popup__grid .menu-section h5 { margin: 0 0 8px; font-size: 12px; letter-spacing: .35px; text-transform: uppercase; }
+    .menu-popup__grid .menu-section ul { margin: 0; padding-left: 18px; }
+    .menu-popup__grid .menu-section ul li { font-size: 12px; color: var(--ink); line-height: 1.4; }
+    .menu-popup__grid .menu-section ul li strong { color: var(--ink); }
+    .menu-popup__footer { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
+    .menu-popup__link { font-size: 12px; font-weight: 600; color: var(--brand); text-decoration: none; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(10,62,122,.16); background: rgba(255,255,255,.85); box-shadow: 0 4px 12px rgba(10,62,122,.12); transition: background .2s ease, color .2s ease, transform .2s ease; display: inline-flex; align-items: center; gap: 6px; }
+    .menu-popup__link:hover { background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); transform: translateY(-1px); }
     .menu-logo { margin-top: 4px; padding-top: 10px; border-top: 1px solid rgba(10,62,122,.1); display: flex; justify-content: center; }
     .menu-logo img { max-width: 140px; width: 100%; height: auto; filter: drop-shadow(0 4px 12px rgba(10,62,122,.25)); opacity: .96; }
 
@@ -74,6 +86,11 @@
     body.theme-dark .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
     body.theme-dark .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
     body.theme-dark .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
+    body.theme-dark .menu-popup__grid .menu-section { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
+    body.theme-dark .menu-popup__intro { color: rgba(203,213,225,.92); }
+    body.theme-dark .menu-popup__grid .menu-section ul li { color: rgba(226,232,240,.96); }
+    body.theme-dark .menu-popup__link { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); color: #dbeafe; box-shadow: 0 12px 26px rgba(0,0,0,.55); }
+    body.theme-dark .menu-popup__link:hover { color: #93c5fd; }
 
     body.theme-light .primary-menu .menu-list { background: var(--menu-pop); }
 
@@ -82,6 +99,11 @@
       body:not(.theme-light) .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
       body:not(.theme-light) .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
       body:not(.theme-light) .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
+      body:not(.theme-light) .menu-popup__grid .menu-section { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
+      body:not(.theme-light) .menu-popup__intro { color: rgba(203,213,225,.92); }
+      body:not(.theme-light) .menu-popup__grid .menu-section ul li { color: rgba(226,232,240,.96); }
+      body:not(.theme-light) .menu-popup__link { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); color: #dbeafe; box-shadow: 0 12px 26px rgba(0,0,0,.55); }
+      body:not(.theme-light) .menu-popup__link:hover { color: #93c5fd; }
       body:not(.theme-light) .partner-card { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
       body:not(.theme-light) .partner-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,.55); }
       body:not(.theme-light) .partner-card figcaption { color: var(--muted); }
@@ -103,7 +125,7 @@
       .primary-menu .menu-list button { padding: 10px 14px; transform: none; }
       .primary-menu .menu-list a:hover,
       .primary-menu .menu-list button:hover { transform: none; }
-      .primary-menu .mission-popup { position: relative; left: auto; right: auto; top: auto; width: 100%; margin-top: 6px; box-shadow: 0 20px 36px var(--halo); }
+      .primary-menu .menu-item--popup .menu-popup { position: relative; left: auto; right: auto; top: auto; width: 100%; margin-top: 6px; box-shadow: 0 20px 36px var(--halo); }
       .primary-menu .menu-logo { display: none; }
       .primary-menu.open .menu-logo { display: flex; margin: 8px 4px 4px; padding-top: 10px; border-top: 1px solid var(--menu-border); }
       .main-content { padding-top: clamp(72px, 18vw, 104px); }
@@ -312,15 +334,15 @@
       <ul class="menu-list" id="primaryMenuList">
         <li><a href="index.html">Home</a></li>
         <li><a href="#identity">Identity</a></li>
-        <li class="mission-menu-item">
-          <button type="button" class="mission-trigger" aria-expanded="false" aria-controls="missionMenuPopup" aria-haspopup="dialog">Mission</button>
-          <div class="mission-popup" id="missionMenuPopup" role="dialog" aria-label="Mission statements" aria-hidden="true">
+        <li class="menu-item--popup">
+          <button type="button" class="menu-trigger" aria-expanded="false" aria-controls="missionMenuPopup" aria-haspopup="dialog">Mission</button>
+          <div class="menu-popup" id="missionMenuPopup" role="dialog" aria-label="Mission statements" aria-hidden="true">
             <h4>Mission Statements</h4>
-            <div class="mission-entry">
+            <div class="menu-section">
               <h5>Make Tomorrow Better</h5>
               <p>Globe Life’s giving focus on youth, veterans, and underserved families.</p>
             </div>
-            <div class="mission-entry">
+            <div class="menu-section">
               <h5>Founded to Protect Working Families</h5>
               <ul>
                 <li>Founded in Indianapolis by Bernard Rapoport and Harold Goodman to protect working families.</li>
@@ -328,13 +350,58 @@
                 <li>Guiding belief: “Be Union – Buy Union” with union-label operations.</li>
               </ul>
             </div>
-            <div class="mission-entry">
+            <div class="menu-section">
               <h5>Keep Promises &amp; Empower Communities</h5>
               <p>The mission is constant: protect people, empower communities, and keep promises.</p>
             </div>
           </div>
         </li>
-        <li><a href="#partnership">Partnership</a></li>
+        <li class="menu-item--popup partners-menu-item">
+          <button type="button" class="menu-trigger" aria-expanded="false" aria-controls="partnersMenuPopup" aria-haspopup="dialog">Partners</button>
+          <div class="menu-popup menu-popup--wide menu-popup--partners" id="partnersMenuPopup" role="dialog" aria-label="AO Globe Life partners" aria-hidden="true">
+            <h4>Partners we serve</h4>
+            <p class="menu-popup__intro">Highlights from AO Globe Life’s “Our Clients – Who We Work With” roster of unions and associations.</p>
+            <div class="menu-popup__grid">
+              <div class="menu-section">
+                <h5>Labor &amp; trade unions</h5>
+                <ul>
+                  <li><strong>International Brotherhood of Electrical Workers (IBEW)</strong></li>
+                  <li><strong>United Steelworkers (USW)</strong></li>
+                  <li><strong>Communications Workers of America (CWA)</strong></li>
+                  <li><strong>United Food &amp; Commercial Workers (UFCW)</strong></li>
+                </ul>
+              </div>
+              <div class="menu-section">
+                <h5>First responders &amp; public safety</h5>
+                <ul>
+                  <li><strong>International Association of Fire Fighters (IAFF)</strong></li>
+                  <li><strong>Fraternal Order of Police (FOP)</strong></li>
+                  <li><strong>National Association of Police Organizations (NAPO)</strong></li>
+                </ul>
+              </div>
+              <div class="menu-section">
+                <h5>Government &amp; postal</h5>
+                <ul>
+                  <li><strong>American Federation of Government Employees (AFGE)</strong></li>
+                  <li><strong>National Association of Letter Carriers (NALC)</strong></li>
+                  <li><strong>National Postal Mail Handlers Union (NPMHU)</strong></li>
+                </ul>
+              </div>
+              <div class="menu-section">
+                <h5>Education &amp; community</h5>
+                <ul>
+                  <li><strong>American Federation of Teachers (AFT)</strong></li>
+                  <li><strong>Veterans of Foreign Wars (VFW)</strong></li>
+                  <li><strong>United Way &amp; local community benefit programs</strong></li>
+                </ul>
+              </div>
+            </div>
+            <div class="menu-popup__footer">
+              <a class="menu-popup__link" href="#partnership">See partnership timeline</a>
+              <a class="menu-popup__link" href="https://aoglobelife.com/#our-clients" target="_blank" rel="noopener">Explore all clients</a>
+            </div>
+          </div>
+        </li>
       </ul>
       <div class="menu-logo" aria-hidden="true">
         <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="" />
@@ -618,56 +685,123 @@
       if(!menu) return;
       const button = menu.querySelector('.menu-button');
       const list = menu.querySelector('.menu-list');
-      const missionItem = list ? list.querySelector('.mission-menu-item') : null;
-      const missionTrigger = missionItem ? missionItem.querySelector('.mission-trigger') : null;
-      const missionPopup = missionItem ? missionItem.querySelector('.mission-popup') : null;
-      let missionCloseTimer = null;
       const landscapeQuery = window.matchMedia ? window.matchMedia('(orientation: landscape)') : null;
+      const pointerFine = window.matchMedia ? window.matchMedia('(pointer: fine)') : null;
+      const popupStates = [];
 
-      function clearMissionTimer(){
-        if(missionCloseTimer){
-          clearTimeout(missionCloseTimer);
-          missionCloseTimer = null;
-        }
-      }
-
-      function closeMissionPopup(){
-        if(!missionPopup) return;
-        clearMissionTimer();
-        missionPopup.classList.remove('open');
-        missionPopup.setAttribute('aria-hidden', 'true');
-        if(missionTrigger){
-          missionTrigger.setAttribute('aria-expanded', 'false');
-        }
-        if(missionItem){
-          missionItem.classList.remove('mission-open');
-        }
-      }
-
-      function openMissionPopup(){
-        if(!missionPopup) return;
-        clearMissionTimer();
-        missionPopup.classList.add('open');
-        missionPopup.setAttribute('aria-hidden', 'false');
-        if(missionTrigger){
-          missionTrigger.setAttribute('aria-expanded', 'true');
-        }
-        if(missionItem){
-          missionItem.classList.add('mission-open');
-        }
-      }
-
-      function scheduleMissionClose(){
-        if(!missionPopup) return;
-        clearMissionTimer();
-        missionCloseTimer = window.setTimeout(() => closeMissionPopup(), 120);
+      function closeAllPopups(except){
+        popupStates.forEach(state => {
+          if(!except || state !== except){
+            state.close();
+          }
+        });
       }
 
       function closeMenu(){
-        closeMissionPopup();
+        closeAllPopups();
         if(!menu.classList.contains('open')) return;
         menu.classList.remove('open');
         if(button) button.setAttribute('aria-expanded', 'false');
+      }
+
+      if(list){
+        const popupItems = Array.from(list.querySelectorAll('.menu-item--popup'));
+        popupItems.forEach(item => {
+          const trigger = item.querySelector('.menu-trigger');
+          const popup = item.querySelector('.menu-popup');
+          if(!trigger || !popup) return;
+
+          const state = {
+            item,
+            trigger,
+            popup,
+            closeTimer: null
+          };
+
+          state.clearTimer = function(){
+            if(state.closeTimer){
+              clearTimeout(state.closeTimer);
+              state.closeTimer = null;
+            }
+          };
+
+          state.close = function(){
+            state.clearTimer();
+            state.item.classList.remove('menu-open');
+            state.popup.classList.remove('open');
+            state.popup.setAttribute('aria-hidden', 'true');
+            state.trigger.setAttribute('aria-expanded', 'false');
+          };
+
+          state.open = function(){
+            closeAllPopups(state);
+            state.clearTimer();
+            state.item.classList.add('menu-open');
+            state.popup.classList.add('open');
+            state.popup.setAttribute('aria-hidden', 'false');
+            state.trigger.setAttribute('aria-expanded', 'true');
+          };
+
+          state.scheduleClose = function(){
+            state.clearTimer();
+            state.closeTimer = window.setTimeout(() => state.close(), 120);
+          };
+
+          popupStates.push(state);
+
+          trigger.addEventListener('click', (event) => {
+            event.preventDefault();
+            if(state.popup.classList.contains('open')){
+              state.close();
+            }else{
+              state.open();
+            }
+          });
+
+          trigger.addEventListener('focus', () => state.open());
+
+          if(pointerFine && typeof pointerFine.matches === 'boolean'){
+            trigger.addEventListener('mouseenter', () => {
+              if(pointerFine.matches){
+                state.open();
+              }
+            });
+            item.addEventListener('mouseenter', () => {
+              if(pointerFine.matches){
+                state.clearTimer();
+              }
+            });
+            item.addEventListener('mouseleave', () => {
+              if(pointerFine.matches){
+                state.scheduleClose();
+              }
+            });
+            popup.addEventListener('mouseenter', () => {
+              if(pointerFine.matches){
+                state.clearTimer();
+              }
+            });
+            popup.addEventListener('mouseleave', () => {
+              if(pointerFine.matches){
+                state.scheduleClose();
+              }
+            });
+          }
+
+          item.addEventListener('focusout', (event) => {
+            const next = event.relatedTarget;
+            if(!next || !item.contains(next)){
+              state.scheduleClose();
+            }
+          });
+        });
+
+        list.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            closeAllPopups();
+            closeMenu();
+          });
+        });
       }
 
       if(button){
@@ -680,74 +814,10 @@
       document.addEventListener('click', (event) => {
         const target = event.target;
         if(!menu.contains(target)){
-          closeMissionPopup();
+          closeAllPopups();
           closeMenu();
-        }else if(missionItem && !missionItem.contains(target)){
-          closeMissionPopup();
         }
       });
-
-      if(list){
-        list.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => closeMenu());
-        });
-      }
-
-      if(missionTrigger && missionPopup){
-        const pointerFine = window.matchMedia ? window.matchMedia('(pointer: fine)') : null;
-
-        missionTrigger.addEventListener('click', (event) => {
-          event.preventDefault();
-          if(missionPopup.classList.contains('open')){
-            closeMissionPopup();
-          }else{
-            openMissionPopup();
-          }
-        });
-
-        missionTrigger.addEventListener('focus', () => {
-          openMissionPopup();
-        });
-
-        if(pointerFine && typeof pointerFine.matches === 'boolean'){
-          missionTrigger.addEventListener('mouseenter', () => {
-            if(pointerFine.matches){
-              openMissionPopup();
-            }
-          });
-          if(missionItem){
-            missionItem.addEventListener('mouseenter', () => {
-              if(pointerFine.matches){
-                clearMissionTimer();
-              }
-            });
-            missionItem.addEventListener('mouseleave', () => {
-              if(pointerFine.matches){
-                scheduleMissionClose();
-              }
-            });
-          }
-          missionPopup.addEventListener('mouseenter', () => {
-            if(pointerFine.matches){
-              clearMissionTimer();
-            }
-          });
-          missionPopup.addEventListener('mouseleave', () => {
-            if(pointerFine.matches){
-              scheduleMissionClose();
-            }
-          });
-        }
-
-        if(missionItem){
-          missionItem.addEventListener('focusout', (event) => {
-            const next = event.relatedTarget;
-            if(!next || !missionItem.contains(next)){
-              closeMissionPopup();
-            }
-          });
-        }
-      }
 
       document.addEventListener('keydown', (event) => {
         if(event.key === 'Escape'){
@@ -835,9 +905,10 @@
       <h4>Who we work with</h4>
       <p>AO Globe Life partners with member-centric groups and organizations to expand access and serve working families.</p>
       <ul>
-        <li><strong>Labor &amp; trade unions:</strong> International Association of Fire Fighters (IAFF), International Brotherhood of Electrical Workers (IBEW), United Steelworkers (USW), Communications Workers of America (CWA).</li>
-        <li><strong>Public service &amp; first responders:</strong> American Federation of Government Employees (AFGE), Fraternal Order of Police (FOP), National Association of Letter Carriers (NALC).</li>
-        <li><strong>Community &amp; service organizations:</strong> Veterans of Foreign Wars (VFW), American Federation of Teachers (AFT), United Way community campaigns and similar member benefit groups.</li>
+        <li><strong>Labor &amp; trade unions:</strong> International Brotherhood of Electrical Workers (IBEW), United Steelworkers (USW), Communications Workers of America (CWA), United Food &amp; Commercial Workers (UFCW).</li>
+        <li><strong>First responders &amp; public safety:</strong> International Association of Fire Fighters (IAFF), Fraternal Order of Police (FOP), National Association of Police Organizations (NAPO).</li>
+        <li><strong>Government &amp; postal:</strong> American Federation of Government Employees (AFGE), National Association of Letter Carriers (NALC), National Postal Mail Handlers Union (NPMHU).</li>
+        <li><strong>Education &amp; community partners:</strong> American Federation of Teachers (AFT), Veterans of Foreign Wars (VFW), United Way-led community benefit programs.</li>
       </ul>
       <p class="source">Inspired by <a href="https://aoglobelife.com/about/">AO Globe Life - About</a>.</p>
     </div>
