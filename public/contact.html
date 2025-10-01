@@ -119,8 +119,97 @@
         <a href="module1.html">Training</a>
         <a href="contact.html" aria-current="page">Contact</a>
       </nav>
+      <div class="glass-menu__section">
+        <nav class="glass-menu__social" aria-label="AO Globe Life social media">
+          <a class="glass-menu__social-link" href="https://instagram.com/aoglobelife" target="_blank" rel="noopener">
+            <span class="glass-menu__social-icon" aria-hidden="true">
+              <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="" />
+            </span>
+            <span class="glass-menu__social-text">Instagram</span>
+          </a>
+          <a class="glass-menu__social-link" href="https://www.facebook.com/aoglobelife" target="_blank" rel="noopener">
+            <span class="glass-menu__social-icon" aria-hidden="true">
+              <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="" />
+            </span>
+            <span class="glass-menu__social-text">Facebook</span>
+          </a>
+          <a class="glass-menu__social-link" href="https://x.com/aoglobelife" target="_blank" rel="noopener">
+            <span class="glass-menu__social-icon" aria-hidden="true">
+              <img src="https://cdn-icons-png.flaticon.com/512/5968/5968830.png" alt="" />
+            </span>
+            <span class="glass-menu__social-text">X</span>
+          </a>
+          <a class="glass-menu__social-link" href="https://www.linkedin.com/company/aoglobelife" target="_blank" rel="noopener">
+            <span class="glass-menu__social-icon" aria-hidden="true">
+              <img src="https://cdn-icons-png.flaticon.com/512/733/733561.png" alt="" />
+            </span>
+            <span class="glass-menu__social-text">LinkedIn</span>
+          </a>
+          <a class="glass-menu__social-link" href="https://youtube.com/@aoglobelife" target="_blank" rel="noopener">
+            <span class="glass-menu__social-icon" aria-hidden="true">
+              <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="" />
+            </span>
+            <span class="glass-menu__social-text">YouTube</span>
+          </a>
+          <a class="glass-menu__social-link" href="https://www.tiktok.com/@aoglobelife" target="_blank" rel="noopener">
+            <span class="glass-menu__social-icon" aria-hidden="true">
+              <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="" />
+            </span>
+            <span class="glass-menu__social-text">TikTok</span>
+          </a>
+        </nav>
+      </div>
     </div>
   </aside>
+  <div class="settings-widget" data-settings>
+    <button class="settings-widget__toggle" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="settingsPanel">
+      <span class="sr-only">Open display and language settings</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M19.14 12.94c.04-.31.06-.63.06-.94 0-.31-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.63l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.028 7.028 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.6.24-1.16.55-1.68.92l-2.39-.96a.5.5 0 0 0-.6.22L2.66 8.5a.5.5 0 0 0 .12.63l2.03 1.58c-.04.31-.06.63-.06.94 0 .31.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.63l1.92 3.32c.14.24.43.34.69.24l2.39-.96c.52.37 1.08.68 1.68.92l.36 2.54c.04.25.25.42.49.42h3.8c.24 0 .45-.17.49-.42l.36-2.54c.6-.24 1.16-.55 1.68-.92l2.39.96c.26.1.55 0 .69-.24l1.92-3.32a.5.5 0 0 0-.12-.63l-2.03-1.58ZM12 15.5a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Z" />
+      </svg>
+    </button>
+    <div class="settings-widget__panel" id="settingsPanel" role="dialog" aria-modal="false" aria-labelledby="settingsPanelTitle">
+      <h2 class="settings-widget__title" id="settingsPanelTitle">Quick settings</h2>
+      <div class="settings-widget__section">
+        <label class="settings-widget__label" for="settingsZoom">Zoom level</label>
+        <select class="settings-widget__select" id="settingsZoom" name="settingsZoom">
+          <option value="0.9">90%</option>
+          <option value="1">100%</option>
+          <option value="1.1">110%</option>
+          <option value="1.25">125%</option>
+        </select>
+        <p class="settings-widget__helper">Adjusts the overall scale of the interface.</p>
+      </div>
+      <div class="settings-widget__section">
+        <fieldset class="settings-widget__fieldset">
+          <legend class="settings-widget__legend">Color theme</legend>
+          <div class="settings-widget__radio-group" role="radiogroup" aria-label="Color theme">
+            <label>
+              <input type="radio" name="settingsTheme" value="auto" checked />
+              <span>Auto</span>
+            </label>
+            <label>
+              <input type="radio" name="settingsTheme" value="light" />
+              <span>Light</span>
+            </label>
+            <label>
+              <input type="radio" name="settingsTheme" value="dark" />
+              <span>Dark</span>
+            </label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="settings-widget__section">
+        <label class="settings-widget__label" for="settingsLanguage">Language</label>
+        <select class="settings-widget__select" id="settingsLanguage" name="settingsLanguage">
+          <option value="en">English</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+        </select>
+        <p class="settings-widget__helper">Sets your preferred language for the site.</p>
+      </div>
+    </div>
+  </div>
   <div class="page-content">
   <main>
     <h1>Contact</h1>
@@ -162,5 +251,6 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+  <script src="js/settings.js"></script>
 </body>
 </html>
