@@ -11,16 +11,28 @@
   --menu-shadow: 24px 0 48px -28px rgba(6, 28, 58, 0.32);
   --menu-rib-sheen: linear-gradient(90deg, rgba(10, 62, 122, 0.35), rgba(10, 62, 122, 0.1) 45%, rgba(10, 62, 122, 0.4));
   --menu-button-font-size: 1rem;
+  --menu-button-height: calc(3.3 * var(--menu-button-font-size));
   --menu-button-padding-y: 0.4em;
-  --menu-button-padding-x: 1.25rem;
+  --menu-button-padding-x: 1.6rem;
+  --menu-button-radius: 12px;
+  --menu-button-width: 100%;
   --menu-button-surface: linear-gradient(
-      112deg,
-      rgba(245, 247, 250, 0.98) 0%,
-      rgba(214, 220, 232, 0.98) 52%,
-      rgba(188, 196, 212, 0.98) 100%
+      162deg,
+      rgba(246, 250, 255, 0.95) 0%,
+      rgba(208, 222, 240, 0.95) 52%,
+      rgba(168, 188, 216, 0.95) 100%
     );
-  --menu-button-shadow: inset 1px 1px 6px rgba(255, 255, 255, 0.7), inset -6px -4px 12px rgba(34, 34, 34, 0.32),
-    0 16px 28px rgba(0, 0, 0, 0.28);
+  --menu-button-surface-pressed: linear-gradient(
+      160deg,
+      rgba(184, 204, 230, 0.95) 0%,
+      rgba(152, 177, 210, 0.95) 55%,
+      rgba(124, 150, 190, 0.95) 100%
+    );
+  --menu-button-shadow: 0 18px 32px rgba(5, 22, 52, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    inset 0 -10px 18px rgba(5, 26, 60, 0.45);
+  --menu-button-shadow-pressed: 0 10px 18px rgba(4, 18, 44, 0.5), inset 0 6px 12px rgba(6, 24, 58, 0.55),
+    inset 0 -3px 6px rgba(255, 255, 255, 0.32);
+  --menu-button-glow: 0 0 26px rgba(110, 182, 255, 0.35);
 }
 
 body.with-glass-menu {
@@ -38,15 +50,38 @@ body.with-glass-menu {
   position: fixed;
   inset: 0 auto 0 0;
   width: var(--menu-width);
-  padding: 36px 0;
+  padding: 36px 12px;
   display: flex;
   flex-direction: column;
   gap: 32px;
-  background: linear-gradient(180deg, rgba(8, 52, 104, 0.96), rgba(5, 40, 84, 0.98));
-  border-right: 1px solid var(--menu-border);
-  box-shadow: var(--menu-shadow);
+  background:
+    radial-gradient(120% 110% at 14% 16%, rgba(118, 172, 236, 0.38), rgba(118, 172, 236, 0) 58%),
+    radial-gradient(140% 140% at 92% 84%, rgba(6, 30, 72, 0.55), rgba(6, 30, 72, 0) 62%),
+    linear-gradient(180deg, #0b4486 0%, #073066 48%, #02163c 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 18px 0 42px -26px rgba(6, 18, 44, 0.72);
   z-index: 100;
   overflow: hidden;
+}
+
+.glass-menu::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -14px;
+  width: 34px;
+  border-radius: 0 22px 22px 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(160, 206, 255, 0.16) 45%,
+    rgba(18, 54, 116, 0.24) 74%,
+    rgba(3, 12, 36, 0.58) 100%
+  );
+  box-shadow: 18px 0 32px -20px rgba(3, 7, 18, 0.7);
+  pointer-events: none;
+  opacity: 0.85;
 }
 
 .glass-menu__inner {
@@ -59,7 +94,11 @@ body.with-glass-menu {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0 var(--menu-frame-inset) 40px;
+  padding: 20px var(--menu-frame-inset) 40px;
+  background: linear-gradient(180deg, rgba(9, 58, 120, 0.92) 0%, rgba(5, 34, 84, 0.95) 100%);
+  border-radius: 26px;
+  box-shadow: none;
+  border: none;
 }
 
 .glass-menu__section {
@@ -81,9 +120,23 @@ body.with-glass-menu {
   padding-left: 4px;
 }
 
+
+.glass-menu__nav,
 .glass-menu__social {
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+  width: var(--menu-button-width);
+  margin: 0;
+  align-self: stretch;
+}
+
+.glass-menu__nav {
+  padding: 12px 0;
+}
+
+.glass-menu__social {
   gap: 0;
 }
 
@@ -132,23 +185,26 @@ body.theme-dark .glass-menu__social-icon {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   width: 100%;
   box-sizing: border-box;
-  padding: var(--menu-button-padding-y) var(--menu-button-padding-x);
+  gap: 14px;
+  padding: 0 var(--menu-button-padding-x);
   font-size: var(--menu-button-font-size);
-  line-height: 1.2;
+  line-height: 1.15;
+  min-height: var(--menu-button-height);
   background: var(--menu-button-surface);
   background-repeat: no-repeat;
   box-shadow: var(--menu-button-shadow);
-  border: 1px solid rgba(10, 62, 122, 0.12);
-  border-radius: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: var(--menu-button-radius);
+  color: #052447;
+  font-weight: 600;
+  letter-spacing: 0.24px;
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, color 0.3s ease;
-}
-
-.glass-menu__nav a,
-.glass-menu__social a {
-  min-height: calc(2 * var(--menu-button-font-size));
+  transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease, color 0.24s ease;
 }
 
 .glass-menu__brand {
@@ -160,66 +216,58 @@ body.theme-dark .glass-menu__social-icon {
 .glass-menu__social a::before {
   content: '';
   position: absolute;
-  inset: 1px;
-  border-radius: 0;
-  background:
-    radial-gradient(140% 160% at 50% -10%, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.12) 38%, rgba(255, 255, 255, 0) 70%),
-    radial-gradient(140% 160% at 50% 110%, rgba(0, 168, 112, 0.26) 0%, rgba(0, 168, 112, 0.12) 45%, rgba(0, 168, 112, 0) 75%),
-    radial-gradient(160% 160% at -10% 50%, rgba(0, 168, 112, 0.22) 0%, rgba(0, 168, 112, 0.08) 46%, rgba(0, 168, 112, 0) 78%),
-    radial-gradient(160% 160% at 110% 50%, rgba(0, 168, 112, 0.22) 0%, rgba(0, 168, 112, 0.08) 46%, rgba(0, 168, 112, 0) 78%);
-  opacity: 0;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.12) 45%, rgba(0, 0, 0, 0) 100%);
+  opacity: 0.65;
   pointer-events: none;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.24s ease;
   z-index: 0;
 }
 
 .glass-menu__brand {
   justify-content: center;
   gap: 12px;
-  color: #000;
+  color: #052447;
 }
 
 .glass-menu__brand::after {
   content: '';
   position: absolute;
-  inset: 2px;
+  inset: 6px;
+  border-radius: calc(var(--menu-button-radius) - 6px);
   background:
-    radial-gradient(120% 140% at 50% -20%, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0) 70%),
-    radial-gradient(140% 160% at 50% 120%, rgba(0, 168, 112, 0.24) 0%, rgba(0, 168, 112, 0.1) 46%, rgba(0, 168, 112, 0) 80%);
-  border-radius: 0;
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 68%),
+    radial-gradient(circle at 50% 100%, rgba(110, 182, 255, 0.32), rgba(110, 182, 255, 0) 72%);
   opacity: 0.4;
   pointer-events: none;
+  transition: opacity 0.24s ease;
   z-index: 0;
 }
 
 .glass-menu__brand:hover,
 .glass-menu__brand:focus-visible {
-  color: #000;
-  background: var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.45);
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.82),
-    inset 0 0 22px rgba(0, 168, 112, 0.38),
-    inset 0 0 42px rgba(0, 168, 112, 0.2),
-    inset 1px 1px 8px rgba(255, 255, 255, 0.7),
-    inset -6px -4px 16px rgba(34, 34, 34, 0.3),
-    0 18px 32px rgba(0, 0, 0, 0.3);
+  color: #031a36;
+  background: var(--menu-button-surface-pressed);
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: var(--menu-button-shadow-pressed), var(--menu-button-glow);
 }
 
 .glass-menu__brand:hover {
-  transform: translateY(-3px);
+  transform: translateY(2px);
 }
 
 .glass-menu__brand:focus-visible {
-  outline: 2px solid rgba(0, 168, 112, 0.5);
-  outline-offset: 2px;
+  outline: 2px solid rgba(110, 182, 255, 0.6);
+  outline-offset: 4px;
 }
 
 .glass-menu__brand:active {
-  color: #000;
-  background: linear-gradient(140deg, #00a870, #02855c), var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.65);
-  box-shadow: inset 0 0 0 1px rgba(0, 168, 112, 0.75), inset 0 0 24px rgba(0, 168, 112, 0.65), 0 10px 20px rgba(0, 0, 0, 0.38);
+  color: #02152b;
+  background: var(--menu-button-surface-pressed);
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 8px 14px rgba(6, 26, 58, 0.6), inset 0 -2px 4px rgba(255, 255, 255, 0.3), 0 6px 10px rgba(4, 18, 44, 0.45);
+  transform: translateY(3px);
 }
 
 .glass-menu__brand img {
@@ -231,18 +279,44 @@ body.theme-dark .glass-menu__social-icon {
   margin: 0 auto;
 }
 
+
+.glass-menu__brand {
+  width: var(--menu-button-width);
+  align-self: stretch;
+  margin: 0;
+}
+
 .glass-menu__nav {
   position: relative;
-  display: flex;
-  flex-direction: column;
   gap: 0;
   margin: 0;
-  padding: 0;
   background: none;
   border: none;
   box-shadow: none;
   overflow: visible;
   isolation: auto;
+}
+
+.glass-menu__nav a,
+.glass-menu__social a {
+  border-radius: 0;
+}
+
+.glass-menu__nav a:first-child,
+.glass-menu__social a:first-child {
+  border-top-left-radius: var(--menu-button-radius);
+  border-top-right-radius: var(--menu-button-radius);
+}
+
+.glass-menu__nav a:last-child,
+.glass-menu__social a:last-child {
+  border-bottom-left-radius: var(--menu-button-radius);
+  border-bottom-right-radius: var(--menu-button-radius);
+}
+
+.glass-menu__nav a + a,
+.glass-menu__social a + a {
+  margin-top: -1px;
 }
 
 .glass-menu__nav::before {
@@ -252,12 +326,6 @@ body.theme-dark .glass-menu__social-icon {
 .glass-menu__nav a,
 .glass-menu__social a {
   z-index: 1;
-  justify-content: flex-start;
-  gap: 12px;
-  color: #000;
-  text-decoration: none;
-  font-weight: 600;
-  letter-spacing: 0.24px;
   background-position: center;
 }
 
@@ -270,13 +338,14 @@ body.theme-dark .glass-menu__social-icon {
 .glass-menu__social a::after {
   content: '';
   position: absolute;
-  inset: 2px;
+  inset: 6px;
+  border-radius: calc(var(--menu-button-radius) - 6px);
   background:
-    radial-gradient(120% 140% at 50% -20%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.12) 40%, rgba(255, 255, 255, 0) 70%),
-    radial-gradient(140% 160% at 50% 120%, rgba(0, 168, 112, 0.22) 0%, rgba(0, 168, 112, 0.08) 46%, rgba(0, 168, 112, 0) 80%);
-  border-radius: 0;
-  opacity: 0.24;
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 68%),
+    radial-gradient(circle at 50% 100%, rgba(110, 182, 255, 0.32), rgba(110, 182, 255, 0) 72%);
+  opacity: 0.35;
   pointer-events: none;
+  transition: opacity 0.24s ease;
   z-index: 0;
 }
 
@@ -285,16 +354,11 @@ body.theme-dark .glass-menu__social-icon {
 .glass-menu__nav a:focus-visible,
 .glass-menu__social a:hover,
 .glass-menu__social a:focus-visible {
-  color: #000;
-  background: var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.45);
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.85),
-    inset 0 0 22px rgba(0, 168, 112, 0.36),
-    inset 0 0 44px rgba(0, 168, 112, 0.2),
-    inset 1px 1px 8px rgba(255, 255, 255, 0.7),
-    inset -6px -4px 16px rgba(34, 34, 34, 0.3),
-    0 16px 28px rgba(0, 0, 0, 0.34);
+  color: #031a36;
+  background: var(--menu-button-surface-pressed);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: var(--menu-button-shadow-pressed), var(--menu-button-glow);
+  transform: translateY(2px);
 }
 
 .glass-menu__brand:hover::before,
@@ -303,31 +367,28 @@ body.theme-dark .glass-menu__social-icon {
 .glass-menu__nav a:focus-visible::before,
 .glass-menu__social a:hover::before,
 .glass-menu__social a:focus-visible::before {
-  opacity: 1;
+  opacity: 0.9;
 }
 
 .glass-menu__nav a[aria-current="page"],
 .glass-menu__social a[aria-current="page"] {
-  color: #000;
+  color: #052417;
   font-weight: 700;
-  background: linear-gradient(132deg, #00a870, #029663), var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.65);
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.75),
-    inset 0 0 32px rgba(0, 168, 112, 0.65),
-    0 18px 32px rgba(0, 0, 0, 0.38);
+  background: linear-gradient(162deg, rgba(0, 210, 150, 0.95) 0%, rgba(0, 168, 112, 0.95) 52%, rgba(0, 136, 92, 0.95) 100%);
+  border-color: rgba(0, 168, 112, 0.55);
+  box-shadow: 0 20px 34px rgba(0, 64, 44, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.72), inset 0 -10px 18px rgba(0, 78, 54, 0.45);
 }
 
 .glass-menu__nav a:hover::after,
 .glass-menu__nav a:focus-visible::after,
 .glass-menu__social a:hover::after,
 .glass-menu__social a:focus-visible::after {
-  opacity: 0.6;
+  opacity: 0.65;
 }
 
 .glass-menu__brand:hover::after,
 .glass-menu__brand:focus-visible::after {
-  opacity: 0.68;
+  opacity: 0.7;
 }
 
 .glass-menu__nav a[aria-current="page"]::after,
@@ -337,19 +398,17 @@ body.theme-dark .glass-menu__social-icon {
 
 .glass-menu__nav a:focus-visible,
 .glass-menu__social a:focus-visible {
-  outline: 2px solid rgba(0, 168, 112, 0.5);
-  outline-offset: 2px;
+  outline: 2px solid rgba(110, 182, 255, 0.6);
+  outline-offset: 4px;
 }
 
 .glass-menu__nav a:active,
 .glass-menu__social a:active {
-  color: #000;
-  background: linear-gradient(140deg, #00a870, #02855c), var(--menu-button-surface);
-  border-color: rgba(0, 168, 112, 0.65);
-  box-shadow:
-    inset 0 0 0 1px rgba(0, 168, 112, 0.75),
-    inset 0 0 24px rgba(0, 168, 112, 0.65),
-    0 10px 20px rgba(0, 0, 0, 0.38);
+  color: #02152b;
+  background: var(--menu-button-surface-pressed);
+  border-color: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 8px 14px rgba(6, 26, 58, 0.6), inset 0 -2px 4px rgba(255, 255, 255, 0.3), 0 6px 10px rgba(4, 18, 44, 0.45);
+  transform: translateY(3px);
 }
 
 .glass-menu__nav a > *,
