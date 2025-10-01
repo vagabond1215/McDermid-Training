@@ -51,6 +51,7 @@ body.with-glass-menu {
   inset: 0 auto 0 0;
   width: var(--menu-width);
   padding: 36px 12px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: 32px;
