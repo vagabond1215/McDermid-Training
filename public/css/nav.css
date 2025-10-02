@@ -137,6 +137,7 @@ body:not(.theme-light) .glass-menu__social a {
 .glass-menu__nav a,
 .glass-menu__social a {
   position: relative;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -265,7 +266,6 @@ body:not(.theme-light) .glass-menu__social a + a {
 
 .glass-menu__nav a,
 .glass-menu__social a {
-  z-index: 1;
   background-position: center;
 }
 
