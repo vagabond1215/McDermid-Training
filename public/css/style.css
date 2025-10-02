@@ -1,35 +1,29 @@
-:root {
-  --ao-blue: #0a3e7a;
-  --ao-green: #00a870;
-  --ink: #1f2937;
-  --muted: #6b7280;
-  --surface: rgba(255, 255, 255, 0.88);
-}
-
 body {
-  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  margin: 0;
-  background: linear-gradient(180deg, #f7f9fc 0%, #f0f6ff 45%, #f7f9fc 100%);
   color: var(--ink);
+  background: var(--page-background);
 }
 
 main {
   width: min(1080px, 92vw);
   margin: clamp(24px, 6vw, 48px) auto 72px;
   padding: clamp(24px, 5vw, 36px) clamp(16px, 6vw, 48px);
-  background: var(--surface);
+  background: var(--surface-strong);
   border-radius: 24px;
-  box-shadow: 0 24px 48px rgba(10, 62, 122, 0.12);
-  border: 1px solid rgba(10, 62, 122, 0.08);
+  box-shadow: 0 24px 48px var(--halo);
+  border: 1px solid var(--border-soft);
 }
 h1, h2, h3 {
   color: var(--ao-blue);
 }
+.checkbox-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 .checkbox-list li {
   list-style: none;
-  margin-bottom: 0.5rem;
-}
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 summary {
   cursor: pointer;
@@ -78,7 +72,7 @@ summary {
 }
 
 .menu-item {
-  background: #005daa;
+  background: linear-gradient(120deg, var(--ao-blue), color-mix(in srgb, var(--ao-blue) 60%, var(--ao-green) 40%));
   color: #fff;
   padding: 1rem 2rem;
   text-decoration: none;
@@ -87,7 +81,7 @@ summary {
 }
 
 .menu-item:hover {
-  background: #004a88;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--ao-blue) 90%, #fff 10%), color-mix(in srgb, var(--ao-green) 60%, var(--ao-blue) 40%));
 }
 
 #logoutBtn {
@@ -179,11 +173,11 @@ summary {
 }
 
 .info-card {
-  background: rgba(255, 255, 255, 0.96);
+  background: var(--surface-strong);
   border-radius: 20px;
   padding: clamp(20px, 3vw, 28px);
-  box-shadow: 0 20px 44px rgba(10, 62, 122, 0.14);
-  border: 1px solid rgba(10, 62, 122, 0.08);
+  box-shadow: 0 20px 44px var(--halo);
+  border: 1px solid var(--border-soft);
 }
 
 .info-card h2 {
@@ -207,7 +201,7 @@ summary {
   padding: clamp(24px, 6vw, 36px);
   background: linear-gradient(120deg, rgba(10, 62, 122, 0.12), rgba(0, 168, 112, 0.12));
   border-radius: 24px;
-  border: 1px solid rgba(10, 62, 122, 0.12);
+  border: 1px solid var(--border-soft);
   text-align: center;
 }
 

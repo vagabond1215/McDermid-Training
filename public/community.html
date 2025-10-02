@@ -7,28 +7,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/nav.css" />
   <style>
-    :root {
-      --ao-blue: #0a3e7a;
-      --ao-green: #00a870;
-      --ink: #1f2937;
-      --muted: #6b7280;
-      --surface: rgba(255, 255, 255, 0.88);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-      color: var(--ink);
-      background: linear-gradient(180deg, #f7f9fc 0%, #f0f6ff 45%, #f7f9fc 100%);
-      min-height: 100vh;
-    }
-
     .page-content {
       min-height: 100vh;
       display: flex;
@@ -64,8 +45,8 @@
       background: var(--surface);
       border-radius: 20px;
       padding: clamp(20px, 3vw, 28px);
-      box-shadow: 0 22px 48px rgba(10, 62, 122, 0.16);
-      border: 1px solid rgba(10, 62, 122, 0.08);
+      box-shadow: 0 22px 48px var(--halo);
+      border: 1px solid var(--border-soft);
     }
 
     .card h2 {
