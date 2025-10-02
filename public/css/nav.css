@@ -20,7 +20,7 @@ body.with-glass-menu {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 28px;
+  gap: 14px;
   background: radial-gradient(
     circle at 110% 50%,
     #1a5aa3 0%,
@@ -154,7 +154,7 @@ body:not(.theme-light) .glass-menu__social a {
   border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: var(--menu-button-radius);
   color: rgba(244, 248, 255, 0.92);
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: 0.24px;
   text-decoration: none;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
@@ -200,7 +200,7 @@ body:not(.theme-light) .glass-menu__social a {
   width: 100%;
   margin: 0;
   margin-left: 0;
-  padding: 12px 0 10px;
+  padding: 6px 0 5px;
   background: none;
   border: none;
   border-radius: 0;
@@ -219,7 +219,7 @@ body:not(.theme-light) .glass-menu__social a {
 .glass-menu__brand img {
   display: block;
   width: 100%;
-  max-width: calc(100% - var(--menu-button-padding-x) * 2);
+  max-width: calc(100% - var(--menu-button-padding-x));
   height: auto;
   margin: 0 auto;
   filter: var(--menu-logo-filter);
@@ -333,7 +333,6 @@ body:not(.theme-light) .glass-menu__social a[aria-current="page"] {
 .glass-menu__nav a[aria-current="page"],
 .glass-menu__social a[aria-current="page"] {
   color: #102a4a;
-  font-weight: 700;
   background: linear-gradient(180deg, rgba(226, 236, 248, 0.95), rgba(194, 210, 232, 0.92));
   border-color: rgba(255, 255, 255, 0.6);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -3px 6px rgba(134, 160, 196, 0.42);
