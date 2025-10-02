@@ -18,7 +18,16 @@
   --ok: #10b981;
   --info: #0ea5e9;
   --warn: #f59e0b;
-  --menu-width: 260px;
+  --menu-button-icon-size: 28px;
+  --menu-button-icon-gap: 14px;
+  --menu-longest-label: 9ch;
+  --menu-width: calc(
+    (var(--menu-button-padding-x) * 2) +
+      var(--menu-longest-label) +
+      var(--menu-button-icon-size) +
+      var(--menu-button-icon-gap) +
+      0.5rem
+  );
   --menu-frame-inset: 16px;
   --menu-surface: rgba(255, 255, 255, 0.14);
   --menu-highlight: rgba(255, 255, 255, 0.18);
@@ -30,26 +39,41 @@
   --menu-button-font-size: 1rem;
   --menu-button-height: calc(3.3 * var(--menu-button-font-size));
   --menu-button-padding-y: 0.4em;
-  --menu-button-padding-x: 1.6rem;
-  --menu-button-radius: 12px;
+  --menu-button-padding-x: 1.2rem;
+  --menu-button-radius: 6px;
   --menu-button-width: 100%;
+  --menu-button-left-offset: 12px;
   --menu-button-surface: linear-gradient(
-      162deg,
-      rgba(246, 250, 255, 0.95) 0%,
-      rgba(208, 222, 240, 0.95) 52%,
-      rgba(168, 188, 216, 0.95) 100%
+      180deg,
+      rgba(30, 88, 156, 0.9) 0%,
+      rgba(16, 58, 118, 0.9) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(12, 50, 104, 0.55) 0%,
+      rgba(22, 74, 140, 0.05) 36%,
+      rgba(6, 30, 74, 0.6) 100%
     );
   --menu-button-surface-pressed: linear-gradient(
-      160deg,
-      rgba(184, 204, 230, 0.95) 0%,
-      rgba(152, 177, 210, 0.95) 55%,
-      rgba(124, 150, 190, 0.95) 100%
+      180deg,
+      rgba(20, 66, 130, 0.92) 0%,
+      rgba(10, 42, 94, 0.92) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(9, 38, 86, 0.6) 0%,
+      rgba(18, 56, 108, 0.1) 32%,
+      rgba(4, 18, 56, 0.72) 100%
     );
-  --menu-button-shadow: 0 18px 32px rgba(5, 22, 52, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.8),
-    inset 0 -10px 18px rgba(5, 26, 60, 0.45);
-  --menu-button-shadow-pressed: 0 10px 18px rgba(4, 18, 44, 0.5), inset 0 6px 12px rgba(6, 24, 58, 0.55),
-    inset 0 -3px 6px rgba(255, 255, 255, 0.32);
-  --menu-button-glow: 0 0 26px rgba(110, 182, 255, 0.35);
+  --menu-button-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), inset 0 -2px 6px rgba(3, 18, 48, 0.55),
+    inset -10px 0 16px rgba(6, 28, 74, 0.45), inset 4px 0 10px rgba(255, 255, 255, 0.18);
+  --menu-button-shadow-pressed: inset 0 1px 0 rgba(6, 20, 52, 0.5), inset 0 -2px 4px rgba(2, 10, 32, 0.7),
+    inset -8px 0 14px rgba(2, 14, 42, 0.55), inset 3px 0 8px rgba(174, 202, 246, 0.24);
+  --menu-button-glow: 0 0 18px rgba(30, 88, 156, 0.3);
+  --menu-logo-filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.45))
+    drop-shadow(0 12px 28px rgba(6, 24, 56, 0.35));
+  --menu-logo-filter-strong: drop-shadow(0 0 22px rgba(255, 255, 255, 0.6))
+    drop-shadow(0 16px 32px rgba(6, 24, 56, 0.45));
 }
 
 *,
@@ -94,22 +118,36 @@ body.theme-dark {
   --menu-border-gradient: linear-gradient(135deg, rgba(62, 142, 255, 0.9), rgba(0, 208, 166, 0.82), rgba(14, 165, 233, 0.75));
   --menu-shadow: 24px 0 48px -28px rgba(2, 6, 23, 0.6);
   --menu-button-surface: linear-gradient(
-      160deg,
-      rgba(30, 58, 92, 0.95) 0%,
-      rgba(17, 34, 64, 0.95) 60%,
-      rgba(12, 26, 46, 0.95) 100%
+      180deg,
+      rgba(23, 60, 106, 0.92) 0%,
+      rgba(10, 32, 68, 0.92) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(13, 35, 70, 0.65) 0%,
+      rgba(23, 52, 94, 0.12) 38%,
+      rgba(6, 18, 46, 0.7) 100%
     );
   --menu-button-surface-pressed: linear-gradient(
-      160deg,
-      rgba(13, 23, 41, 0.95) 0%,
-      rgba(11, 20, 36, 0.95) 55%,
-      rgba(9, 16, 30, 0.95) 100%
+      180deg,
+      rgba(16, 42, 80, 0.94) 0%,
+      rgba(7, 20, 46, 0.94) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(8, 24, 56, 0.7) 0%,
+      rgba(14, 34, 68, 0.14) 34%,
+      rgba(3, 12, 32, 0.78) 100%
     );
-  --menu-button-shadow: 0 18px 32px rgba(2, 8, 23, 0.65), inset 0 1px 0 rgba(148, 163, 184, 0.25),
-    inset 0 -10px 18px rgba(2, 6, 23, 0.6);
-  --menu-button-shadow-pressed: 0 10px 18px rgba(2, 6, 23, 0.6), inset 0 6px 12px rgba(11, 27, 53, 0.6),
-    inset 0 -3px 6px rgba(148, 163, 184, 0.2);
-  --menu-button-glow: 0 0 26px rgba(37, 99, 235, 0.45);
+  --menu-button-shadow: inset 0 1px 0 rgba(148, 163, 184, 0.18), inset 0 -2px 6px rgba(2, 8, 26, 0.65),
+    inset -10px 0 18px rgba(2, 10, 28, 0.55), inset 4px 0 12px rgba(148, 179, 220, 0.25);
+  --menu-button-shadow-pressed: inset 0 1px 0 rgba(11, 27, 53, 0.55), inset 0 -2px 4px rgba(0, 4, 18, 0.75),
+    inset -8px 0 16px rgba(0, 6, 20, 0.6), inset 3px 0 9px rgba(82, 115, 166, 0.3);
+  --menu-button-glow: 0 0 18px rgba(37, 99, 235, 0.35);
+  --menu-logo-filter: drop-shadow(0 0 22px rgba(148, 197, 255, 0.55))
+    drop-shadow(0 14px 32px rgba(2, 6, 23, 0.55));
+  --menu-logo-filter-strong: drop-shadow(0 0 26px rgba(148, 197, 255, 0.68))
+    drop-shadow(0 18px 36px rgba(2, 6, 23, 0.65));
 }
 
 @media (prefers-color-scheme: dark) {
@@ -137,18 +175,36 @@ body.theme-dark {
         rgba(30, 58, 92, 0.95) 0%,
         rgba(17, 34, 64, 0.95) 60%,
         rgba(12, 26, 46, 0.95) 100%
+      ),
+      linear-gradient(
+        95deg,
+        rgba(16, 36, 68, 0.7) 0%,
+        rgba(28, 58, 102, 0.16) 36%,
+        rgba(5, 14, 34, 0.78) 100%
       );
     --menu-button-surface-pressed: linear-gradient(
         160deg,
         rgba(13, 23, 41, 0.95) 0%,
         rgba(11, 20, 36, 0.95) 55%,
         rgba(9, 16, 30, 0.95) 100%
+      ),
+      linear-gradient(
+        95deg,
+        rgba(8, 20, 42, 0.75) 0%,
+        rgba(18, 36, 64, 0.2) 32%,
+        rgba(2, 6, 18, 0.82) 100%
       );
     --menu-button-shadow: 0 18px 32px rgba(2, 8, 23, 0.65), inset 0 1px 0 rgba(148, 163, 184, 0.25),
-      inset 0 -10px 18px rgba(2, 6, 23, 0.6);
+      inset 0 -10px 18px rgba(2, 6, 23, 0.6), inset -12px 0 22px rgba(2, 8, 23, 0.55),
+      inset 6px 0 14px rgba(148, 179, 220, 0.28);
     --menu-button-shadow-pressed: 0 10px 18px rgba(2, 6, 23, 0.6), inset 0 6px 12px rgba(11, 27, 53, 0.6),
-      inset 0 -3px 6px rgba(148, 163, 184, 0.2);
+      inset 0 -3px 6px rgba(148, 163, 184, 0.2), inset -10px 0 20px rgba(0, 4, 18, 0.65),
+      inset 5px 0 12px rgba(104, 139, 198, 0.32);
     --menu-button-glow: 0 0 26px rgba(37, 99, 235, 0.45);
+    --menu-logo-filter: drop-shadow(0 0 24px rgba(148, 197, 255, 0.6))
+      drop-shadow(0 16px 32px rgba(2, 6, 23, 0.62));
+    --menu-logo-filter-strong: drop-shadow(0 0 28px rgba(148, 197, 255, 0.72))
+      drop-shadow(0 20px 40px rgba(2, 6, 23, 0.68));
   }
 }
 
