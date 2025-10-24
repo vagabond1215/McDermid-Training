@@ -90,8 +90,61 @@
       font-size: 0.85rem;
     }
 
+    .media-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: clamp(32px, 5vw, 48px);
+    }
+
+    figure {
+      margin: 0;
+      background: var(--surface);
+      border: 1px solid var(--border-soft);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px var(--halo);
+    }
+
+    figure img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 3 / 2;
+    }
+
+    figcaption {
+      padding: 16px 20px 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    figcaption a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    .embed {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .embed iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
     @media (min-width: 760px) {
-      .card-grid.two-column {
+      .card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .media-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -205,62 +258,76 @@
     <h1>Community Outreach &amp; Impact</h1>
     <p class="intro">Beyond our historic milestones, AO Globe Life invests time, talent, and resources into programs that strengthen working families and the communities we serve.</p>
 
-    <section class="card-grid">
+    <section class="card-grid program-grid">
       <article class="card">
-        <h2>Labor Advisory leadership in action</h2>
-        <p>Through the AIL/NILICO Labor Advisory Board, union leaders guide where support is needed most and keep us accountable to working families.</p>
+        <h2>Texas Rangers MLB Youth Academy</h2>
+        <p>Globe Life supports the 17-acre West Dallas academy where young athletes receive free instruction, college prep, and wellness resources in a safe, year-round environment.</p>
         <ul>
-          <li>Advisory board brings together 65+ leaders from the AFL-CIO and affiliated unions.</li>
-          <li>Focus on wage security, workplace safety, and healthcare access with continuous feedback loops.</li>
-          <li>Hands-on solidarity: picket line support, food bank activations, scholarships, and 100% union-label operations.</li>
+          <li>Hosts baseball, softball, and STEM programming for students across North Texas.</li>
+          <li>Partners with community mentors to deliver tutoring, workforce skills, and nutrition workshops.</li>
+          <li>Serves as the home base for the Junior RBI League and special events like the Jennie Finch Classic.</li>
         </ul>
-        <p class="cta"><a href="https://www.ailife.com/about/community" target="_blank" rel="noopener noreferrer">Explore AIL community partnerships</a></p>
+        <p class="cta"><a href="https://www.mlb.com/rangers/community/youth-academy" target="_blank" rel="noopener noreferrer">Discover the Youth Academy</a></p>
       </article>
 
       <article class="card">
-        <h2>Recent community impact highlights</h2>
-        <p>Our teams and partners show up year-round for causes aligned to youth, veterans, and underserved families.</p>
+        <h2>Globe Life × Rangers Equipment Grants</h2>
+        <p>Since 2011, Globe Life and the Texas Rangers Baseball Foundation have provided crucial funding so kids can keep playing the sports they love.</p>
         <ul>
-          <li>Supplied KKIS scholarships and classroom essentials for students in 2024.</li>
-          <li>Supported the Kids Cancer Foundation with fundraising and volunteer hours.</li>
-          <li>Ongoing food bank drives and strike relief efforts coordinated with labor partners.</li>
+          <li>More than $625,000 awarded to over 78 youth organizations in five states.</li>
+          <li>Investments cover scoreboards, uniforms, safety gear, and league program costs.</li>
+          <li>Grant recipients collectively serve more than 75,000 young athletes each season.</li>
         </ul>
-        <p class="cta"><a href="https://www.ailife.com/about/community" target="_blank" rel="noopener noreferrer">See the latest stories</a></p>
+        <p class="cta"><a href="https://home.globelifeinsurance.com/about/community/archive" target="_blank" rel="noopener noreferrer">Browse grant success stories</a></p>
       </article>
 
       <article class="card">
-        <h2>Globe Life × Texas Rangers youth grants</h2>
-        <p>Since 2011, Globe Life and the Texas Rangers Baseball Foundation have teamed up to give young athletes the resources they need to play and grow.</p>
+        <h2>Fields for the Future ballpark upgrades</h2>
+        <p>Community ballfields across Texas receive turf, lighting, and clubhouse upgrades through the Globe Life and Rangers “Fields for the Future” initiative.</p>
         <ul>
-          <li>More than $625,000 awarded to 78+ organizations across five states.</li>
-          <li>Funding supports fields, scoreboards, uniforms, equipment, and league programming.</li>
-          <li>Impact reaches 75,000+ kids in 57+ communities.</li>
+          <li>Annual projects revive neighborhood diamonds for Little League and high school teams.</li>
+          <li>Recent renovations include new bullpens, digital scoreboards, and ADA-accessible seating.</li>
+          <li>Local volunteers join AO Globe Life associates for clean-up and field maintenance days.</li>
         </ul>
-        <p class="cta"><a href="https://home.globelifeinsurance.com/about/community/archive" target="_blank" rel="noopener noreferrer">Browse the community archive</a></p>
+        <p class="cta"><a href="https://www.mlb.com/press-release/press-release-globe-life-and-texas-rangers-baseball-foundation-announce-2023-fields-for-the-future-projects" target="_blank" rel="noopener noreferrer">See the 2023 project lineup</a></p>
+      </article>
+
+      <article class="card">
+        <h2>National Medal of Honor Museum pledge</h2>
+        <p>Globe Life committed $20 million to help build the National Medal of Honor Museum in Arlington, honoring service members and investing in character education.</p>
+        <ul>
+          <li>Funding supports exhibit design, educational outreach, and scholarship endowments.</li>
+          <li>Medal of Honor recipients guide curriculum that reaches classrooms nationwide.</li>
+          <li>AO Globe Life volunteers participate in veteran-focused events alongside museum staff.</li>
+        </ul>
+        <p class="cta"><a href="https://mohmuseum.org/news/globe-life-pledges-20-million-to-national-medal-of-honor-museum" target="_blank" rel="noopener noreferrer">Read the pledge announcement</a></p>
       </article>
     </section>
 
-    <section class="card-grid two-column" style="margin-top: 32px;">
-      <article class="card">
-        <h2>Organizations we proudly support</h2>
-        <p>AO Globe Life aligns with mission-driven groups that advocate for members and communities.</p>
-        <ul>
-          <li><strong>Labor &amp; trade unions:</strong> IAFF, IBEW, United Steelworkers, Communications Workers of America.</li>
-          <li><strong>Public service &amp; first responders:</strong> American Federation of Government Employees, Fraternal Order of Police, National Association of Letter Carriers.</li>
-          <li><strong>Community &amp; service organizations:</strong> Veterans of Foreign Wars, American Federation of Teachers, United Way campaigns, and more.</li>
-        </ul>
-      </article>
+    <section class="media-grid" aria-labelledby="communitySpotlights">
+      <h2 id="communitySpotlights" class="sr-only">Community spotlights</h2>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1521412644187-c49fa049e84d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="Coach guiding youth baseball players near home plate." loading="lazy" />
+        <figcaption>
+          Photo by <a href="https://unsplash.com/@benhershey" target="_blank" rel="noopener noreferrer">Ben Hershey</a> on <a href="https://unsplash.com/photos/white-and-black-baseball-helmet-on-green-grass-during-daytime-c49fa049e84d" target="_blank" rel="noopener noreferrer">Unsplash</a> (Unsplash License).
+        </figcaption>
+      </figure>
 
-      <article class="card">
-        <h2>How to partner with us</h2>
-        <p>We collaborate with local leaders to tailor benefits education, volunteer events, and fundraising that reflect community priorities.</p>
-        <ul>
-          <li>Co-create workshops on insurance literacy and financial protection.</li>
-          <li>Activate volunteer days with member organizations and community nonprofits.</li>
-          <li>Coordinate scholarship and grant submissions for deserving programs.</li>
-        </ul>
-        <p class="cta"><a href="contact.html">Connect with our outreach team</a></p>
-      </article>
+      <figure>
+        <div class="embed">
+          <iframe src="https://www.youtube.com/embed/1O6mIanFkYI" title="Texas Rangers Youth Academy highlight video" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <figcaption>
+          Video courtesy of <a href="https://www.youtube.com/@RangersBaseball" target="_blank" rel="noopener noreferrer">Texas Rangers Baseball</a> on <a href="https://www.youtube.com/watch?v=1O6mIanFkYI" target="_blank" rel="noopener noreferrer">YouTube</a>.
+        </figcaption>
+      </figure>
+
+      <figure>
+        <img src="https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="American flag waving beside a modern glass building." loading="lazy" />
+        <figcaption>
+          Photo by <a href="https://unsplash.com/@marclanglois" target="_blank" rel="noopener noreferrer">Marcel Langthim</a> on <a href="https://unsplash.com/photos/low-angle-photography-of-flag-of-usa-6dd665756598" target="_blank" rel="noopener noreferrer">Unsplash</a> (Unsplash License).
+        </figcaption>
+      </figure>
     </section>
   </main>
   <footer>
