@@ -235,3 +235,66 @@ summary {
   transform: translateY(-2px);
   box-shadow: 0 20px 36px rgba(10, 62, 122, 0.2);
 }
+
+.partner-directory h2 {
+  margin-bottom: 8px;
+}
+
+.partner-intro {
+  color: var(--muted);
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.partner-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.partner-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.partner-card__media {
+  margin: 0;
+}
+
+.partner-card__media img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.partner-card__media figcaption {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.partner-card__media figcaption a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+.partner-card__link {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ao-blue);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.partner-card__link::after {
+  content: '↗';
+  font-size: 0.9em;
+}
+
+.partner-card__link:hover,
+.partner-card__link:focus {
+  text-decoration: underline;
+}
