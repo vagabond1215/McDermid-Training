@@ -1,292 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AO Globe Life – Heritage Timeline</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/nav.css" />
-  <meta name="color-scheme" content="light dark">
-  <meta charset="UTF-8" />
-  <title>AO Globe Life – Comprehensive Visual Timeline</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    body.history-page { color: var(--ink); background: var(--page-background); }
-    header { padding: 28px 16px 0; text-align: center; }
-    .history-page .page-content { padding: clamp(24px, 6vw, 48px) 0; }
-    h1 { margin: 0 0 6px; color: var(--brand); font-size: 28px; }
-    .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 8px; }
+    :root {
+      color-scheme: light dark;
+    }
 
-    .layout-grid { max-width: 1600px; margin: 0 auto; padding: clamp(16px, 4vw, 48px) clamp(16px, 6vw, 72px) 0; display: block; }
-    .main-content { min-width: 0; }
+    body.history-page {
+      --page-background: linear-gradient(180deg, #f7f9fc 0%, #ffffff 55%, #f7f9fc 100%);
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --rail: rgba(10, 62, 122, 0.18);
+      --card-surface: rgba(255, 255, 255, 0.9);
+      --card-border: rgba(10, 62, 122, 0.18);
+      --badge-found: rgba(10, 62, 122, 0.1);
+      --badge-launch: rgba(0, 168, 112, 0.12);
+      --badge-expand: rgba(14, 165, 233, 0.14);
+      --badge-acquire: rgba(99, 102, 241, 0.14);
+      --badge-rebrand: rgba(234, 179, 8, 0.16);
+      --badge-outlook: rgba(249, 115, 22, 0.14);
+      --badge-text: #0a3e7a;
+      --brand: #0a3e7a;
+      background: var(--page-background);
+      color: var(--ink);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+    }
 
-    .primary-menu { background: var(--menu-surface); border-radius: 24px; padding: 24px 22px 32px; box-shadow: 0 20px 48px var(--halo); display: flex; flex-direction: column; gap: 22px; backdrop-filter: blur(18px); z-index: 110; border: 1px solid transparent; background-image: linear-gradient(var(--menu-surface), var(--menu-surface)), var(--menu-border-gradient); background-origin: border-box; background-clip: padding-box, border-box; position: relative; }
-    .primary-menu .menu-button { display: none; align-items: center; justify-content: center; gap: 10px; font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
-    .primary-menu .menu-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
-    .primary-menu .menu-list li { list-style: none; }
-    .primary-menu .menu-list a,
-    .primary-menu .menu-list button { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; text-decoration: none; color: var(--ink); font-weight: 600; letter-spacing: .2px; transition: background .2s ease, color .2s ease, transform .2s ease; background: transparent; border: none; font: inherit; cursor: pointer; }
-    .primary-menu .menu-list button { text-align: left; }
-    .primary-menu .menu-list a::before,
-    .primary-menu .menu-list button::before { content: ''; width: 6px; height: 6px; border-radius: 999px; background: var(--brand); box-shadow: 0 0 0 4px rgba(10,62,122,.12); }
-    .primary-menu .menu-list a:hover,
-    .primary-menu .menu-list button:hover { background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(0,168,112,.08)); color: var(--brand); transform: translateX(4px); }
-    .primary-menu .menu-list a:focus-visible,
-    .primary-menu .menu-list button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
-    .primary-menu .menu-list a:focus-visible::before,
-    .primary-menu .menu-list button:focus-visible::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
-    .primary-menu .menu-item--popup { position: relative; }
-    .primary-menu .menu-item--popup.menu-open .menu-trigger { background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); }
-    .primary-menu .menu-item--popup.menu-open .menu-trigger::before { box-shadow: 0 0 0 4px rgba(10,62,122,.25); }
-    .menu-trigger { width: 100%; }
-    .menu-popup { position: absolute; left: calc(100% + 18px); top: 0; width: min(320px, 36vw); background: var(--menu-pop); border: 1px solid rgba(10,62,122,.16); border-radius: 16px; padding: 18px 18px 16px; box-shadow: 0 28px 52px var(--halo); display: none; color: var(--ink); z-index: 120; }
-    .menu-popup.open { display: block; }
-    .menu-popup h4 { margin: 0 0 10px; font-size: 16px; color: var(--brand); display: flex; align-items: center; gap: 8px; }
-    .menu-popup .menu-section + .menu-section { margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(10,62,122,.08); }
-    .menu-popup .menu-section h5 { margin: 0 0 6px; font-size: 15px; color: var(--brand); }
-    .menu-popup .menu-section p { margin: 0 0 8px; font-size: 13px; color: var(--ink); }
-    .menu-popup .menu-section ul { margin: 0 0 0 18px; padding: 0; }
-    .menu-popup .menu-section ul li { margin: 4px 0; font-size: 13px; color: var(--muted); }
-    .menu-popup--wide { width: min(380px, 42vw); }
-    .menu-popup__intro { margin: 0 0 12px; font-size: 13px; color: var(--muted); line-height: 1.5; }
-    .menu-popup__grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-    .menu-popup__grid .menu-section { margin: 0; padding: 12px; border: 1px solid rgba(10,62,122,.08); border-radius: 12px; background: rgba(255,255,255,.78); box-shadow: 0 8px 20px rgba(10,62,122,.1); }
-    .menu-popup__grid .menu-section h5 { margin: 0 0 8px; font-size: 12px; letter-spacing: .35px; text-transform: uppercase; }
-    .menu-popup__grid .menu-section ul { margin: 0; padding-left: 18px; }
-    .menu-popup__grid .menu-section ul li { font-size: 12px; color: var(--ink); line-height: 1.4; }
-    .menu-popup__grid .menu-section ul li strong { color: var(--ink); }
-    .menu-popup__footer { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
-    .menu-popup__link { font-size: 12px; font-weight: 600; color: var(--brand); text-decoration: none; padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(10,62,122,.16); background: rgba(255,255,255,.85); box-shadow: 0 4px 12px rgba(10,62,122,.12); transition: background .2s ease, color .2s ease, transform .2s ease; display: inline-flex; align-items: center; gap: 6px; }
-    .menu-popup__link:hover { background: linear-gradient(90deg, rgba(10,62,122,.12), rgba(0,168,112,.12)); color: var(--brand); transform: translateY(-1px); }
-    .menu-logo { margin-top: 4px; padding-top: 10px; border-top: 1px solid rgba(10,62,122,.1); display: flex; justify-content: center; }
-    .menu-logo img { max-width: 140px; width: 100%; height: auto; filter: drop-shadow(0 4px 12px rgba(10,62,122,.25)); opacity: .96; }
+    body.history-page.theme-dark {
+      --page-background: linear-gradient(180deg, #1c2632 0%, #111827 100%);
+      --ink: #e2e8f0;
+      --muted: #a3adc2;
+      --rail: rgba(96, 165, 250, 0.35);
+      --card-surface: rgba(15, 23, 42, 0.82);
+      --card-border: rgba(148, 163, 184, 0.25);
+      --badge-text: #dbeafe;
+    }
 
-    .menu-icon { display: inline-flex; flex-direction: column; gap: 4px; margin-right: 4px; }
-    .menu-icon span { display: block; width: 18px; height: 2px; border-radius: 999px; background: currentColor; transition: transform .2s ease, width .2s ease; }
+    body.history-page.theme-dark .timeline__footnote a {
+      color: #bfdbfe;
+    }
 
-    header, .node, .timeline-anchor { scroll-margin-top: 96px; }
+    header {
+      padding: clamp(24px, 6vw, 48px) clamp(16px, 5vw, 40px) 0;
+      text-align: center;
+    }
 
-    body.history-page.theme-dark .primary-menu { background-image: linear-gradient(var(--menu-surface), var(--menu-surface)), var(--menu-border-gradient); border-color: transparent; box-shadow: 0 20px 48px rgba(0,0,0,.55); }
-    body.history-page.theme-dark .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
-    body.history-page.theme-dark .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
-    body.history-page.theme-dark .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
-    body.history-page.theme-dark .menu-popup__grid .menu-section { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
-    body.history-page.theme-dark .menu-popup__intro { color: rgba(203,213,225,.92); }
-    body.history-page.theme-dark .menu-popup__grid .menu-section ul li { color: rgba(226,232,240,.96); }
-    body.history-page.theme-dark .menu-popup__link { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); color: #dbeafe; box-shadow: 0 12px 26px rgba(0,0,0,.55); }
-    body.history-page.theme-dark .menu-popup__link:hover { color: #93c5fd; }
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: 0.2px;
+    }
 
-    body.history-page.theme-light .primary-menu .menu-list { background: var(--menu-pop); }
+    .subtitle {
+      margin: 0 auto 12px;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .layout-grid {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 clamp(16px, 6vw, 64px) clamp(48px, 12vw, 96px);
+    }
+
+    .main-content {
+      width: 100%;
+      display: block;
+    }
+
+    .timeline {
+      margin-top: clamp(24px, 6vw, 48px);
+    }
+
+    .timeline__intro {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .timeline__heading {
+      font-size: clamp(24px, 2.8vw, 32px);
+      font-weight: 700;
+      color: var(--brand);
+      margin: 0 0 12px;
+      text-align: left;
+    }
+
+    .timeline__list {
+      position: relative;
+      display: grid;
+      gap: clamp(20px, 4vw, 28px);
+      padding-left: 32px;
+    }
+
+    .timeline__list::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10px;
+      bottom: 0;
+      width: 4px;
+      border-radius: 999px;
+      background: var(--rail);
+    }
+
+    .timeline__item {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .timeline__marker {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--brand);
+      box-shadow: 0 0 0 4px rgba(10, 62, 122, 0.12);
+      margin-top: 6px;
+    }
+
+    body.history-page.theme-dark .timeline__marker {
+      box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.28);
+    }
+
+    .timeline__body {
+      background: var(--card-surface);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: clamp(16px, 3vw, 24px);
+      box-shadow: 0 14px 32px rgba(10, 62, 122, 0.12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timeline__body::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 4px;
+      background: linear-gradient(90deg, rgba(10, 62, 122, 0.9), rgba(0, 168, 112, 0.8));
+      opacity: 0.9;
+    }
+
+    .timeline__meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .timeline__date {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      color: var(--brand);
+    }
+
+    .timeline__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      color: var(--badge-text);
+      border: 1px solid rgba(10, 62, 122, 0.12);
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .timeline__badge--founding { background: var(--badge-found); }
+    .timeline__badge--launch { background: var(--badge-launch); }
+    .timeline__badge--expansion { background: var(--badge-expand); }
+    .timeline__badge--acquisition { background: var(--badge-acquire); }
+    .timeline__badge--rebrand { background: var(--badge-rebrand); }
+    .timeline__badge--outlook { background: var(--badge-outlook); }
+
+    .timeline__org {
+      margin: 0 0 8px;
+      font-size: clamp(20px, 2.4vw, 24px);
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      color: var(--ink);
+    }
+
+    .timeline__summary {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    .timeline__footnote {
+      margin: 14px 0 0;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .timeline__footnote a {
+      color: var(--brand);
+      font-weight: 600;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-decoration-color: rgba(10, 62, 122, 0.4);
+    }
 
     @media (prefers-color-scheme: dark) {
-      body.history-page:not(.theme-light) .primary-menu { background-image: linear-gradient(var(--menu-surface), var(--menu-surface)), var(--menu-border-gradient); border-color: transparent; box-shadow: 0 20px 48px rgba(0,0,0,.55); }
-      body.history-page:not(.theme-light) .primary-menu .menu-list { background: var(--menu-pop); border-color: var(--menu-border); box-shadow: 0 28px 48px rgba(0,0,0,.55); }
-      body.history-page:not(.theme-light) .primary-menu .menu-button { border-color: rgba(255,255,255,.25); }
-      body.history-page:not(.theme-light) .primary-menu .menu-logo { border-top-color: rgba(255,255,255,.12); }
-      body.history-page:not(.theme-light) .menu-popup__grid .menu-section { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
-      body.history-page:not(.theme-light) .menu-popup__intro { color: rgba(203,213,225,.92); }
-      body.history-page:not(.theme-light) .menu-popup__grid .menu-section ul li { color: rgba(226,232,240,.96); }
-      body.history-page:not(.theme-light) .menu-popup__link { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); color: #dbeafe; box-shadow: 0 12px 26px rgba(0,0,0,.55); }
-      body.history-page:not(.theme-light) .menu-popup__link:hover { color: #93c5fd; }
-      body.history-page:not(.theme-light) .partner-card { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
-      body.history-page:not(.theme-light) .partner-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,.55); }
-      body.history-page:not(.theme-light) .partner-card figcaption { color: var(--muted); }
+      body.history-page:not(.theme-light) {
+        --page-background: linear-gradient(180deg, #1c2632 0%, #111827 100%);
+        --ink: #e2e8f0;
+        --muted: #a3adc2;
+        --rail: rgba(96, 165, 250, 0.35);
+        --card-surface: rgba(15, 23, 42, 0.82);
+        --card-border: rgba(148, 163, 184, 0.25);
+        --badge-text: #dbeafe;
+      }
+
+      body.history-page:not(.theme-light) .timeline__footnote a {
+        color: #bfdbfe;
+      }
     }
 
-    @media (orientation: landscape) and (min-width: 1024px) {
-      .layout-grid { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: clamp(24px, 5vw, 72px); align-items: start; }
-      .primary-menu { position: sticky; top: clamp(32px, 8vh, 80px); width: 220px; }
-      .main-content { max-width: 1080px; margin: 0 auto; }
+    @media (max-width: 720px) {
+      .timeline__list {
+        padding-left: 24px;
+      }
+
+      .timeline__list::before {
+        left: 8px;
+      }
+
+      .timeline__item {
+        gap: 12px;
+      }
+
+      .timeline__marker {
+        width: 16px;
+        height: 16px;
+        margin-top: 10px;
+      }
     }
-
-    @media (orientation: portrait), (max-width: 1023px) {
-      .layout-grid { padding: clamp(16px, 6vw, 64px) clamp(16px, 6vw, 48px) 0; }
-      .primary-menu { position: fixed; top: clamp(12px, 5vw, 24px); right: clamp(12px, 5vw, 24px); left: auto; width: auto; padding: 0; background: transparent; border: none; box-shadow: none; backdrop-filter: none; }
-      .primary-menu .menu-button { display: inline-flex; padding: 10px 18px; border-radius: 999px; border: 1px solid var(--menu-border); background: linear-gradient(90deg, var(--ao-blue), var(--ao-green)); color: #fff; box-shadow: 0 20px 36px var(--halo); }
-      .primary-menu .menu-list { position: absolute; top: calc(100% + 12px); right: 0; background: var(--menu-pop); border: 1px solid var(--menu-border); border-radius: 16px; padding: 12px; gap: 8px; min-width: 200px; box-shadow: 0 28px 48px var(--halo); display: none; }
-      .primary-menu.open .menu-list { display: flex; flex-direction: column; }
-      .primary-menu .menu-list a,
-      .primary-menu .menu-list button { padding: 10px 14px; transform: none; }
-      .primary-menu .menu-list a:hover,
-      .primary-menu .menu-list button:hover { transform: none; }
-      .primary-menu .menu-item--popup .menu-popup { position: relative; left: auto; right: auto; top: auto; width: 100%; margin-top: 6px; box-shadow: 0 20px 36px var(--halo); }
-      .primary-menu .menu-logo { display: none; }
-      .primary-menu.open .menu-logo { display: flex; margin: 8px 4px 4px; padding-top: 10px; border-top: 1px solid var(--menu-border); }
-      .main-content { padding-top: clamp(72px, 18vw, 104px); }
-      header, .node, .timeline-anchor { scroll-margin-top: clamp(112px, 22vw, 140px); }
-    }
-
-
-    .timeline { position: relative; max-width: 1080px; margin: 16px auto 80px; padding: 0 16px 160px; padding-bottom: calc(160px + env(safe-area-inset-bottom, 0px)); }
-    .timeline-anchor { position: relative; height: 0; display: block; }
-    .rail { position: absolute; left: 50%; top: 0; bottom: 0; width: 6px; background: var(--rail); border-radius: 3px; }
-
-    .node { position: relative; width: 50%; padding: 18px; }
-    .node.left { padding-right: 40px; float: left; clear: both; }
-    .node.right { padding-left: 40px; float: right; clear: both; }
-    .dot { position: absolute; top: 28px; left: calc(100% - 3px); transform: translateX(-50%); width: 16px; height: 16px; background: var(--brand); border: 3px solid #fff; border-radius: 50%; box-shadow: 0 0 0 2px var(--rail); }
-    .node.right .dot { left: 3px; }
-
-    .card { background: var(--card); border-radius: 14px; box-shadow: 0 10px 28px var(--halo); padding: 18px 18px 14px; position: relative; overflow: hidden; }
-    .date { font-weight: 800; color: var(--brand); margin: 0 0 8px; letter-spacing: .2px; text-transform: uppercase; font-size: 12px; display:flex; align-items:center; gap:8px; }
-    .title { margin: 0 0 8px; font-weight: 800; font-size: 18px; display:flex; align-items:center; gap:10px; }
-    .list { margin: 8px 0 0 18px; }
-    .list li { margin: 6px 0; }
-    .source { margin-top: 10px; font-size: 13px; }
-    .source a { color: var(--brand); text-decoration: none; font-weight: 700; }
-
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-    .chip { background: #fff; border: 1px solid #e6eefb; color: var(--brand); border-radius: 999px; padding: 6px 12px; font-size: 13px; cursor: pointer; position: relative; box-shadow: 0 2px 8px var(--halo); }
-
-    .popup { position: absolute; z-index: 40; top: calc(100% + 8px); left: 0; width: min(560px, 92vw); background: #fff; border: 1px solid #e6eefb; border-radius: 12px; box-shadow: 0 20px 44px var(--halo); padding: 14px 14px 12px; display: none; }
-    .popup.open { display: block; }
-    .popup h4 { margin: 0 0 6px; color: var(--brand); display:flex; align-items:center; gap:8px; }
-    .popup p { margin: 6px 0; font-size: 14px; }
-    .popup ul { margin: 8px 0 0 18px; }
-
-    .logos { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
-    .logos img { height: 26px; width: auto; display: inline-block; filter: drop-shadow(0 1px 2px rgba(0,0,0,.1)); }
-
-    .partner-groups { margin-top: 20px; display: flex; flex-direction: column; gap: 18px; }
-    .partner-group h4 { margin: 0 0 10px; font-size: 15px; text-transform: uppercase; letter-spacing: .3px; color: var(--brand); }
-    .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
-    .partner-card { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 14px 12px; border-radius: 14px; border: 1px solid rgba(10,62,122,.08); background: rgba(255,255,255,.78); box-shadow: 0 12px 26px rgba(10,62,122,.08); backdrop-filter: blur(6px); min-height: 132px; transition: transform .2s ease, box-shadow .2s ease; }
-    .partner-card img { max-width: 120px; max-height: 56px; object-fit: contain; margin-bottom: 10px; filter: drop-shadow(0 2px 4px rgba(0,0,0,.08)); }
-    .partner-card figcaption { font-size: 12px; font-weight: 600; color: var(--muted); line-height: 1.35; }
-    .partner-card:hover { transform: translateY(-2px); box-shadow: 0 16px 28px rgba(10,62,122,.12); }
-    body.history-page.theme-dark .partner-card { background: rgba(15,23,32,.82); border-color: rgba(255,255,255,.08); box-shadow: 0 12px 26px rgba(0,0,0,.55); }
-    body.history-page.theme-dark .partner-card:hover { box-shadow: 0 16px 32px rgba(0,0,0,.55); }
-    body.history-page.theme-dark .partner-card figcaption { color: var(--muted); }
-
-    .badge { display:inline-flex; align-items:center; gap:8px; padding:4px 8px; background:#fff; border:1px solid #e6eefb; border-radius:999px; font-size:12px; color:var(--brand); box-shadow:0 2px 6px var(--halo); }
-    .badge .fallback { font-weight:700; }
-
-    footer { max-width:1080px; margin: 0 auto 80px; padding: 0 16px; }
-    .footer-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap:18px; }
-    .footer-card { background:#fff; border-radius:12px; box-shadow:0 8px 24px var(--halo); padding:16px; }
-    .footer-card h4 { margin:0 0 8px; color:var(--brand); }
-    .small { color:var(--muted); font-size:13px; }
-
-    @media (max-width: 980px) { .timeline { max-width: 860px; } }
-    @media (max-width: 860px) {
-      .rail { left: 24px; }
-      .node, .node.left, .node.right { width: 100%; float: none; padding: 18px 18px 18px 54px; }
-      .dot { left: 24px; }
-      .node.right .dot { left: 24px; }
-    }
-    .footer-head{max-width:1080px;margin:40px auto 12px;padding:0 16px;text-align:left}
-  .footer-head h3{margin:0 0 4px;color:var(--brand);font-size:18px}
-  .footer-head .small{margin:0;color:var(--muted)}
-  body.history-page{padding-bottom:68px}
-  .sticky-bar{position:fixed;bottom:0;left:var(--menu-width);right:0;background:#0a3e7a;color:#fff;box-shadow:0 -4px 18px rgba(0,0,0,.12);z-index:100}
-  .sticky-inner{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .sticky-left{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px}
-  .sticky-left span.handle{opacity:.9;font-weight:600}
-  .sticky-right{display:flex;align-items:center;gap:12px}
-  .sticky-icons{display:flex;align-items:center;gap:12px}
-  .sticky-icons a{display:inline-flex;width:22px;height:22px}
-  .sticky-icons img{width:22px;height:22px;filter:brightness(0) invert(1);opacity:.95}
-  .sticky-icons img:hover{opacity:1}
-  .theme-toggle{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.22);color:#fff;font-weight:600;font-size:12px;letter-spacing:.2px;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease;backdrop-filter:blur(6px)}
-  .theme-toggle .theme-icon{font-size:14px;line-height:1}
-  .theme-toggle:focus-visible{outline:2px solid rgba(255,255,255,.65);outline-offset:2px}
-  .theme-toggle:hover{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.65)}
-  /* Reveal-on-bottom footer */
-  .reveal-footer{opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .3s ease, transform .3s ease}
-  .reveal-footer.show{opacity:1;transform:translateY(0);pointer-events:auto}
-  /* Theming accents */
-  .rail{background:linear-gradient(180deg, var(--ao-gray), #d4deeb)}
-  .card{border:1px solid rgba(10,62,122,.06);}
-  .card:before{content:"";position:absolute;inset:0 0 auto; height:4px; background:linear-gradient(90deg, var(--ao-blue), var(--ao-green)); opacity:.85}
-  .chip{border-color:#d6e3f6}
-  .chip:hover{background:linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08));}
-  .logos img{background:#fff;border-radius:6px;padding:4px;border:1px solid rgba(0,0,0,.05)}
-  .partner-card{background:rgba(255,255,255,.82);border:1px solid rgba(10,62,122,.08)}
-  .sticky-bar{background:linear-gradient(90deg, var(--ao-blue), var(--ao-green))}
-  .footer-card{border:1px solid rgba(10,62,122,.08);}
-  .footer-head h3{color:var(--ao-blue)}
-  body.history-page{--page-background:linear-gradient(180deg,#f7f9fc 0%, #f9fbff 40%, #f7f9fc 100%)}
-  /* Heading tweaks for brand tone */
-  h1,h2,h3,h4 { letter-spacing:.2px }
-  .title{font-weight:800}
-
-  /* Dark mode (auto by system/browser setting) */
-  @media (prefers-color-scheme: dark) {
-    body.history-page:not(.theme-light) {
-      --ink:#e6e7ea;
-      --muted:#a3a8b3;
-      --card:#0f1720;
-      --rail:#243246;
-      --accent:#0f1a2a;
-      --halo:rgba(0,0,0,.55);
-      --ao-gray:#1e2937;
-      --menu-surface: rgba(15,23,32,.92);
-      --menu-border: rgba(255,255,255,.08);
-      --menu-pop: rgba(15,23,32,.96);
-      --menu-border-gradient: linear-gradient(135deg, rgba(62,142,255,.9), rgba(0,208,166,.82), rgba(14,165,233,.75));
-      --page-background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%);
-    }
-    body.history-page:not(.theme-light) .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
-    body.history-page:not(.theme-light) .card:before{ opacity:.6 }
-    body.history-page:not(.theme-light) .chip{ background:#0f1720; border-color:#223048; color:#dbe5f7 }
-    body.history-page:not(.theme-light) .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.25), rgba(0,168,112,.22)); }
-    body.history-page:not(.theme-light) .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
-    body.history-page:not(.theme-light) .logos img{ background:#0f1720; border-color: rgba(255,255,255,.06) }
-    body.history-page:not(.theme-light) .sticky-bar{ background: linear-gradient(90deg, rgba(10,62,122,.95), rgba(0,168,112,.9)); box-shadow: 0 -6px 24px rgba(0,0,0,.6) }
-    body.history-page:not(.theme-light) .theme-toggle{background:rgba(15,23,32,.55);border-color:rgba(255,255,255,.35)}
-    body.history-page:not(.theme-light) .theme-toggle:hover{background:rgba(15,23,32,.7);border-color:rgba(255,255,255,.5)}
-    body.history-page:not(.theme-light) .footer-card{ background:#0f1720; border-color: rgba(255,255,255,.06) }
-    body.history-page:not(.theme-light) .footer-head h3{ color:#b9d6ff }
-  }
-  body.history-page.theme-dark{
-    --ink:#e6e7ea;
-    --muted:#a3a8b3;
-    --card:#0f1720;
-    --rail:#243246;
-    --accent:#0f1a2a;
-    --halo:rgba(0,0,0,.55);
-    --ao-gray:#1e2937;
-    --menu-surface: rgba(15,23,32,.92);
-    --menu-border: rgba(255,255,255,.08);
-    --menu-pop: rgba(15,23,32,.96);
-    --menu-border-gradient: linear-gradient(135deg, rgba(62,142,255,.9), rgba(0,208,166,.82), rgba(14,165,233,.75));
-    --page-background: linear-gradient(180deg,#2a3439 0%, #1f2a30 100%);
-  }
-  body.history-page.theme-dark .card{ background: var(--card); border-color: rgba(255,255,255,.06); }
-  body.history-page.theme-dark .card:before{ opacity:.6 }
-  body.history-page.theme-dark .chip{ background:#0f1720; border-color:#223048; color:#dbe5f7 }
-  body.history-page.theme-dark .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.25), rgba(0,168,112,.22)); }
-  body.history-page.theme-dark .rail{ background: linear-gradient(180deg, #223048, #1a2232); }
-  body.history-page.theme-dark .logos img{ background:#0f1720; border-color: rgba(255,255,255,.06) }
-  body.history-page.theme-dark .sticky-bar{ background: linear-gradient(90deg, rgba(10,62,122,.95), rgba(0,168,112,.9)); box-shadow: 0 -6px 24px rgba(0,0,0,.6) }
-  body.history-page.theme-dark .theme-toggle{background:rgba(15,23,32,.55);border-color:rgba(255,255,255,.35)}
-  body.history-page.theme-dark .theme-toggle:hover{background:rgba(15,23,32,.7);border-color:rgba(255,255,255,.5)}
-  body.history-page.theme-dark .footer-card{ background:#0f1720; border-color: rgba(255,255,255,.06) }
-  body.history-page.theme-dark .footer-head h3{ color:#b9d6ff }
-  body.history-page.theme-light{
-    --ink:#1f2937;
-    --muted:#6b7280;
-    --card:#ffffff;
-    --rail:#e6ebf2;
-    --accent:#eaf2ff;
-    --halo:rgba(10,62,122,.14);
-    --ao-gray:#e6ebf2;
-    --menu-surface: rgba(255,255,255,.92);
-    --menu-border: rgba(10,62,122,.14);
-    --menu-pop: rgba(255,255,255,.97);
-    --menu-border-gradient: linear-gradient(135deg, rgba(10,62,122,.65), rgba(0,168,112,.65), rgba(14,165,233,.55));
-    --page-background: linear-gradient(180deg,#f7f9fc 0%, #f9fbff 40%, #f7f9fc 100%);
-  }
-  body.history-page.theme-light .card{ background:#fff; border-color: rgba(10,62,122,.06); }
-  body.history-page.theme-light .card:before{ opacity:.85 }
-  body.history-page.theme-light .chip{ background:#fff; border:1px solid #e6eefb; color:var(--brand) }
-  body.history-page.theme-light .chip:hover{ background: linear-gradient(90deg, rgba(10,62,122,.08), rgba(10,191,102,.08)); }
-  body.history-page.theme-light .rail{ background: linear-gradient(180deg, var(--ao-gray), #d4deeb); }
-  body.history-page.theme-light .logos img{ background:#fff; border:1px solid rgba(0,0,0,.05) }
-  body.history-page.theme-light .sticky-bar{ background: linear-gradient(90deg, var(--ao-blue), var(--ao-green)); box-shadow:0 -4px 18px rgba(0,0,0,.12) }
-  body.history-page.theme-light .theme-toggle{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.5)}
-  body.history-page.theme-light .theme-toggle:hover{background:rgba(255,255,255,.32);border-color:rgba(255,255,255,.65)}
-  body.history-page.theme-light .footer-card{ background:#fff; border-color: rgba(10,62,122,.08) }
-  body.history-page.theme-light .footer-head h3{ color:var(--ao-blue) }
-</style>
+  </style>
 </head>
 <body class="with-glass-menu history-page">
   <aside class="glass-menu" aria-label="Primary navigation">
@@ -392,684 +367,126 @@
     </div>
   </div>
   <div class="page-content">
-  <div class="layout-grid">
-    <nav class="primary-menu" aria-label="Section navigation">
-      <button class="menu-button" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="primaryMenuList">
-        <span class="menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-        Menu
-      </button>
-      <ul class="menu-list" id="primaryMenuList">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#identity">Identity</a></li>
-        <li class="menu-item--popup">
-          <button type="button" class="menu-trigger" aria-expanded="false" aria-controls="missionMenuPopup" aria-haspopup="dialog">Mission</button>
-          <div class="menu-popup" id="missionMenuPopup" role="dialog" aria-label="Mission statements" aria-hidden="true">
-            <h4>Mission Statements</h4>
-            <div class="menu-section">
-              <h5>Make Tomorrow Better</h5>
-              <p>Globe Life’s giving focus on youth, veterans, and underserved families.</p>
-            </div>
-            <div class="menu-section">
-              <h5>Founded to Protect Working Families</h5>
-              <ul>
-                <li>Founded in Indianapolis by Bernard Rapoport and Harold Goodman to protect working families.</li>
-                <li>Premium waivers for union members during strikes, scholarships, and strike relief funds.</li>
-                <li>Guiding belief: “Be Union – Buy Union” with union-label operations.</li>
-              </ul>
-            </div>
-            <div class="menu-section">
-              <h5>Keep Promises &amp; Empower Communities</h5>
-              <p>The mission is constant: protect people, empower communities, and keep promises.</p>
-            </div>
-          </div>
-        </li>
-        <li class="menu-item--popup partners-menu-item">
-          <button type="button" class="menu-trigger" aria-expanded="false" aria-controls="partnersMenuPopup" aria-haspopup="dialog">Partners</button>
-          <div class="menu-popup menu-popup--wide menu-popup--partners" id="partnersMenuPopup" role="dialog" aria-label="AO Globe Life partners" aria-hidden="true">
-            <h4>Partners we serve</h4>
-            <p class="menu-popup__intro">Highlights from AO Globe Life’s “Our Clients – Who We Work With” roster of unions and associations.</p>
-            <div class="menu-popup__grid">
-              <div class="menu-section">
-                <h5>Labor &amp; trade unions</h5>
-                <ul>
-                  <li><strong>International Brotherhood of Electrical Workers (IBEW)</strong></li>
-                  <li><strong>United Steelworkers (USW)</strong></li>
-                  <li><strong>Communications Workers of America (CWA)</strong></li>
-                  <li><strong>United Food &amp; Commercial Workers (UFCW)</strong></li>
-                </ul>
+    <div class="layout-grid">
+      <main class="main-content">
+        <header>
+          <h1>AO Globe Life – Our Shared History</h1>
+          <p class="subtitle">Tracing the milestones that connect Liberty National, Torchmark, Globe Life, American Income Life, Globe Life and Accident, and AO through 125 years of protecting working families.</p>
+        </header>
+
+        <section class="timeline" aria-labelledby="timeline-heading">
+          <h2 class="timeline__heading" id="timeline-heading">Heritage timeline (1900–2025)</h2>
+          <p class="timeline__intro">Each milestone highlights how the enterprise grew from a regional fraternal society into a multi-brand organization. Entries list the organization involved, the type of inflection point, and a verifiable source.</p>
+
+          <div class="timeline__list">
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="1900">1900</time></p>
+                  <span class="timeline__badge timeline__badge--founding">Founding</span>
+                </div>
+                <h3 class="timeline__org">Liberty National origins as the Heralds of Liberty</h3>
+                <p class="timeline__summary">Charles C. O’Rear and associates formed the Heralds of Liberty in Birmingham, Alabama to provide burial benefits to industrial workers. The fraternal society’s community focus set the foundation for what became Liberty National Life Insurance Company.</p>
+                <p class="timeline__footnote">Source: <a href="https://www.bhamwiki.com/w/Liberty_National_Life_Insurance_Company" target="_blank" rel="noopener">Bhamwiki – Liberty National Life Insurance Company</a>.</p>
               </div>
-              <div class="menu-section">
-                <h5>First responders &amp; public safety</h5>
-                <ul>
-                  <li><strong>International Association of Fire Fighters (IAFF)</strong></li>
-                  <li><strong>Fraternal Order of Police (FOP)</strong></li>
-                  <li><strong>National Association of Police Organizations (NAPO)</strong></li>
-                </ul>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="1929">1929</time></p>
+                  <span class="timeline__badge timeline__badge--expansion">Expansion</span>
+                </div>
+                <h3 class="timeline__org">Liberty National becomes a stock insurer</h3>
+                <p class="timeline__summary">The Heralds reorganized as Liberty National Life Insurance Company, converting to a stock charter and expanding across the Southeast with industrial life policies that emphasized affordability for working families.</p>
+                <p class="timeline__footnote">Source: <a href="https://www.encyclopediaofalabama.org/article/h-1971" target="_blank" rel="noopener">Encyclopedia of Alabama – Liberty National Life Insurance Company</a>.</p>
               </div>
-              <div class="menu-section">
-                <h5>Government &amp; postal</h5>
-                <ul>
-                  <li><strong>American Federation of Government Employees (AFGE)</strong></li>
-                  <li><strong>National Association of Letter Carriers (NALC)</strong></li>
-                  <li><strong>National Postal Mail Handlers Union (NPMHU)</strong></li>
-                </ul>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="1951-02">February&nbsp;1951</time></p>
+                  <span class="timeline__badge timeline__badge--founding">Founding</span>
+                </div>
+                <h3 class="timeline__org">American Income Life Insurance Company opens</h3>
+                <p class="timeline__summary">Bernard Rapoport and Harold Goodman launched American Income Life (AIL) in Indianapolis with a mission to partner with labor unions, offering supplemental benefits built around strike relief, premium waivers, and scholarship programs.</p>
+                <p class="timeline__footnote">Source: <a href="https://en.wikipedia.org/wiki/American_Income_Life_Insurance_Company" target="_blank" rel="noopener">Wikipedia – American Income Life Insurance Company</a>.</p>
               </div>
-              <div class="menu-section">
-                <h5>Education &amp; community</h5>
-                <ul>
-                  <li><strong>American Federation of Teachers (AFT)</strong></li>
-                  <li><strong>Veterans of Foreign Wars (VFW)</strong></li>
-                  <li><strong>United Way &amp; local community benefit programs</strong></li>
-                </ul>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="1951-08">August&nbsp;1951</time></p>
+                  <span class="timeline__badge timeline__badge--launch">Launch</span>
+                </div>
+                <h3 class="timeline__org">Globe Life and Accident Insurance Company begins operations</h3>
+                <p class="timeline__summary">Entrepreneurs Ralph Reece and John Singletary founded Globe Life and Accident Insurance Company in Oklahoma City, focusing on streamlined, low-cost life coverage sold through home service agents.</p>
+                <p class="timeline__footnote">Source: <a href="https://en.wikipedia.org/wiki/Globe_Life_And_Accident_Insurance_Company" target="_blank" rel="noopener">Wikipedia – Globe Life and Accident Insurance Company</a>.</p>
               </div>
-            </div>
-            <div class="menu-popup__footer">
-              <a class="menu-popup__link" href="#partnership">See partnership timeline</a>
-              <a class="menu-popup__link" href="https://aoglobelife.com/#our-clients" target="_blank" rel="noopener">Explore all clients</a>
-            </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="1982">1982</time></p>
+                  <span class="timeline__badge timeline__badge--launch">Agency launch</span>
+                </div>
+                <h3 class="timeline__org">Altig-Orlovic (AO) scales the AIL distribution system</h3>
+                <p class="timeline__summary">The Altig family reorganized their agency as Altig-Orlovic—today’s AO Globe Life—to professionalize training, leadership development, and field support for American Income Life’s rapidly growing sales force across North America.</p>
+                <p class="timeline__footnote">Source: <a href="https://aoglobelife.com/history/" target="_blank" rel="noopener">AO Globe Life – Our History</a>.</p>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="1994">1994</time></p>
+                  <span class="timeline__badge timeline__badge--acquisition">Acquisition</span>
+                </div>
+                <h3 class="timeline__org">Torchmark acquires American Income Life</h3>
+                <p class="timeline__summary">Torchmark Corporation, Liberty National’s parent, purchased American Income Life to broaden its union-focused distribution while retaining Bernard Rapoport’s leadership—solidifying AIL and AO as core growth engines for the enterprise.</p>
+                <p class="timeline__footnote">Source: <a href="https://en.wikipedia.org/wiki/American_Income_Life_Insurance_Company" target="_blank" rel="noopener">Wikipedia – American Income Life Insurance Company</a>.</p>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="2019-08-08">August&nbsp;2019</time></p>
+                  <span class="timeline__badge timeline__badge--rebrand">Rebrand</span>
+                </div>
+                <h3 class="timeline__org">Torchmark adopts the Globe Life Inc. name</h3>
+                <p class="timeline__summary">Torchmark unified its subsidiaries under the Globe Life brand, emphasizing a single national identity that includes Globe Life and Accident, Liberty National, AIL, and AO’s distribution network.</p>
+                <p class="timeline__footnote">Source: <a href="https://www.businesswire.com/news/home/20190808005390/en/Torchmark-Corporation-to-Change-Name-to-Globe-Life-Inc." target="_blank" rel="noopener">Business Wire – Torchmark Corporation to Change Name to Globe Life Inc.</a>.</p>
+              </div>
+            </article>
+
+            <article class="timeline__item">
+              <div class="timeline__marker" aria-hidden="true"></div>
+              <div class="timeline__body">
+                <div class="timeline__meta">
+                  <p class="timeline__date"><time datetime="2025">2025</time></p>
+                  <span class="timeline__badge timeline__badge--outlook">Strategic outlook</span>
+                </div>
+                <h3 class="timeline__org">Globe Life sets 2025 growth guidance for agency and direct channels</h3>
+                <p class="timeline__summary">Globe Life Inc.’s 2025 guidance highlights sustained premium growth driven by its agency system—including American Income Life and AO—alongside direct-to-consumer expansion and disciplined capital deployment.</p>
+                <p class="timeline__footnote">Source: <a href="https://investors.globelifeinsurance.com/news/news-details/2025/Globe-Life-Inc.-Reports-Fourth-Quarter-2024-Results-and-Provides-2025-Guidance/default.aspx" target="_blank" rel="noopener">Globe Life Investor Relations – 2025 Guidance Release</a>.</p>
+              </div>
+            </article>
           </div>
-        </li>
-      </ul>
-      <div class="menu-logo" aria-hidden="true">
-        <img src="Ao%20Globe%20Life%20Full%20Logo.png" alt="" />
-      </div>
-    </nav>
-    <main class="main-content">
-      <header id="identity">
-    <h1>AO Globe Life - Our Story At A Glance</h1>
-    <div class="subtitle">From AIL roots and union solidarity to Globe Life strength and AO leadership</div>
-  </header>
-
-  <section class="timeline" id="timeline">
-    <div class="rail" aria-hidden="true"></div>
-
-    <div id="mission" class="timeline-anchor" aria-hidden="true"></div>
-
-    <!-- 1951 -->
-    <article class="node right" id="history">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">1951</p>
-        <h3 class="title">Founding and early mission of AIL</h3>
-        <ul class="list">
-          <li>Founded in Indianapolis by Bernard Rapoport and Harold Goodman to protect working families.</li>
-          <li>Premium waivers for union members during strikes, scholarships, and strike relief funds.</li>
-          <li>Guiding belief: "Be Union - Buy Union" with union-label operations.</li>
-        </ul>
-        <div class="logos" aria-label="AIL logos">
-          <img src="https://www.ailife.com/favicon-32x32.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>AIL</span></span>'" alt="AIL mark" />
-        </div>
-        <p class="source">Check out <a href="https://www.ailife.com/about/who-we-serve">AIL's Who We Serve</a>.</p>
-      </div>
-    </article>
-
-    <!-- 1961 Union-first innovations -->
-    <article class="node left">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">1961</p>
-        <h3 class="title">Union-first innovations</h3>
-        <ul class="list">
-          <li>Waived premiums during authorized strikes; contributed to strike funds.</li>
-          <li>Launched scholarships for union families; deepened labor alignment.</li>
-          <li>Set foundation for official AFL-CIO Union Label recognition in the 1970s.</li>
-        </ul>
-        <div class="chips"><div class="chip" data-pop="union-benefits">Learn more</div></div>
-        <p class="source">Check out <a href="https://www.ailife.com/about/history">AIL History</a>.</p>
-      </div>
-    </article>
-
-    <!-- 1950s - 1970s Growth & Values -->
-    <article class="node right">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">1950s - 1970s</p>
-        <h3 class="title">Growth and values</h3>
-        <ul class="list">
-          <li>By 1956 AIL operated in 13 states with 300+ agents; moved HQ to Waco in 1958.</li>
-          <li>Coverage portability supported workers who moved jobs.</li>
-          <li>Scholarships and strike waivers reinforced solidarity in action.</li>
-        </ul>
-        <p class="source">Check out <a href="https://www.ailife.com/about/history">AIL History</a>.</p>
-      </div>
-    </article>
-
-    <!-- 1970s - 1990s Labor Advisory Board & Community -->
-    <article class="node left">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">1970s - 1990s</p>
-        <h3 class="title">Labor Advisory Board and community engagement</h3>
-        <ul class="list">
-          <li>Established AIL/NILICO Labor Advisory Board with 65+ union leaders and AFL-CIO reps.</li>
-          <li>Regular advisory on wage security, safety, and healthcare access with feedback loops.</li>
-          <li>Award-winning Labor Letter amplified labor news and solidarity actions.</li>
-          <li>Hands-on support: picket lines, food banks, scholarships. 100% union-label under OPEIU Local 277.</li>
-        </ul>
-        <div class="logos" aria-label="Union logos">
-          <img src="https://opeiu277.org/favicon.ico" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>OPEIU 277</span></span>'" alt="OPEIU Local 277" />
-        </div>
-        <p class="source">Check out <a href="https://www.ailife.com/about/community">AIL Community</a> and explore more outreach highlights on our <a href="community.html">Community page</a>.</p>
-      </div>
-    </article>
-
-    <!-- 1994 Torchmark Acquisition -->
-    <article class="node right">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">1994</p>
-        <h3 class="title">Acquisition by Torchmark</h3>
-        <ul class="list">
-          <li>AIL acquired by Torchmark Corporation for approximately $563M - added financial strength and scale.</li>
-          <li>Bernard Rapoport remained active to preserve mission and culture.</li>
-        </ul>
-        <p class="source">Check out <a href="https://www.ailife.com/about">About AIL</a>.</p>
-      </div>
-    </article>
-
-    <!-- 2011 - Present Youth Grants Accent -->
-    <article class="node left" id="community">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">2011 - Present</p>
-        <h3 class="title">Community outreach - Youth baseball and softball grants</h3>
-        <ul class="list">
-          <li>Globe Life and the Texas Rangers Baseball Foundation fund youth baseball and softball across a five-state region.</li>
-          <li>More than $625,000 distributed to 78+ organizations - impacting 75,000+ kids in 57+ communities.</li>
-          <li>Funding for fields, scoreboards, equipment, uniforms, and league development.</li>
-        </ul>
-        <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/community/archive">Community archive</a> and dive deeper on our <a href="community.html">Community page</a>.</p>
-      </div>
-    </article>
-
-    <!-- 2014 - Present Brand Recognition & Partnerships -->
-    <article class="node right" id="partnership">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">2014 - Present</p>
-        <h3 class="title">Brand recognition and partnerships</h3>
-        <ul class="list">
-          <li>Naming rights to <strong>Globe Life Field</strong> - home of the Texas Rangers (extended through 2048).</li>
-          <li><strong>Official Life Insurance</strong> of the Dallas Cowboys; partnerships with Atlanta Braves, FC Dallas, Allen Americans.</li>
-        </ul>
-        <div class="logos" aria-label="brand logos">
-          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6b/Globe_Life_Field_logo.svg/320px-Globe_Life_Field_logo.svg.png" alt="Globe Life Field" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Dallas_Cowboys.svg/320px-Dallas_Cowboys.svg.png" alt="Dallas Cowboys" />
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Texas_Rangers.svg/320px-Texas_Rangers.svg.png" alt="Texas Rangers" />
-          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Atlanta_Braves_Insignia.svg/320px-Atlanta_Braves_Insignia.svg.png" alt="Atlanta Braves" />
-          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/FC_Dallas_logo.svg/320px-FC_Dallas_logo.svg.png" alt="FC Dallas" />
-          <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/94/Allen_Americans_logo.svg/320px-Allen_Americans_logo.svg.png" alt="Allen Americans" />
-        </div>
-        <div class="partner-groups" aria-label="Examples of AO Globe Life partner organizations">
-          <div class="partner-group">
-            <h4>Labor &amp; trade unions</h4>
-            <div class="partner-grid" role="list">
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/60/International_Association_of_Fire_Fighters_logo.svg/240px-International_Association_of_Fire_Fighters_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>IAFF</span></span>'" alt="International Association of Fire Fighters" />
-                <figcaption>International Association of Fire Fighters (IAFF)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/45/International_Brotherhood_of_Electrical_Workers_logo.svg/240px-International_Brotherhood_of_Electrical_Workers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>IBEW</span></span>'" alt="International Brotherhood of Electrical Workers" />
-                <figcaption>International Brotherhood of Electrical Workers (IBEW)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/1/16/United_Steelworkers_logo.svg/240px-United_Steelworkers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>USW</span></span>'" alt="United Steelworkers" />
-                <figcaption>United Steelworkers (USW)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/06/Communications_Workers_of_America_logo.svg/240px-Communications_Workers_of_America_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>CWA</span></span>'" alt="Communications Workers of America" />
-                <figcaption>Communications Workers of America (CWA)</figcaption>
-              </figure>
-            </div>
-          </div>
-          <div class="partner-group">
-            <h4>Public service &amp; first responders</h4>
-            <div class="partner-grid" role="list">
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/c/cf/American_Federation_of_Government_Employees_logo.svg/240px-American_Federation_of_Government_Employees_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>AFGE</span></span>'" alt="American Federation of Government Employees" />
-                <figcaption>American Federation of Government Employees (AFGE)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/7/7a/Fraternal_Order_of_Police_logo.png/240px-Fraternal_Order_of_Police_logo.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>FOP</span></span>'" alt="Fraternal Order of Police" />
-                <figcaption>Fraternal Order of Police (FOP)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/ea/National_Association_of_Letter_Carriers_logo.svg/240px-National_Association_of_Letter_Carriers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>NALC</span></span>'" alt="National Association of Letter Carriers" />
-                <figcaption>National Association of Letter Carriers (NALC)</figcaption>
-              </figure>
-            </div>
-          </div>
-          <div class="partner-group">
-            <h4>Community &amp; service organizations</h4>
-            <div class="partner-grid" role="list">
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/92/Veterans_of_Foreign_Wars_Emblem.svg/240px-Veterans_of_Foreign_Wars_Emblem.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>VFW</span></span>'" alt="Veterans of Foreign Wars" />
-                <figcaption>Veterans of Foreign Wars (VFW)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/6/6f/American_Federation_of_Teachers_logo.svg/240px-American_Federation_of_Teachers_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>AFT</span></span>'" alt="American Federation of Teachers" />
-                <figcaption>American Federation of Teachers (AFT)</figcaption>
-              </figure>
-              <figure class="partner-card" role="listitem">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/United_Way_logo.svg/240px-United_Way_logo.svg.png" onerror="this.outerHTML='<span class=\'badge\'><span class=\'fallback\'>United Way</span></span>'" alt="United Way" />
-                <figcaption>United Way community campaigns</figcaption>
-              </figure>
-            </div>
-          </div>
-        </div>
-        <div class="chips"><div class="chip" data-pop="globe-life-field">Explore Globe Life Field</div></div>
-        <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/globe-life-field">Globe Life Field</a> and <a href="https://home.globelifeinsurance.com/press-releases">Press releases</a>.</p>
-      </div>
-    </article>
-
-    <!-- 2019 Rebrand + Financial profile -->
-    <article class="node left">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">2019</p>
-        <h3 class="title">Rebrand as Globe Life Inc.</h3>
-        <ul class="list">
-          <li>Torchmark rebranded as Globe Life - unified brand across divisions.</li>
-          <li>Ratings: A (Excellent) A.M. Best; AA- (Very Strong) S&amp;P; A+ Fitch; A+ BBB.</li>
-          <li>Scale: 17M+ policies in force; ~$229B coverage in force. NYSE: GL.</li>
-        </ul>
-        <div class="logos">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Globe_Life_logo.svg/320px-Globe_Life_logo.svg.png" alt="Globe Life logo" />
-        </div>
-        <div class="chips"><div class="chip" data-pop="globe-life">Who is Globe Life?</div><div class="chip" data-pop="financial-profile">Financial profile</div><div class="chip" data-pop="who-we-work-with">Who we work with</div></div>
-        <p class="source">Check out <a href="https://home.globelifeinsurance.com/about">Globe Life</a> and <a href="https://home.globelifeinsurance.com/about/financial-strength-and-insurance-ratings">Financial strength and ratings</a>.</p>
-      </div>
-    </article>
-
-    <!-- 1982 AO Founded -->
-    <article class="node right">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">1982</p>
-        <h3 class="title">AO founded</h3>
-        <ul class="list">
-          <li>Established as Altig-Orlovic; later rebranded as Altig Organizations as operations scaled across North America.</li>
-          <li>Became the largest distribution system of Globe Life’s AIL Division, with training and support across the U.S. and Canada.</li>
-        </ul>
-        <div class="logos" aria-label="AO logo">$1</div>
-        <div class="chips"><div class="chip" data-pop="who-is-ao">Who is AO (video)</div></div>
-        <p class="source">Check out <a href="https://aoglobelife.com/about/">AO - About</a> and <a href="https://aoglobelife.com/history/">AO History</a>.</p>
-      </div>
-    </article>
-
-    <!-- AO Globe Life Alignment -->
-    <article class="node left">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">AO Globe Life</p>
-        <h3 class="title">Alignment with Globe Life</h3>
-        <ul class="list">
-          <li>AO aligned with Globe Life after AIL rebrand.</li>
-          <li>Distinct culture: merit-based advancement, leadership pipelines, union protections (OPEIU Local 277).</li>
-        </ul>
-        <p class="source">Check out <a href="https://aoglobelife.com/history/">AO's history</a>.</p>
-      </div>
-    </article>
-
-    <!-- Today Modern -->
-    <article class="node right">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">Today</p>
-        <h3 class="title">Modern work, training, and outreach</h3>
-        <ul class="list">
-          <li>Digital onboarding portals, interactive e-learning, virtual academies; national livestreams and conventions.</li>
-          <li>Remote service platforms to reach underserved communities; benefits education for unions and member groups.</li>
-          <li>AO growth highlights: 34% revenue growth in 2023, 409% growth over 10 years (per AO overview).</li>
-        </ul>
-        <div class="chips"><div class="chip" data-pop="what-is-your-why">What is your why? (video)</div></div>
-        <p class="source">Check out <a href="https://aoglobelife.com/careers/">AO Careers</a> and <a href="https://aoglobelife.com/wp-content/uploads/2024/04/AO-Globe-Life-Overview-D6.pdf">AO Overview PDF</a>.</p>
-      </div>
-    </article>
-
-    <!-- Summary -->
-    <article class="node left">
-      <span class="dot"></span>
-      <div class="card">
-        <p class="date">Summary</p>
-        <h3 class="title">Heritage meets opportunity</h3>
-        <p>From AIL's legacy for working families to Globe Life's national strength and AO's leadership culture, this timeline highlights decades of protecting people, empowering communities, and keeping promises.</p>
-        <div class="chips">
-          <div class="chip" data-pop="careers">Careers and advancement</div>
-          <!-- Intentionally not wiring video triggers yet, per your note -->
-        </div>
-        <p class="source">Discover active outreach programs on the <a href="community.html">Community page</a>.</p>
-      </div>
-    </article>
-  </section>
-    </main>
-  </div>
-  </div>
-
-  <script>
-    (function(){
-      const menu = document.querySelector('.primary-menu');
-      if(!menu) return;
-      const button = menu.querySelector('.menu-button');
-      const list = menu.querySelector('.menu-list');
-      const landscapeQuery = window.matchMedia ? window.matchMedia('(orientation: landscape)') : null;
-      const pointerFine = window.matchMedia ? window.matchMedia('(pointer: fine)') : null;
-      const popupStates = [];
-
-      function closeAllPopups(except){
-        popupStates.forEach(state => {
-          if(!except || state !== except){
-            state.close();
-          }
-        });
-      }
-
-      function closeMenu(){
-        closeAllPopups();
-        if(!menu.classList.contains('open')) return;
-        menu.classList.remove('open');
-        if(button) button.setAttribute('aria-expanded', 'false');
-      }
-
-      if(list){
-        const popupItems = Array.from(list.querySelectorAll('.menu-item--popup'));
-        popupItems.forEach(item => {
-          const trigger = item.querySelector('.menu-trigger');
-          const popup = item.querySelector('.menu-popup');
-          if(!trigger || !popup) return;
-
-          const state = {
-            item,
-            trigger,
-            popup,
-            closeTimer: null
-          };
-
-          state.clearTimer = function(){
-            if(state.closeTimer){
-              clearTimeout(state.closeTimer);
-              state.closeTimer = null;
-            }
-          };
-
-          state.close = function(){
-            state.clearTimer();
-            state.item.classList.remove('menu-open');
-            state.popup.classList.remove('open');
-            state.popup.setAttribute('aria-hidden', 'true');
-            state.trigger.setAttribute('aria-expanded', 'false');
-          };
-
-          state.open = function(){
-            closeAllPopups(state);
-            state.clearTimer();
-            state.item.classList.add('menu-open');
-            state.popup.classList.add('open');
-            state.popup.setAttribute('aria-hidden', 'false');
-            state.trigger.setAttribute('aria-expanded', 'true');
-          };
-
-          state.scheduleClose = function(){
-            state.clearTimer();
-            state.closeTimer = window.setTimeout(() => state.close(), 120);
-          };
-
-          popupStates.push(state);
-
-          trigger.addEventListener('click', (event) => {
-            event.preventDefault();
-            if(state.popup.classList.contains('open')){
-              state.close();
-            }else{
-              state.open();
-            }
-          });
-
-          trigger.addEventListener('focus', () => state.open());
-
-          if(pointerFine && typeof pointerFine.matches === 'boolean'){
-            trigger.addEventListener('mouseenter', () => {
-              if(pointerFine.matches){
-                state.open();
-              }
-            });
-            item.addEventListener('mouseenter', () => {
-              if(pointerFine.matches){
-                state.clearTimer();
-              }
-            });
-            item.addEventListener('mouseleave', () => {
-              if(pointerFine.matches){
-                state.scheduleClose();
-              }
-            });
-            popup.addEventListener('mouseenter', () => {
-              if(pointerFine.matches){
-                state.clearTimer();
-              }
-            });
-            popup.addEventListener('mouseleave', () => {
-              if(pointerFine.matches){
-                state.scheduleClose();
-              }
-            });
-          }
-
-          item.addEventListener('focusout', (event) => {
-            const next = event.relatedTarget;
-            if(!next || !item.contains(next)){
-              state.scheduleClose();
-            }
-          });
-        });
-
-        list.querySelectorAll('a').forEach(link => {
-          link.addEventListener('click', () => {
-            closeAllPopups();
-            closeMenu();
-          });
-        });
-      }
-
-      if(button){
-        button.addEventListener('click', () => {
-          const isOpen = menu.classList.toggle('open');
-          button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-      }
-
-      document.addEventListener('click', (event) => {
-        const target = event.target;
-        if(!menu.contains(target)){
-          closeAllPopups();
-          closeMenu();
-        }
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if(event.key === 'Escape'){
-          closeMenu();
-          if(button){
-            const styles = window.getComputedStyle(button);
-            if(styles && styles.display !== 'none'){
-              button.focus();
-            }
-          }
-        }
-      });
-
-      window.addEventListener('resize', () => {
-        if(window.innerWidth > 1023 && landscapeQuery && landscapeQuery.matches){
-          closeMenu();
-        }
-      });
-
-      if(landscapeQuery && typeof landscapeQuery.addEventListener === 'function'){
-        landscapeQuery.addEventListener('change', (event) => {
-          if(event.matches){
-            closeMenu();
-          }
-        });
-      }else if(landscapeQuery && typeof landscapeQuery.addListener === 'function'){
-        landscapeQuery.addListener((event) => {
-          if(event.matches){
-            closeMenu();
-          }
-        });
-      }
-    })();
-  </script>
-
-  <!-- Popups (stories & videos) -->
-  <div id="popups">
-    <div class="popup" id="pop-union-benefits">
-      <h4>Union-first innovations</h4>
-      <p>In 1961, AIL led the industry by waiving premiums during authorized strikes, contributing to strike funds, and launching scholarships for union families - cementing trust with working people.</p>
-      <ul>
-        <li>Premium waivers during strikes</li>
-        <li>Scholarships for union members' children</li>
-        <li>Financial support for authorized strikes</li>
-      </ul>
-      <p class="source">Check out <a href="https://www.ailife.com/about/history">AIL History</a>.</p>
-    </div>
-
-    <div class="popup" id="pop-globe-life">
-      <h4>Who is Globe Life?</h4>
-      <p>Globe Life Inc. (NYSE: GL) is among the largest life insurers in the U.S. with over 17M policies and ~$229B coverage in force. Family of companies includes AIL, Liberty National, Family Heritage, United American, and more.</p>
-      <ul>
-        <li>Strong ratings and decades-long track record of financial strength</li>
-        <li>Brand partnerships: Globe Life Field (Texas Rangers), Dallas Cowboys, Atlanta Braves, FC Dallas, Allen Americans</li>
-      </ul>
-      <p class="source">Check out <a href="https://home.globelifeinsurance.com/about">Globe Life - About</a>.</p>
-    </div>
-
-    <div class="popup" id="pop-globe-life-field">
-      <h4>Inside Globe Life Field</h4>
-      <p>Globe Life Field in Arlington delivers a climate-controlled, retractable-roof home for the Texas Rangers with the flexibility to host baseball, concerts, and marquee events year-round.</p>
-      <ul>
-        <li>1.8M-square-foot ballpark with a 5.5-acre retractable roof and operable outfield doors for open-air game days.</li>
-        <li>Seats approximately 40,300 fans with 360-degree concourses, premium clubs, and Texas Live! entertainment next door.</li>
-        <li>Designed for player wellness with advanced training facilities, natural light, and modern clubhouse spaces.</li>
-      </ul>
-      <div style="margin:12px 0;">
-        <iframe title="Globe Life Field tour" src="https://player.vimeo.com/video/852960498?h=8fceda4be4" width="100%" height="320" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen></iframe>
-      </div>
-      <p class="source">Explore more at <a href="https://home.globelifeinsurance.com/about/globe-life-field">Globe Life Field - Globe Life</a> and <a href="https://globelifefield.com/">globelifefield.com</a>.</p>
-    </div>
-
-    <div class="popup" id="pop-financial-profile">
-      <h4>Financial profile</h4>
-      <ul>
-        <li>Over 17M policies in force; ~$229B coverage in force</li>
-        <li>45+ consecutive years rated A (Excellent) or higher by A.M. Best</li>
-        <li>Current ratings: A (Excellent) A.M. Best; AA- (Very Strong) S&amp;P; A+ Fitch; A+ BBB</li>
-        <li>NYSE ticker: GL</li>
-      </ul>
-      <p class="source">Check out <a href="https://home.globelifeinsurance.com/about/financial-strength-and-insurance-ratings">Financial strength and ratings</a>.</p>
-    </div>
-
-    <div class="popup" id="pop-who-we-work-with">
-      <h4>Who we work with</h4>
-      <p>AO Globe Life partners with member-centric groups and organizations to expand access and serve working families.</p>
-      <ul>
-        <li><strong>Labor &amp; trade unions:</strong> International Brotherhood of Electrical Workers (IBEW), United Steelworkers (USW), Communications Workers of America (CWA), United Food &amp; Commercial Workers (UFCW).</li>
-        <li><strong>First responders &amp; public safety:</strong> International Association of Fire Fighters (IAFF), Fraternal Order of Police (FOP), National Association of Police Organizations (NAPO).</li>
-        <li><strong>Government &amp; postal:</strong> American Federation of Government Employees (AFGE), National Association of Letter Carriers (NALC), National Postal Mail Handlers Union (NPMHU).</li>
-        <li><strong>Education &amp; community partners:</strong> American Federation of Teachers (AFT), Veterans of Foreign Wars (VFW), United Way-led community benefit programs.</li>
-      </ul>
-      <p class="source">Inspired by <a href="https://aoglobelife.com/about/">AO Globe Life - About</a>.</p>
-    </div>
-
-    <div class="popup" id="pop-geo-reach">
-      <h4>Geographic reach</h4>
-      <p>AO serves families across the U.S. and Canada. AIL licensing spans 49 U.S. states, D.C., Canada, and New Zealand.</p>
-    </div>
-
-    <div class="popup" id="pop-careers">
-      <h4>Careers and advancement</h4>
-      <p>Merit-based growth with one-on-one mentorship, leadership academies, and flexible remote models.</p>
-      <ul>
-        <li>Weekly team huddles and regional recognition</li>
-        <li>Annual conventions and advanced workshops</li>
-        <li>Business Builder Pathway: recruit/code agents and production milestones for advancement</li>
-      </ul>
-      <p class="source">Check out <a href="https://aoglobelife.com/careers/">AO Careers</a> and <a href="https://aoglobelife.com/business-builder-pathway/">Business Builder Pathway</a>.</p>
-    </div>
-
-    <!-- Video popups (no triggers yet per your note) -->
-    <div class="popup" id="pop-who-is-ao">
-      <h4>Who is AO?</h4>
-      <p>Get to know AO Globe Life through this short video overview:</p>
-      <div style="margin:12px 0;">
-        <iframe title="vimeo-player" src="https://player.vimeo.com/video/834165304?h=9894e86fcf" width="100%" height="320" frameborder="0" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share" allowfullscreen></iframe>
-      </div>
-    </div>
-
-    <div class="popup" id="pop-what-is-your-why">
-      <h4>What is your why?</h4>
-      <p>This inspirational piece asks you to consider your personal motivations for success:</p>
-      <div style="margin:12px 0;">
-        <iframe width="100%" height="320" src="https://www.youtube.com/embed/9IMNPY4nKS8" title="What is your Why?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
+        </section>
+      </main>
     </div>
   </div>
-
-  <script>
-    // Popup manager (click + hover)
-    const idMap = {
-      'union-benefits':'pop-union-benefits',
-      'globe-life':'pop-globe-life',
-      'globe-life-field':'pop-globe-life-field',
-      'financial-profile':'pop-financial-profile',
-      'who-we-work-with':'pop-who-we-work-with',
-      'geo-reach':'pop-geo-reach',
-      'careers':'pop-careers',
-      'who-is-ao':'pop-who-is-ao',
-      'what-is-your-why':'pop-what-is-your-why'
-    };
-
-    document.addEventListener('click', (e) => {
-      const chip = e.target.closest('.chip');
-      const openPopups = document.querySelectorAll('.popup.open');
-      if (!chip && !e.target.closest('.popup')) { openPopups.forEach(p => p.classList.remove('open')); return; }
-      if (chip) {
-        const key = chip.getAttribute('data-pop');
-        const popId = idMap[key];
-        if (!popId) return;
-        const popup = document.getElementById(popId);
-        if (!popup) return;
-        openPopups.forEach(p => { if (p !== popup) p.classList.remove('open'); });
-        const rect = chip.getBoundingClientRect();
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-        popup.style.left = (rect.left + scrollLeft) + 'px';
-        popup.style.top = (rect.bottom + scrollTop + 8) + 'px';
-        popup.classList.toggle('open');
-      }
-    });
-
-    // Hover (desktop)
-    document.addEventListener('mouseover', (e) => {
-      const chip = e.target.closest('.chip');
-      if (!chip) return;
-      const key = chip.getAttribute('data-pop');
-      const popId = idMap[key];
-      if (!popId) return;
-      const popup = document.getElementById(popId);
-      if (!popup) return;
-      const rect = chip.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-      popup.style.left = (rect.left + scrollLeft) + 'px';
-      popup.style.top = (rect.bottom + scrollTop + 8) + 'px';
-      popup.classList.add('open');
-    });
-    document.addEventListener('mouseout', (e) => {
-      if (!e.relatedTarget || !e.relatedTarget.closest || !e.relatedTarget.closest('.popup')) {
-        document.querySelectorAll('.popup.open').forEach(p => p.classList.remove('open'));
-      }
-    });
-  </script>
   <script src="js/settings.js"></script>
 </body>
 </html>
