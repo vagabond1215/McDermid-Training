@@ -21,11 +21,11 @@ body.with-glass-menu {
   flex-direction: column;
   align-items: stretch;
   gap: 14px;
-  background: radial-gradient(
-    circle at 110% 50%,
-    #29d6a3 0%,
-    #00a870 45%,
-    #006f4c 100%
+  background: linear-gradient(
+    180deg,
+    #0f5c44 0%,
+    #0b4b37 45%,
+    #083a2c 100%
   );
   border-right: none;
   box-shadow: none;
