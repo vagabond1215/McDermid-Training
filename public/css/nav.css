@@ -23,9 +23,9 @@ body.with-glass-menu {
   gap: 14px;
   background: radial-gradient(
     circle at 110% 50%,
-    #1a5aa3 0%,
-    #0f3f7d 45%,
-    #06244f 100%
+    #29d6a3 0%,
+    #00a870 45%,
+    #006f4c 100%
   );
   border-right: none;
   box-shadow: none;
