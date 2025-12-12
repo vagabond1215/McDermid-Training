@@ -110,7 +110,7 @@ body.theme-dark {
   --halo: rgba(2, 6, 23, 0.6);
   --border-soft: rgba(148, 163, 184, 0.35);
   --link-color: #93c5fd;
-  --page-background: radial-gradient(120% 120% at 20% 20%, #111c2f 0%, #060b16 65%, #02050a 100%);
+  --page-background: #1f2933;
   --menu-surface: rgba(15, 23, 32, 0.92);
   --menu-highlight: rgba(148, 163, 184, 0.2);
   --menu-border: rgba(255, 255, 255, 0.08);
@@ -163,7 +163,7 @@ body.theme-dark {
     --halo: rgba(2, 6, 23, 0.6);
     --border-soft: rgba(148, 163, 184, 0.35);
     --link-color: #93c5fd;
-    --page-background: radial-gradient(120% 120% at 20% 20%, #111c2f 0%, #060b16 65%, #02050a 100%);
+    --page-background: #1f2933;
     --menu-surface: rgba(15, 23, 32, 0.92);
     --menu-highlight: rgba(148, 163, 184, 0.2);
     --menu-border: rgba(255, 255, 255, 0.08);
